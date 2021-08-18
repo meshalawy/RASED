@@ -1,0 +1,102 @@
+type,category,order
+track,Road Network,1
+driveway,Road Network,1
+highway,Road Network,1
+living_street,Road Network,1
+mini_roundabout,Road Network,1
+motorway,Road Network,1
+motorway_link,Road Network,1
+primary,Road Network,1
+primary_link,Road Network,1
+residential,Road Network,1
+secondary,Road Network,1
+secondary_link,Road Network,1
+service,Road Network,1
+tertiary,Road Network,1
+tertiary_link,Road Network,1
+trunk,Road Network,1
+trunk_link,Road Network,1
+turning_circle,Road Network,1
+turning_island,Road Network,1
+turning_loop,Road Network,1
+unclassified,Road Network,1
+Unclassified,Road Network,1
+crossing;traffic_signals,Navigational Metadata,2
+give_way,Navigational Metadata,2
+give_way;crossing,Navigational Metadata,2
+junction:adjoint,Navigational Metadata,2
+junction:circular,Navigational Metadata,2
+junction:crossing,Navigational Metadata,2
+junction:crossroads,Navigational Metadata,2
+junction:interchange,Navigational Metadata,2
+junction:intersection,Navigational Metadata,2
+junction:mini_roundabout,Navigational Metadata,2
+junction:motorway_junction,Navigational Metadata,2
+junction:roundabout,Navigational Metadata,2
+junction:t_junction,Navigational Metadata,2
+junction:tertiary,Navigational Metadata,2
+junction:traffic_signals,Navigational Metadata,2
+junction:turning_circle,Navigational Metadata,2
+junction:yes,Navigational Metadata,2
+motorway_junction,Navigational Metadata,2
+passing_place,Navigational Metadata,2
+restriction:allow_right_turn,Navigational Metadata,2
+restriction:no_entry,Navigational Metadata,2
+restriction:no_exit,Navigational Metadata,2
+restriction:no_left_turn,Navigational Metadata,2
+restriction:no_left_turn @ (Mo_Su 14:30-15:30),Navigational Metadata,2
+"restriction:no_left_turn @ (Mo-Fr 07:00-08:30,14:15-15:15)",Navigational Metadata,2
+restriction:no_left_turn @ (Mo-Fr 07:00-09:00),Navigational Metadata,2
+"restriction:no_left_turn @ (Mo-Fr 7:30-8:30,13:00-15:00)",Navigational Metadata,2
+restriction:no_left_turn @ (Mo-Fr 8:00-15:00),Navigational Metadata,2
+"restriction:no_left_turn @ (Mo-Fr 8:00-9:00,14:00-15:00)",Navigational Metadata,2
+"restriction:no_left_turn @ (Mo-Fr 8:30-9:30,14:30-15:30)",Navigational Metadata,2
+restriction:no_left_turn @ (Mo-Su 07:00-22:00),Navigational Metadata,2
+restriction:no_right_on,Navigational Metadata,2
+restriction:no_right_turn,Navigational Metadata,2
+restriction:no_right_turn @,Navigational Metadata,2
+"restriction:no_right_turn @ (Mo-Fr 7:30-8:30,13:00-15:00)",Navigational Metadata,2
+restriction:no_right_turn @ (Mo-Fr 8:00-15:00),Navigational Metadata,2
+"restriction:no_right_turn @ (Mo-Fr 8:30-9:30,14:30-15:30)",Navigational Metadata,2
+restriction:no_right_turn_@_(Mo-Fr_15:00-16:00;SH_off),Navigational Metadata,2
+restriction:no_straight_on,Navigational Metadata,2
+"restriction:no_straight_on @ (Mo-Fr 7:30-8:30,13:00-15:00)",Navigational Metadata,2
+"restriction:no_straight_on @ (Mo-Fr 8:30-9:30,14:30-15:30)",Navigational Metadata,2
+restriction:no_u_turn,Navigational Metadata,2
+restriction:only_left_turn,Navigational Metadata,2
+restriction:only_right_turn,Navigational Metadata,2
+restriction:only_right_turn @ (Mo-Fr 07:00-20:00),Navigational Metadata,2
+restriction:only_straight_on,Navigational Metadata,2
+restriction:only_straight_on @ (Mo-Su 07:00-22:00),Navigational Metadata,2
+restriction:only_u_turn,Navigational Metadata,2
+restriction:private,Navigational Metadata,2
+restriction:stop,Navigational Metadata,2
+traffic_sign,Navigational Metadata,2
+stop,Navigational Metadata,2
+stop;crossing,Navigational Metadata,2
+toll_gantry,Navigational Metadata,2
+traffic_island,Navigational Metadata,2
+traffic_signals,Navigational Metadata,2
+traffic_signals;crossing,Navigational Metadata,2
+emergency_access_point,POI Road Network,3
+emergency_bay,POI Road Network,3
+escape,POI Road Network,3
+rest_area,POI Road Network,3
+services,POI Road Network,3
+bus,Bus,4
+bus_guideway,Bus,4
+bus_stop,Bus,4
+busway,Bus,4
+cycleway,Cyclist,5
+bridleway,Pedestrian,6
+corridor,Pedestrian,6
+crossing,Pedestrian,6
+elevator,Pedestrian,6
+footway,Pedestrian,6
+footway;service,Pedestrian,6
+junction:Trail,Pedestrian,6
+junction:trail,Pedestrian,6
+pedestrian,Pedestrian,6
+skyway,Pedestrian,6
+snowshoe_trail,Pedestrian,6
+steps,Pedestrian,6

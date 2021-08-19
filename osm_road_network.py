@@ -98,7 +98,7 @@ class Dashboard(param.Parameterized):
     as_percentage   = param.Boolean(default=False)
 
     # player timestamp
-    player = pn.widgets.Player(start=0, end=8, value= 0,loop_policy= 'once',show_loop_controls= False,interval= 1000, width=500, sizing_mode='fixed')
+    player = pn.widgets.Player(start=0, end=8, value= 0,loop_policy= 'once',show_loop_controls= False,interval= 1500, width=500, sizing_mode='fixed')
 
     
 
@@ -318,7 +318,7 @@ class Dashboard(param.Parameterized):
 
 
     choro_fig = pn.pane.Plotly()
-    choro_table = pn.widgets.Tabulator(pd.DataFrame(), pagination='local', width=300, height=550)
+    choro_table = pn.widgets.Tabulator(pd.DataFrame(), pagination='local', width=300, height=500)
     @param.depends('query', 'tabulator.selection', 'as_percentage', 'player.value')
     def choropleth_map(self):
         print('choro')
@@ -600,9 +600,9 @@ class Dashboard(param.Parameterized):
                                 )
                             ),
                             self.tabulator
-                        ), title='Detailed Numbers'
+                        ), title='Road Types View'
                     ),
-                    pn.Card(self.sample_map_view(), title='Sample', height=750)
+                    pn.Card(self.sample_map_view(), title='Sample View', height=750)
                 )
             )
         )

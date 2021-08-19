@@ -368,9 +368,10 @@ class Dashboard(param.Parameterized):
         
                 
         query['location_name'] = query.index + (' %' if self.as_percentage else '')
+        query['Total Updates'] = query['Total Updates'].round(2)
         fig = go.Figure(data=go.Choropleth(
             locations = query['location_id'],
-            z = query['Total Updates'].round(2),
+            z = query['Total Updates'],
             text = query['location_name'],
             # hovertemplate = 'Price: %{z:$.2f}<extra></extra>',
             colorscale = 'Blues',
@@ -401,7 +402,20 @@ class Dashboard(param.Parameterized):
         else:
             fig.update_geos(fitbounds="locations")
 
-        return fig
+        if len(query) == 0 :
+            df_table = pd.DataFrame(index=pd.Series(['#NA'], name='Total'))
+        else:
+            df_table = query[['Total Updates']]
+            df_table.sort_values(by='Total Updates', ascending=False, inplace=True)
+
+        df_table.index.name = 'State' if self.location_group['name'] == 'US' else 'Country'
+        if self.as_percentage:
+            df_table.rename(columns={'Total Updates': 'Total Updates %'}, inplace=True)
+
+        
+        table = pn.widgets.Tabulator(df_table, pagination='local', width=300, height=550)
+
+        return pn.Row(table,pn.Pane(fig, sizing_mode='stretch_width'))
         
 
 
@@ -547,7 +561,7 @@ class Dashboard(param.Parameterized):
 
         query_func = partial(query, button=button)
         button.on_click(query_func)
-        return pn.Column(self.leaflet_map,button)
+        return pn.Column(button, self.leaflet_map)
 
         
     def view(self):

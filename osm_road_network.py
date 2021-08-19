@@ -143,6 +143,12 @@ class Dashboard(param.Parameterized):
 
 
     params_column = pn.Column()
+    unreflected_changes = pn.pane.Markdown(style = {'color':'red'})
+
+    @param.depends('start_date','end_date', 'elements', 'operations', 'categories.selected_types', watch=True)
+    def show_warning_unreflected_changes(self):
+        self.unreflected_changes.object = 'Make sure to click on Query Data to reflect the changes'
+
     @param.depends('query_button', watch=True)
     def load_data(self):
         df = None
@@ -161,6 +167,7 @@ class Dashboard(param.Parameterized):
         
             
         self.data = df.copy()
+        self.unreflected_changes.object = ''
 
 
     
@@ -210,7 +217,7 @@ class Dashboard(param.Parameterized):
                         'end': date(2021,6,28),
                     }
             }),
-            pn.pane.Markdown("Data is currently available from 2019-01-01 to 2021-06-28", style={'color':'red'}),
+            pn.pane.Markdown("Data is currently available from 2019-01-01 to 2021-06-28", style={'color':'gray'}),
             self.categories.view,
             pn.layout.VSpacer(),
             pn.widgets.StaticText(name='Elements', value=''),
@@ -224,6 +231,7 @@ class Dashboard(param.Parameterized):
             pn.Param(self.param['query_button'], widgets={
                     'query_button': {'widget_type': pn.widgets.Button, 'button_type': 'primary' }
             }),
+            self.unreflected_changes
             
         )
         return self.params_column

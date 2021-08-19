@@ -285,7 +285,7 @@ class Dashboard(param.Parameterized):
             new_list['All'] = {
                 'country_name':'All',
                 'dataframe_filter': None,
-                'postgis_filter': f"SRID=4326;{self.countries.loc[list(self.location_group['countries'])].dissolve().geometry[0].to_wkt()}",
+                'postgis_filter': self.location_group['postgis_filter'],
                 'bounds':new_bounds
             }
             print('elapsed_time', time.process_time() - t)
@@ -358,11 +358,7 @@ class Dashboard(param.Parameterized):
             query['location_id'] = query['ISO3']
             
         
-        
-        
-
-
-        # query = pd.merge(left=query, right=self.countries, left_index=True, right_on='COUNTRYAFF')
+                
         query['location_name'] = query.index + (' %' if self.as_percentage else '')
         fig = go.Figure(data=go.Choropleth(
             locations = query['location_id'],

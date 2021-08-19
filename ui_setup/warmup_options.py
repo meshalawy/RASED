@@ -1,4 +1,8 @@
 #%%
+import pandas as pd 
+import geopandas 
+import pickle
+#%%
 
 countries = geopandas.read_file('/export/scratch/mmusleh/osm/osm_change_analysis/UIA_World_Countries_Boundaries_with_ISO3/World_Countries__Generalized_.shp')
 countries = countries[['COUNTRYAFF', 'ISO3', 'geometry']].dissolve(by='COUNTRYAFF')
@@ -55,7 +59,8 @@ location_group_options = {
     'Asia': {'name': 'Asia', 'countries': tuple(pd.read_csv('countries/asia.csv').Country)}
 }
 
+for k,v in location_group_options.items():
+    v['postgis_filter'] = f"SRID=4326;{countries.loc[list(v['countries'])].dissolve().geometry[0].to_wkt()}",
 
-import pickle
 pickle.dump((countries, us_states_gdf, country_objects, state_objects, location_group_options), open('warmup_options.pkl', 'wb'))
 # %%

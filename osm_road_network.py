@@ -317,6 +317,8 @@ class Dashboard(param.Parameterized):
 
 
 
+    choro_fig = pn.pane.Plotly()
+    choro_table = pn.widgets.Tabulator(pd.DataFrame(), pagination='local', width=300, height=550)
     @param.depends('query', 'tabulator.selection', 'as_percentage', 'player.value')
     def choropleth_map(self):
         print('choro')
@@ -373,7 +375,6 @@ class Dashboard(param.Parameterized):
             locations = query['location_id'],
             z = query['Total Updates'],
             text = query['location_name'],
-            # hovertemplate = 'Price: %{z:$.2f}<extra></extra>',
             colorscale = 'Blues',
             autocolorscale=False,
             reversescale=False,
@@ -402,6 +403,8 @@ class Dashboard(param.Parameterized):
         else:
             fig.update_geos(fitbounds="locations")
 
+        self.choro_fig.object = fig
+
         if len(query) == 0 :
             df_table = pd.DataFrame(index=pd.Series(['#NA'], name='Total'))
         else:
@@ -413,9 +416,9 @@ class Dashboard(param.Parameterized):
             df_table.rename(columns={'Total Updates': 'Total Updates %'}, inplace=True)
 
         
-        table = pn.widgets.Tabulator(df_table, pagination='local', width=300, height=550)
+        self.choro_table._update_data(df_table)
 
-        return pn.Row(table,pn.Pane(fig, sizing_mode='stretch_width'))
+        return pn.Row(self.choro_table,self.choro_fig)
         
 
 
@@ -576,7 +579,7 @@ class Dashboard(param.Parameterized):
             pn.Column(
                 pn.Card(
                     pn.Column(
-                        self.choropleth_map, 
+                        self.choropleth_map,
                         self.map_control_view
                     ),title='Map View'
                 ),

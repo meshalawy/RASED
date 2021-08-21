@@ -75,7 +75,7 @@ class TypeCategorySelector(param.Parameterized):
         return pn.Column(
             pn.Param(self.param, 
                 widgets={
-                    param_name: {'widget_type': pn.widgets.Toggle, 'name': category }
+                    param_name: {'widget_type': pn.widgets.Checkbox, 'name': category }
                              for param_name, category in zip(self.category_params, self.categories.keys())}
             )
         )
@@ -222,11 +222,11 @@ class Dashboard(param.Parameterized):
             pn.layout.VSpacer(),
             pn.widgets.StaticText(name='Elements', value=''),
             pn.Param(self.param['elements'], widgets={
-                    'elements': pn.widgets.CheckButtonGroup
+                    'elements': pn.widgets.CheckBoxGroup
             }),
             pn.widgets.StaticText(name='Operations', value=''),
             pn.Param(self.param['operations'], widgets={
-                    'operations': pn.widgets.CheckButtonGroup
+                    'operations': pn.widgets.CheckBoxGroup
             }),
             pn.Param(self.param['query_button'], widgets={
                     'query_button': {'widget_type': pn.widgets.Button, 'button_type': 'primary' }
@@ -277,7 +277,6 @@ class Dashboard(param.Parameterized):
     def country_state_filter_view(self):
         print('updating drop down')
         
-        import time
 
         name = ""
         if self.location_group['name'] == 'US' :    
@@ -289,14 +288,13 @@ class Dashboard(param.Parameterized):
             
 
             new_bounds = ((south, west), (north, east))
-            t = time.process_time()
+
             new_list['All'] = {
                 'country_name':'All',
                 'dataframe_filter': None,
                 'postgis_filter': self.location_group['postgis_filter'],
                 'bounds':new_bounds
             }
-            print('elapsed_time', time.process_time() - t)
             new_list.update({
                 c: self.country_objects[c] for c in self.location_group['countries']
             })

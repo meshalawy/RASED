@@ -1,5 +1,6 @@
 #%%
 
+from os import stat_result
 from attr import dataclass
 from ipywidgets.widgets.widget_string import Label
 import panel as pn
@@ -514,13 +515,10 @@ class Dashboard(param.Parameterized):
                     pass 
 
                 # note the order of x,y is different between leaflet, deckgl and shapely.
-                (miny, minx),(maxy, maxx) = self.leaflet_map.bounds
-                bb = f"SRID=4326;{box(minx,miny,maxx,maxy)}"
-                
+                # (miny, minx),(maxy, maxx) = self.leaflet_map.bounds
+                # bb = f"SRID=4326;{box(minx,miny,maxx,maxy)}"
+                # country_bb = self.country['postgis_filter'] or f"SRID=4326;{box(-180,-90,180,90).to_wkb()}"
 
-                country_bb = self.country['postgis_filter'] or f"SRID=4326;{box(-180,-90,180,90).to_wkb()}"
-
-                    
 
                 engine = create_engine("postgresql://dmlab:postgisisfun@cs-spatial-314:5432/osm_changes")  
 
@@ -535,22 +533,33 @@ class Dashboard(param.Parameterized):
                 element_filter = ' OR '.join([f'element_{e}' for e in self.elements])
                 operation_filter = ' OR '.join([f'operation_{e}' for e in self.operations])
 
-                # country_filter = ""
-                # if self.country['postgis_filter']:
-                #     country_filter = f"AND country IN {self.country['postgis_filter']}"
+                country_filter = ""
+                if self.country['dataframe_filter']:
+                    if self.location_group['name'] == 'US':
+                        country_filter = f"AND country = 'United States' AND state = '{self.country['name']}'" 
+                    else:
+                        country_filter = f"AND country = '{self.country['name']}'" 
+
+                elif self.location_group['name'] != 'All':
+                    country_filter = f"AND country IN {tuple(self.location_group['countries']+('',))}" 
+
+                # country_filter = f"AND country IN {self.country['postgis_filter']}"
+                # AND ST_INTERSECTS(geometry, '{bb}') 
+                # AND ST_INTERSECTS(geometry, '{country_bb}') 
 
                 s = self.start_date.strftime("%Y-%m-%d")
                 e = self.end_date.strftime("%Y-%m-%d")
+                
                 sql = f"""SELECT * FROM changeset_ids
                         WHERE day BETWEEN '{s}' AND '{e}' 
                         AND ({element_filter})
                         AND ({operation_filter})
                         
                         {road_type_filter} 
-                        AND ST_INTERSECTS(geometry, '{bb}') 
-                        AND ST_INTERSECTS(geometry, '{country_bb}') 
+                        {country_filter}
+
                         LIMIT 100"""
-                
+
                 
                 changes = geopandas.read_postgis(sql, engine,geom_col='geometry').drop_duplicates(subset = ["changeset"])
                 self.markers_group.markers = tuple(

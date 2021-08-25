@@ -317,7 +317,43 @@ class Dashboard(param.Parameterized):
 
 
     choro_fig = pn.pane.Plotly()
-    choro_table = pn.widgets.Tabulator(pd.DataFrame(), pagination='local', width=300, height=500)
+    choro_table = pn.widgets.Tabulator(pd.DataFrame(),  width=300, height=500)
+    
+    def get_choropleth_table_df(self):
+        idx = pd.IndexSlice
+
+        query = self.query
+        if len(query):
+            if self.tabulator.selection:
+                road_type_filter = self.tabulator.value.index[self.tabulator.selection].tolist()
+                query = self.query.loc[idx[:,road_type_filter],:]
+
+            if self.as_percentage:
+                query = query.groupby(level=[0,1,2],axis=1).sum().groupby(level=1).sum()
+                query = query.loc[:, query.columns.intersection(self.total_per_country)]
+                tpc = self.total_per_country.loc[query.index,query.columns].fillna(0)
+
+            
+            group_level = 1 if self.location_group['name'] == 'US' else 0
+            query = query.groupby(level=group_level, axis=1).sum().sum()
+            if self.as_percentage:
+                tpc = tpc.groupby(level=group_level, axis=1).sum().sum()
+                query = (query/tpc.values * 100).fillna(0).round(2)
+            
+            query.name = 'Total Updates'
+        
+        if len(query) == 0 :
+            df_table = pd.DataFrame(index=pd.Series(['#NA'], name='Total'))
+        else:
+            df_table = pd.DataFrame(query)
+            df_table.sort_values(by='Total Updates', ascending=False, inplace=True)
+
+        df_table.index.name = 'State' if self.location_group['name'] == 'US' else 'Country'
+        if self.as_percentage:
+            df_table.rename(columns={'Total Updates': 'Total Updates %'}, inplace=True)
+        
+        return df_table
+
     @param.depends('query', 'tabulator.selection', 'as_percentage', 'player.value')
     def choropleth_map(self):
         print('choro')
@@ -403,19 +439,7 @@ class Dashboard(param.Parameterized):
             fig.update_geos(fitbounds="locations")
 
         self.choro_fig.object = fig
-
-        if len(query) == 0 :
-            df_table = pd.DataFrame(index=pd.Series(['#NA'], name='Total'))
-        else:
-            df_table = query[['Total Updates']]
-            df_table.sort_values(by='Total Updates', ascending=False, inplace=True)
-
-        df_table.index.name = 'State' if self.location_group['name'] == 'US' else 'Country'
-        if self.as_percentage:
-            df_table.rename(columns={'Total Updates': 'Total Updates %'}, inplace=True)
-
-        
-        self.choro_table._update_data(df_table)
+        self.choro_table._update_data(self.get_choropleth_table_df())
 
         return pn.Row(self.choro_table,self.choro_fig)
         
@@ -440,18 +464,9 @@ class Dashboard(param.Parameterized):
                 country_filter = ([self.country['dataframe_filter']])
         else: 
             country_filter = (slice(None))
-
-
-        if self.player.value:
-            day = self.start_date + timedelta(days = self.player.value -1) 
-            day = day.strftime("%Y-%m-%d")
-            player_day_filter = idx[day:day]
-        else:
-            player_day_filter = slice(None)
-        
         
         try:
-            query = self.query.loc[player_day_filter,country_filter]
+            query = self.query.loc[:,country_filter]
         except:
             
             query = pd.DataFrame()

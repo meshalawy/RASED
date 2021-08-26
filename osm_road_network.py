@@ -168,7 +168,11 @@ class Dashboard(param.Parameterized):
                 idx[s:e, self.categories.selected_types],
                 idx[: , : , self.elements , self.operations]
             ]
-        
+
+            tpc = pd.read_pickle('data/total_per_country.pkl.gzip', compression='gzip').loc[
+                idx[self.categories.selected_types],
+                idx[: , : , self.elements]
+            ]
         
         # reset the player in case it was used
         days = (self.end_date - self.start_date).days
@@ -177,6 +181,7 @@ class Dashboard(param.Parameterized):
         self.player.value = 0
 
         self.data = df.copy()
+        self.total_per_country = tpc.copy()
         
         self.unreflected_changes.object = ''
 
@@ -197,7 +202,7 @@ class Dashboard(param.Parameterized):
     
 
     def __init__(self, *args, **kwargs):  
-        self.total_per_country = pd.read_pickle('data/total_per_country.pkl.gzip', compression='gzip')
+        # self.total_per_country = pd.read_pickle('data/total_per_country.pkl.gzip', compression='gzip')
     
         self.categories.set_all_possible_types(self.data.index.get_level_values(level=1))
         super().__init__(*args, **kwargs)
@@ -260,7 +265,7 @@ class Dashboard(param.Parameterized):
                 sizing_mode='fixed'
             )
         )
-            
+
     @pn.depends('player.value')
     def player_info_view(self):
         text = ''
@@ -331,9 +336,10 @@ class Dashboard(param.Parameterized):
         if len(query):
             if self.tabulator.selection:
                 road_type_filter = self.tabulator.value.index[self.tabulator.selection].tolist()
-                query = self.query.loc[idx[:,road_type_filter],:]
-
-
+            else:
+                road_type_filter = slice(None)
+            
+            query = self.query.loc[idx[:,road_type_filter],:]
             group_level = 1 if self.location_group['name'] == 'US' else 0
             query = query.groupby(level=group_level, axis = 1).sum().groupby(level=0).sum()
 
@@ -341,6 +347,11 @@ class Dashboard(param.Parameterized):
                 countries = self.choro_table.value.index[self.choro_table.selection].tolist()    
             else: 
                 countries = query.sum().nlargest(3).index.tolist()
+
+            
+            if self.as_percentage:
+                tpc = self.total_per_country.loc[road_type_filter].fillna(0).groupby(level=group_level, axis = 1).sum().sum()
+                query = query.divide(tpc.loc[query.columns], axis = 1).multiply(100).round(2)
 
             try:
                 query = query[countries]
@@ -499,7 +510,7 @@ class Dashboard(param.Parameterized):
         
 
 
-    @param.depends('country', 'query', 'as_percentage', 'player.value', watch=True)
+    @param.depends('country', 'query', 'as_percentage',  watch=True)
     def update_tabular(self):
         # if not any(pd.DataFrame().columns):
         #     return
@@ -532,22 +543,12 @@ class Dashboard(param.Parameterized):
             
             if self.as_percentage:
                 tpc  = self.total_per_country.loc[
-                    idx[query.index],
-                    idx[
-                        list(self.location_group['countries']),
-                        :,
-                        self.elements 
-                    ]
-                ].loc[
-                    :,
-                    country_filter
-
-                ].fillna(0).groupby(level=[2], axis=1).sum().loc[query.index]
+                            idx[query.index],country_filter].fillna(0).groupby(level=[2], axis=1).sum()
                 tpc['Total'] = tpc.sum(axis=1)
-                for o in self.operations:
-                    query.loc[:,idx[self.elements,o]] = query.loc[:,idx[self.elements,o]] / tpc.loc[:,idx[self.elements]].values
 
-                query.loc[:,idx['Total']] = query.loc[:,idx['Total']] / tpc.loc[:,idx['Total']].values
+                for c in query.columns:
+                    query[c] = query[c] / tpc[c[0]].values
+
                 query = query * 100
 
             
@@ -657,7 +658,7 @@ class Dashboard(param.Parameterized):
                     pn.Column(
                         # self.choropleth_map,
                         pn.Row(
-                            pn.Column(pn.pane.Markdown("Select a country/state to draw its time series. The top 3 will be drawn by default if no entry is selected", style = {'color':'gray'}), self.choro_table, width = 300, sizing_mode='fixed'),
+                            pn.Column(pn.pane.Markdown("Select a country/state to draw its time series and compare it with others. The top-3 will be drawn by default if no entry is selected", style = {'color':'gray'}), self.choro_table, width = 300, sizing_mode='fixed'),
                             self.timeseries_fig,
                             self.choro_fig),
                         self.map_control_view

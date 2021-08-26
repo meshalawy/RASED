@@ -4,6 +4,7 @@ from os import stat_result
 from attr import dataclass
 from ipywidgets.widgets.widget_string import Label
 import panel as pn
+from panel.widgets import select
 import param
 import pandas as pd
 import geopandas
@@ -24,6 +25,8 @@ from sqlalchemy import create_engine
 
 
 import plotly.graph_objects as go
+import plotly.express as px
+
 
 import glob
 from tqdm.contrib.concurrent import process_map
@@ -148,7 +151,7 @@ class Dashboard(param.Parameterized):
 
     @param.depends('start_date','end_date', 'elements', 'operations', 'categories.selected_types', watch=True)
     def show_warning_unreflected_changes(self):
-        self.unreflected_changes.object = 'Make sure to click on Query Data to reflect the changes'
+        self.unreflected_changes.object = 'A query parameter or more has changed. Make sure to click on "Query Data" to reflect the changes'
 
     @param.depends('query_button', watch=True)
     def load_data(self):
@@ -166,8 +169,15 @@ class Dashboard(param.Parameterized):
                 idx[: , : , self.elements , self.operations]
             ]
         
-            
+        
+        # reset the player in case it was used
+        days = (self.end_date - self.start_date).days
+        days = 0 if days < 0 else days
+        self.player.end = days + 1
+        self.player.value = 0
+
         self.data = df.copy()
+        
         self.unreflected_changes.object = ''
 
 
@@ -251,24 +261,17 @@ class Dashboard(param.Parameterized):
             )
         )
             
-
-    
-    @pn.depends('start_date', 'end_date', watch=True)
-    def player_control_view(self):
-        days = (self.end_date - self.start_date).days
-        days = 0 if days < 0 else days
-        self.player.end = days + 1
-        
-
     @pn.depends('player.value')
     def player_info_view(self):
         text = ''
         if self.player.value :
             text = (self.start_date + timedelta(days=self.player.value -1)).strftime("%d-%b-%Y")
+            style =  {"color": "red"}
         else:
             text = 'All days'
+            style = {}
 
-        return pn.pane.Markdown("**Showing:**\n\n" + text, width=120, sizing_mode='fixed')
+        return pn.pane.Markdown("**Showing:**\n\n" + text, width=120, sizing_mode='fixed', style = style)
 
             
 
@@ -317,8 +320,59 @@ class Dashboard(param.Parameterized):
 
 
     choro_fig = pn.pane.Plotly()
-    choro_table = pn.widgets.Tabulator(pd.DataFrame(),  width=300, height=500)
+    timeseries_fig = pn.pane.Plotly(width=500)
+    choro_table = pn.widgets.Tabulator(pd.DataFrame(),  width=300, height=500,  selectable='checkbox')
     
+    @param.depends('query', 'tabulator.selection', 'as_percentage', 'choro_table.selection', watch=True)
+    def get_timeseries_plot(self):
+        print('timeserires')
+        idx = pd.IndexSlice
+        query = self.query
+        if len(query):
+            if self.tabulator.selection:
+                road_type_filter = self.tabulator.value.index[self.tabulator.selection].tolist()
+                query = self.query.loc[idx[:,road_type_filter],:]
+
+
+            group_level = 1 if self.location_group['name'] == 'US' else 0
+            query = query.groupby(level=group_level, axis = 1).sum().groupby(level=0).sum()
+
+            if self.choro_table.selection:
+                countries = self.choro_table.value.index[self.choro_table.selection].tolist()    
+            else: 
+                countries = query.sum().nlargest(3).index.tolist()
+
+            try:
+                query = query[countries]
+                days = pd.to_datetime(query.index)
+                fig = px.line(query, x=days, y=countries)
+                fig.update_layout(
+                    xaxis_title = "Date",
+                    yaxis_title = "Total Number of Updates",
+                    legend_title="",
+                    legend=dict(
+                        orientation="h",
+                        yanchor="bottom",
+                        y=1.02,
+                        xanchor="right",
+                        x=1
+                    )
+
+
+                )
+                fig.update_traces(line= {'shape': 'spline', 'smoothing': 1.3})
+                self.timeseries_fig.object = fig
+            except Exception as ex:
+                pass
+
+            
+            
+        else :
+            self.timeseries_fig.object = None
+
+
+
+    @param.depends('query', 'tabulator.selection', 'as_percentage',  watch=True)
     def get_choropleth_table_df(self):
         idx = pd.IndexSlice
 
@@ -352,9 +406,12 @@ class Dashboard(param.Parameterized):
         if self.as_percentage:
             df_table.rename(columns={'Total Updates': 'Total Updates %'}, inplace=True)
         
-        return df_table
+        # previously_selected = self.choro_table.value.index[self.choro_table.selection].tolist()
+        self.choro_table._update_data(df_table)
+        # self.choro_table.selection = [df_table.index.get_loc(t) for t in previously_selected]
+        # return df_table
 
-    @param.depends('query', 'tabulator.selection', 'as_percentage', 'player.value')
+    @param.depends('query', 'tabulator.selection', 'as_percentage', 'player.value', watch=True)
     def choropleth_map(self):
         print('choro')
 
@@ -439,9 +496,6 @@ class Dashboard(param.Parameterized):
             fig.update_geos(fitbounds="locations")
 
         self.choro_fig.object = fig
-        self.choro_table._update_data(self.get_choropleth_table_df())
-
-        return pn.Row(self.choro_table,self.choro_fig)
         
 
 
@@ -601,9 +655,13 @@ class Dashboard(param.Parameterized):
             pn.Column(
                 pn.Card(
                     pn.Column(
-                        self.choropleth_map,
+                        # self.choropleth_map,
+                        pn.Row(
+                            pn.Column(pn.pane.Markdown("Select a country/state to draw its time series. The top 3 will be drawn by default if no entry is selected", style = {'color':'gray'}), self.choro_table, width = 300, sizing_mode='fixed'),
+                            self.timeseries_fig,
+                            self.choro_fig),
                         self.map_control_view
-                    ),title='Map View'
+                    ),title='Country/State View'
                 ),
                 pn.Row(
                     pn.Card(
@@ -621,6 +679,8 @@ class Dashboard(param.Parameterized):
                                     }, margin=[22, 0, 0, 0])
                                 )
                             ),
+                            pn.pane.Markdown("Select a country/state from the dropdown list above to show its road types and count of updates in the table below. Select from the table below to filter only for a specific road type and update all views above", style = {'color':'gray'}),
+                            
                             self.tabulator
                         ), title='Road Types View'
                     ),

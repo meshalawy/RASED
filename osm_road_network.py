@@ -351,30 +351,31 @@ class Dashboard(param.Parameterized):
             
             if self.as_percentage:
                 tpc = self.total_per_country.loc[road_type_filter].fillna(0).groupby(level=group_level, axis = 1).sum().sum()
+                query = query[query.columns.intersection(tpc.index)]
                 query = query.divide(tpc.loc[query.columns], axis = 1).multiply(100).round(2)
 
-            try:
-                query = query[countries]
-                days = pd.to_datetime(query.index)
-                fig = px.line(query, x=days, y=countries)
-                fig.update_layout(
-                    xaxis_title = "Date",
-                    yaxis_title = "Total Number of Updates",
-                    legend_title="",
-                    legend=dict(
-                        orientation="h",
-                        yanchor="bottom",
-                        y=1.02,
-                        xanchor="right",
-                        x=1
-                    )
-
-
+            # try:
+            query = query[countries]
+            days = pd.to_datetime(query.index)
+            fig = px.line(query, x=days, y=countries)
+            fig.update_layout(
+                xaxis_title = "Date",
+                yaxis_title = "Total Updates" + (' %' if self.as_percentage else ''),
+                legend_title="",
+                legend=dict(
+                    orientation="h",
+                    yanchor="bottom",
+                    y=1.02,
+                    xanchor="right",
+                    x=1
                 )
-                fig.update_traces(line= {'shape': 'spline', 'smoothing': 1.3})
-                self.timeseries_fig.object = fig
-            except Exception as ex:
-                pass
+
+
+            )
+            fig.update_traces(line= {'shape': 'spline', 'smoothing': 1.3})
+            self.timeseries_fig.object = fig
+            # except Exception as ex:
+            #     pass
 
             
             

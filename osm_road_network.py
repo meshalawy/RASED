@@ -1,49 +1,33 @@
 #%%
-import json
+
 from bokeh.models.formatters import NumeralTickFormatter
-from bokeh.models import ColumnDataSource, HoverTool
+from bokeh.models import ColumnDataSource, HoverTool, Label, LabelSet
 from bokeh.palettes import GnBu6,  Category10, Category20, Turbo256
-
 from bokeh.plotting import figure
+import plotly.graph_objects as go
 
 
-from ipywidgets.widgets.widget_string import Label
 import panel as pn
-from panel.widgets import select
 import param
+from param.parameterized import depends
+
 import pandas as pd
 from pandas import IndexSlice as idx
 import numpy as np
-from itertools import cycle
-
-
-
 import geopandas
-
-import pickle
-
-from itertools import chain
-
-from datetime import datetime, date, time, timedelta
-from functools import partial
-
-from ipyleaflet import Map, Marker, MarkerCluster, basemaps, basemap_to_tiles, SplitMapControl
-from ipywidgets import HTML
-from param.parameterized import depends
-from shapely import geometry
-
-from shapely.geometry import box
 from sqlalchemy import create_engine
 
+from itertools import cycle, chain
+from functools import partial
 
-import plotly.graph_objects as go
-import plotly.express as px
+import json
+import pickle
 
-from bokeh.models import ColumnDataSource
+from datetime import date, timedelta
 
 
-import glob
-from tqdm.contrib.concurrent import process_map
+from ipyleaflet import Map, Marker, MarkerCluster
+from ipywidgets import HTML
 
 
 class TypeCategorySelector(param.Parameterized):
@@ -103,8 +87,6 @@ class TypeCategorySelector(param.Parameterized):
 
 class Dashboard(param.Parameterized):
     
-    
-
     # start_date  = param.Date(default= date.today() - timedelta (days=8))
     # end_date    = param.Date(default= date.today() - timedelta (days=1))
 
@@ -136,8 +118,6 @@ class Dashboard(param.Parameterized):
     operations  = param.ListSelector(default=['create', 'modify'], objects=operations)
 
     query_button = param.Action(lambda x: x.param.trigger('query_button'), label='Query Data')
-
-
 
     data = param.DataFrame(precedence=-1, default=pd.DataFrame(index=pd.MultiIndex(levels=[[],[]],codes=[[],[]],names=['day', 'type'])))
     query = param.DataFrame(precedence=-1, default=pd.DataFrame(columns=['Total']))
@@ -193,6 +173,20 @@ class Dashboard(param.Parameterized):
 
     def get_location_group_string(self):
         return 'All ' + ('countries' if self.location_group['name'] == 'All' else f' in {self.location_group["name"]}')
+
+    def get_only_20_note(self):
+        options = {
+            'x_units' : 'screen',
+            'y_units' : 'screen',
+            'background_fill_color' : 'white',
+            'background_fill_alpha' : 1.0,
+            'text_font_size' : "10px",
+            'render_mode' : 'css',
+        }
+        return [
+            Label(x_offset=200, y_offset=40, text='Only top 20 entries (absolute count) are shown here.', **options ),
+            Label(x_offset=200, y_offset=20, text='Switch to table view for the full list.', **options )
+        ]
 
     
     @param.depends('data', 'location_group', watch=True)
@@ -314,9 +308,6 @@ class Dashboard(param.Parameterized):
         pn.state.onload(lambda: self.param.trigger('query_button'))
 
         super().__init__(*args, **kwargs)
-
-
-
 
 
     
@@ -541,6 +532,10 @@ class Dashboard(param.Parameterized):
         format ='0.00%' if self.as_percentage else '0.0a'
         p.xaxis.formatter = NumeralTickFormatter(format=format)
         p.outline_line_color = None
+
+        if len(table_data) > 20:
+            for l in self.get_only_20_note():
+                p.add_layout(l)
         
         chart = pn.pane.Bokeh(p, height=400)
 
@@ -661,7 +656,12 @@ class Dashboard(param.Parameterized):
         p.xaxis.formatter = NumeralTickFormatter(format=format)
         p.outline_line_color = None
         
+        if len(table_data) > 20:
+            for l in self.get_only_20_note():
+                p.add_layout(l)
+        
         chart = pn.pane.Bokeh(p, height=400)
+        
 
 
         ## 3- update table view:
@@ -751,10 +751,6 @@ class Dashboard(param.Parameterized):
                 
                 for c in query.columns:
                     query[c] = query[c] / tpc[c]
-        
-
-
-            
 
             
             if len(query.columns) <= 10 :

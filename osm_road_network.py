@@ -1,12 +1,22 @@
 #%%
+import json
+from bokeh.models.formatters import NumeralTickFormatter
+from bokeh.models import ColumnDataSource, HoverTool
+from bokeh.palettes import GnBu6,  Category10, Category20, Turbo256
 
-from os import stat_result
-from attr import dataclass
+from bokeh.plotting import figure
+
+
 from ipywidgets.widgets.widget_string import Label
 import panel as pn
 from panel.widgets import select
 import param
 import pandas as pd
+from pandas import IndexSlice as idx
+import numpy as np
+
+
+
 import geopandas
 
 import pickle
@@ -26,6 +36,8 @@ from sqlalchemy import create_engine
 
 import plotly.graph_objects as go
 import plotly.express as px
+
+from bokeh.models import ColumnDataSource
 
 
 import glob
@@ -91,18 +103,19 @@ class Dashboard(param.Parameterized):
     
     
 
-    start_date  = param.Date(default= date.today() - timedelta (days=8))
-    end_date    = param.Date(default= date.today() - timedelta (days=1))
+    # start_date  = param.Date(default= date.today() - timedelta (days=8))
+    # end_date    = param.Date(default= date.today() - timedelta (days=1))
 
-    # start_date  = param.Date(default= date(2019,1,1))
-    # end_date    = param.Date(default= date(2021,6,30))
+    start_date  = param.Date(default= date(2021,6,1))
+    end_date    = param.Date(default= date(2021,6,28))
 
 
     categories  = TypeCategorySelector(name='Category Selection')
     as_percentage   = param.Boolean(default=False)
+    selected_road_types = param.List(default=[])
+    selected_countries = param.List(default=[])
 
-    # player timestamp
-    player = pn.widgets.Player(start=0, end=8, value= 0,loop_policy= 'once',show_loop_controls= False,interval= 1500, width=500, sizing_mode='fixed')
+    
 
     
 
@@ -132,18 +145,7 @@ class Dashboard(param.Parameterized):
 
     data = param.DataFrame(precedence=-1, default=pd.DataFrame(index=pd.MultiIndex(levels=[[],[]],codes=[[],[]],names=['day', 'type'])))
     query = param.DataFrame(precedence=-1, default=pd.DataFrame(columns=['Total']))
-    tabulator = pn.widgets.Tabulator(pd.DataFrame(), selectable='checkbox', pagination='local', sizing_mode='stretch_width', 
-        widths={
-            'Type':200,
-            'Total':150,
-            'Ways Created': 140,
-            'Ways Modified': 140,
-            'Relations Created': 140,
-            'Relations Modified': 140,
-            'Nodes Created': 140,
-            'Nodes Modified': 140,
-        }
-    )
+    query2 = param.DataFrame(precedence=-1, default=pd.DataFrame(columns=['Total']))
 
 
     params_column = pn.Column()
@@ -161,7 +163,6 @@ class Dashboard(param.Parameterized):
             # TODO temporary fix make it type instead of road_type. Should be updated in the original data
             df.index.names = ['day', 'Type']
             
-            idx = pd.IndexSlice
             s = self.start_date.strftime("%Y-%m-%d")
             e = self.end_date.strftime("%Y-%m-%d")
             df = df.loc[
@@ -185,12 +186,16 @@ class Dashboard(param.Parameterized):
         
         self.unreflected_changes.object = ''
 
+    def get_empty_dataframe(self):
+        return pd.DataFrame(index=pd.Series(['#NA'], name='Total'))
+
+    def reselect_itmes_in_table(self, items, table):
+        table.selection = [table.value.index.get_loc(t) for t in items if t in table.value.index]
 
     
     @param.depends('data', 'location_group', watch=True)
-    def get_query_results(self):
+    def update_query_results(self):
 
-        idx = pd.IndexSlice
         
         query = self.data.loc[
             idx[:],
@@ -199,19 +204,105 @@ class Dashboard(param.Parameterized):
             ]
         ]
         self.query = query
+
+
+        group_level = 1 if self.location_group['name'] == 'US' else 0
+        query = query.groupby(level=[group_level,2,3], axis = 1).sum()
+
+        
+        # wait not to update views until the last param (query2) is updated
+        # this is to avoid multiple rendering, i.e. rendering road_type_views after updating the country selection.
+        self.pause_updates = True
+
+
+        # clear selected countries and road_types and keep only ones that are existing in the new data
+        self.selected_countries = sorted([c for c in self.selected_countries if c in query.columns.get_level_values(0)])
+        # self.selected_road_types = sorted([c for c in self.selected_road_types if c in query.index.get_level_values(1)])
+        # self.road_type_table.selection = [c for c in self.selected_road_types if c in query.index.get_level_values(1)])
+        # table.value.index.get_loc(t) for t in items if t in table.value.index
+        for c in self.selected_road_types:
+            if c not in query.index.get_level_values(1):
+                self.road_type_table.selection = []
+                break
+        
+        # resume updates
+        self.pause_updates = False
+        self.query2 = query
+
     
 
     def __init__(self, *args, **kwargs):  
-        # self.total_per_country = pd.read_pickle('data/total_per_country.pkl.gzip', compression='gzip')
-    
         self.categories.set_all_possible_types(self.data.index.get_level_values(level=1))
+
+        # We use this to pause updates while updating multiple parameters, to avoid multiple rendering, 
+        # until the last parameter is updated.
+        self.pause_updates = False
+
+        
+        # initializing widgets and related elements:
+
+        # 1- initializing items related to Road Type View:
+        self.road_type_table = pn.widgets.DataFrame(pd.DataFrame(), autosize_mode = 'fit_columns', height=400)
+        self.road_type_datasource = ColumnDataSource()
+        self.road_type_tabs = pn.Tabs()
+        
+        ## linking the selectons of both the chart and the table
+        def road_type_datasource_selection_change(attr, old, new):
+            self.road_type_table.selection = new
+
+        self.road_type_datasource.selected.on_change('indices', road_type_datasource_selection_change)
+        self.road_type_table.link(self.road_type_datasource.selected, selection='indices')
+
+        ## linking the widget to the selected_road_types parameter
+        def callback(*events):
+            for event in events:
+                if event.name == 'selection':
+                    self.selected_road_types = sorted(self.road_type_table.value.index[event.new].tolist())
+
+        self.road_type_table.param.watch(callback, ['selection'], onlychanged=True)
+        ############################################
+
+        # 2- initializing items related to Country View:
+        self.country_table = pn.widgets.DataFrame(pd.DataFrame(), autosize_mode = 'fit_columns', height=400)
+        self.country_datasource = ColumnDataSource()
+        self.country_tabs = pn.Tabs()
+        
+        ## linking the selectons of both the chart and the table
+        def country_datasource_selection_change(attr, old, new):
+            self.country_table.selection = new
+
+        self.country_datasource.selected.on_change('indices', country_datasource_selection_change)
+        self.country_table.link(self.country_datasource.selected, selection='indices')
+
+        ## linking the widget to the selected_countries parameter
+        def callback(*events):
+            for event in events:
+                if event.name == 'selection':
+                    self.selected_countries = sorted(self.country_table.value.index[event.new].tolist())
+
+        self.country_table.param.watch(callback, ['selection'], onlychanged=True)
+        #######################################################
+        
+        # 3- initializing items related to the Choropleth View:
+        self.player = pn.widgets.Player(start=0, end=8, value= 0,loop_policy= 'once',show_loop_controls= False,interval= 500, width=400, sizing_mode='fixed')
+        self.choropleth_chart = pn.pane.Plotly(height=340)
+        #######################################################
+
+        # 4- initializing items related to the Time Series View:
+        self.time_series_tabs = pn.Tabs()
+        #######################################################
+
+        # 5- initializing items related to the Sample View:
+        self.sample_map = Map(center=(0, 0), zoom=2, scroll_wheel_zoom=True, layout={'height':'650px'} )
+        self.sample_markers = MarkerCluster()        
+        self.sample_map.add_layer(self.sample_markers) 
+        self.countries_bounds = json.load(open('ui_setup/countries_bounds.json', 'r'))   
+        self.us_states_bounds = json.load(open('ui_setup/us_states_bounds.json', 'r'))   
+
+
         super().__init__(*args, **kwargs)
 
 
-    leaflet_map = Map(center=(0, 0), zoom=2, scroll_wheel_zoom=True, layout={'height':'650px'} )
-    markers_group = MarkerCluster()
-    leaflet_map.add_layer(markers_group)    
-    
 
 
 
@@ -252,182 +343,21 @@ class Dashboard(param.Parameterized):
         )
         return self.params_column
 
-    def map_control_view(self):
-        return pn.Row(
-            pn.Param(
-                self.param['location_group'], 
-                widgets={'location_group':  pn.widgets.RadioButtonGroup},
-                align = ('center', 'center')),
-            pn.Row(
-                self.player,
-                self.player_info_view, 
-                width=650,
-                sizing_mode='fixed'
-            )
-        )
-
-    @pn.depends('player.value')
-    def player_info_view(self):
-        text = ''
-        if self.player.value :
-            text = (self.start_date + timedelta(days=self.player.value -1)).strftime("%d-%b-%Y")
-            style =  {"color": "red"}
-        else:
-            text = 'All days'
-            style = {}
-
-        return pn.pane.Markdown("**Showing:**\n\n" + text, width=120, sizing_mode='fixed', style = style)
-
-            
-
-
-
-    @param.depends('location_group')
-    def country_state_filter_view(self):
-        print('updating drop down')
-        
-
-        name = ""
-        if self.location_group['name'] == 'US' :    
-            self.param.country.names = self.state_objects
-            name = 'State' 
-        else:
-            new_list = {}
-            west,south,east,north =  self.countries.loc[list(self.location_group['countries'])].total_bounds
-            
-
-            new_bounds = ((south, west), (north, east))
-
-            new_list['All'] = {
-                'country_name':'All',
-                'dataframe_filter': None,
-                'postgis_filter': self.location_group['postgis_filter'],
-                'bounds':new_bounds
-            }
-            new_list.update({
-                c: self.country_objects[c] for c in self.location_group['countries']
-            })
-                 
-            self.param.country.names = new_list
-            name = 'Country'
-
-        
-        self.param.country.objects = list(self.param.country.names.values())
-        self.country = self.param.country.names['All']
-        print(' done updating drop down')
-        return pn.Param(
-            self.param['country'],
-            widgets={
-                "country": {'name':name}
-            }
-        )
-
-
-
-    choro_fig = pn.pane.Plotly()
-    timeseries_fig = pn.pane.Plotly(width=500)
-    choro_table = pn.widgets.Tabulator(pd.DataFrame(),  width=300, height=500,  selectable='checkbox')
     
-    @param.depends('query', 'tabulator.selection', 'as_percentage', 'choro_table.selection', watch=True)
-    def get_timeseries_plot(self):
-        print('timeserires')
-        idx = pd.IndexSlice
-        query = self.query
-        if len(query):
-            if self.tabulator.selection:
-                road_type_filter = self.tabulator.value.index[self.tabulator.selection].tolist()
-            else:
-                road_type_filter = slice(None)
-            
-            query = self.query.loc[idx[:,road_type_filter],:]
-            group_level = 1 if self.location_group['name'] == 'US' else 0
-            query = query.groupby(level=group_level, axis = 1).sum().groupby(level=0).sum()
+    
+    #######################################
+    #######################################
+    ########## Choropleth View ############
+    #######################################
+    #######################################
 
-            if self.choro_table.selection:
-                countries = self.choro_table.value.index[self.choro_table.selection].tolist()    
-            else: 
-                countries = query.sum().nlargest(3).index.tolist()
+    @param.depends( 'query2', 'as_percentage', 'player.value', watch=True)
+    def choropleth_watcher(self):
+        if self.pause_updates:
+            return 
 
-            
-            if self.as_percentage:
-                tpc = self.total_per_country.loc[road_type_filter].fillna(0).groupby(level=group_level, axis = 1).sum().sum()
-                query = query[query.columns.intersection(tpc.index)]
-                query = query.divide(tpc.loc[query.columns], axis = 1).multiply(100).round(2)
+        print('choro', self.selected_road_types)
 
-            # try:
-            query = query[countries]
-            days = pd.to_datetime(query.index)
-            fig = px.line(query, x=days, y=countries)
-            fig.update_layout(
-                xaxis_title = "Date",
-                yaxis_title = "Total Updates" + (' %' if self.as_percentage else ''),
-                legend_title="",
-                legend=dict(
-                    orientation="h",
-                    yanchor="bottom",
-                    y=1.02,
-                    xanchor="right",
-                    x=1
-                )
-
-
-            )
-            fig.update_traces(line= {'shape': 'spline', 'smoothing': 1.3})
-            self.timeseries_fig.object = fig
-            # except Exception as ex:
-            #     pass
-
-            
-            
-        else :
-            self.timeseries_fig.object = None
-
-
-
-    @param.depends('query', 'tabulator.selection', 'as_percentage',  watch=True)
-    def get_choropleth_table_df(self):
-        idx = pd.IndexSlice
-
-        query = self.query
-        if len(query):
-            if self.tabulator.selection:
-                road_type_filter = self.tabulator.value.index[self.tabulator.selection].tolist()
-                query = self.query.loc[idx[:,road_type_filter],:]
-
-            if self.as_percentage:
-                query = query.groupby(level=[0,1,2],axis=1).sum().groupby(level=1).sum()
-                query = query.loc[:, query.columns.intersection(self.total_per_country)]
-                tpc = self.total_per_country.loc[query.index,query.columns].fillna(0)
-
-            
-            group_level = 1 if self.location_group['name'] == 'US' else 0
-            query = query.groupby(level=group_level, axis=1).sum().sum()
-            if self.as_percentage:
-                tpc = tpc.groupby(level=group_level, axis=1).sum().sum()
-                query = (query/tpc.values * 100).fillna(0).round(2)
-            
-            query.name = 'Total Updates'
-        
-        if len(query) == 0 :
-            df_table = pd.DataFrame(index=pd.Series(['#NA'], name='Total'))
-        else:
-            df_table = pd.DataFrame(query)
-            df_table.sort_values(by='Total Updates', ascending=False, inplace=True)
-
-        df_table.index.name = 'State' if self.location_group['name'] == 'US' else 'Country'
-        if self.as_percentage:
-            df_table.rename(columns={'Total Updates': 'Total Updates %'}, inplace=True)
-        
-        # previously_selected = self.choro_table.value.index[self.choro_table.selection].tolist()
-        self.choro_table._update_data(df_table)
-        # self.choro_table.selection = [df_table.index.get_loc(t) for t in previously_selected]
-        # return df_table
-
-    @param.depends('query', 'tabulator.selection', 'as_percentage', 'player.value', watch=True)
-    def choropleth_map(self):
-        print('choro')
-
-        idx = pd.IndexSlice
 
         if self.player.value:
             day = self.start_date + timedelta(days = self.player.value -1) 
@@ -435,9 +365,9 @@ class Dashboard(param.Parameterized):
             player_day_filter = idx[day:day]
         else:
             player_day_filter = slice(None)
-            
-        if self.tabulator.selection:
-            road_type_filter = self.tabulator.value.index[self.tabulator.selection].tolist()
+
+        if self.road_type_table.selection:
+            road_type_filter = self.road_type_table.value.index[self.road_type_table.selection].tolist()
             query = self.query.loc[(player_day_filter,road_type_filter),:]
         else:
             query = self.query.loc[player_day_filter]
@@ -507,38 +437,62 @@ class Dashboard(param.Parameterized):
         else:
             fig.update_geos(fitbounds="locations")
 
-        self.choro_fig.object = fig
+        self.choropleth_chart.object = fig
+
+
+
+    @pn.depends('player.value')
+    def player_info_view(self):
+        text = ''
+        if self.player.value :
+            text = (self.start_date + timedelta(days=self.player.value -1)).strftime("%d-%b-%Y")
+            style =  {"color": "red"}
+        else:
+            text = 'All days'
+            style = {}
+
+        return pn.pane.Markdown("**Showing:**\n\n" + text, width=120, sizing_mode='fixed', style = style)
+
+    ##########################################################################################################################
+
+    
+    
+    
+    #######################################
+    #######################################
+    ########## Road Type View #############
+    #######################################
+    #######################################
+    
+    @param.depends('query2', 'selected_countries','as_percentage')
+    def road_type_view(self):
+        if self.pause_updates:
+            return self.road_type_tabs
+
+        print('road_type_view', self.selected_countries)
         
-
-
-    @param.depends('country', 'query', 'as_percentage',  watch=True)
-    def update_tabular(self):
-        # if not any(pd.DataFrame().columns):
-        #     return
-
-        print('update tabular')
-        idx = pd.IndexSlice
-        import numpy as np
 
 
         # road_type_filter = self.tabulator.value.index[self.tabulator.selection].tolist()
 
-        if self.country['dataframe_filter']:
-            if self.location_group['name'] == 'US':
-                country_filter = (slice(None),[self.country['dataframe_filter']])                      
-            else:
-                country_filter = ([self.country['dataframe_filter']])
-        else: 
-            country_filter = (slice(None))
+        # if self.country and self.country['dataframe_filter']:
+        #     if self.location_group['name'] == 'US':
+        #         country_filter = (slice(None),[self.country['dataframe_filter']])                      
+        #     else:
+        #         country_filter = ([self.country['dataframe_filter']])
+        # else: 
+        #     country_filter = (slice(None))
         
-        try:
-            query = self.query.loc[:,country_filter]
-        except:
+        # try:
+        #     query = self.query.loc[:,country_filter]
+        # except:
             
-            query = pd.DataFrame()
-
-        if len(query) and len(query.columns):
-            query = query[query.any(axis=1)].groupby(level=1).sum().groupby(level=[2,3], axis=1).sum()
+        #     query = pd.DataFrame()
+        table_data = self.get_empty_dataframe()
+        if len(self.query2) and len(self.query2.columns):
+            country_filter = self.selected_countries or slice(None)
+            query = self.query2.loc[:,(country_filter,)]
+            query =query[query.any(axis=1)].groupby(level=1).sum().groupby(level=[1,2], axis=1).sum()
             query['Total'] = query.sum(axis=1)
             query.sort_values(by='Total', ascending=False, inplace=True)
             
@@ -553,32 +507,223 @@ class Dashboard(param.Parameterized):
                 query = query * 100
 
             
-            query = query[['Total'] + self.elements].replace([np.inf, -np.inf], np.nan).fillna(0).round(2)
+            query = query.loc[:,(['Total'] + self.param.elements.objects,)].replace([np.inf, -np.inf], np.nan).fillna(0).round(2)
             query.rename({'node':'Nodes', 'way':'Ways','relation': 'Relations', 'create':'Created', 'modify':'Modified'}, axis=1, inplace=True)
             query.columns = query.columns.to_flat_index().str.join(' ')
 
             if self.as_percentage:
                 query.rename(lambda x: x + ' %', axis=1, inplace=True)
 
-            self.tabulator._update_data(query)
-            # self.tabulator.selection = [query.index.get_loc(t) for t in road_type_filter]
-        else:
+            table_data = query.copy()
 
-            self.tabulator._update_data(pd.DataFrame(index=pd.Series(['#NA'], name='Total')))
-
-        print('done update tabular')
-
-
-    
         
 
-    @param.depends('country', watch=True)
-    def update_map_bounds(self):
-        self.leaflet_map.fit_bounds(self.country['bounds'])
+        self.road_type_table._update_data(table_data)
+        
+        # previoysly selected items are preserved in selected_road_types.  Reselect them again if exist.
+        self.reselect_itmes_in_table(self.selected_road_types, self.road_type_table)
 
     
-    def sample_map_view(self):
-        button = pn.widgets.Button(name='Load a sample updates', button_type='primary')
+
+
+        def road_type_chart(query):
+            query = query.iloc[:20]
+            keys = ['Ways Created', 'Ways Modified', 'Relations Created',
+                'Relations Modified', 'Nodes Created', 'Nodes Modified']
+
+            keys = list(filter(lambda k: k in query.columns, keys))
+
+            road_types = query.index.values.tolist()
+            data = dict({'road_types' : road_types}, **{k: query[k].values.tolist() for k in keys})
+
+
+            p = figure(y_range=list(reversed(road_types)),  title="Total updates by type",
+                    toolbar_location=None, tools='tap')
+            self.road_type_datasource.data = data
+            p.hbar_stack(keys, y='road_types', height=0.6, color=GnBu6[:len(keys)], source=self.road_type_datasource,
+                        legend_label=keys)
+
+
+
+            p.y_range.range_padding = 0.1
+            p.ygrid.grid_line_color = None
+            p.legend.location = "center_right"
+            p.axis.minor_tick_line_color = None
+            p.xaxis.formatter = NumeralTickFormatter(format='0.0a')
+            p.outline_line_color = None
+            
+
+
+            return pn.pane.Bokeh(p, height=400)
+
+
+        self.road_type_tabs = pn.Tabs(
+            ('Chart', road_type_chart(table_data)), 
+            ('Table', self.road_type_table),
+            active=self.road_type_tabs.active,
+            dynamic = True
+        )
+        return self.road_type_tabs 
+    ##########################################################################################################################
+
+
+
+    #######################################
+    #######################################
+    ############ Country View #############
+    #######################################
+    #######################################
+
+    @param.depends('query2', 'selected_road_types','as_percentage')
+    def country_view(self):
+        if self.pause_updates:
+            return self.country_tabs
+
+
+        print('country_view', self.selected_road_types)
+
+        if len(self.query2) and len(self.query2.columns):
+            selected_roads = self.selected_road_types
+            road_type_filter = idx[selected_roads] if selected_roads else idx[:]
+            query = self.query2.loc[idx[:,road_type_filter],:].sum().unstack(0).T
+            query['Total'] = query.sum(axis=1)
+            query.sort_values(by='Total', ascending=False, inplace=True)
+            
+            # if self.as_percentage:
+            #     tpc  = self.total_per_country.loc[
+            #                 idx[query.index],country_filter].fillna(0).groupby(level=[2], axis=1).sum()
+            #     tpc['Total'] = tpc.sum(axis=1)
+
+            #     for c in query.columns:
+            #         query[c] = query[c] / tpc[c[0]].values
+
+            #     query = query * 100
+
+            
+            query = query[['Total'] + self.elements].replace([np.inf, -np.inf], np.nan).fillna(0).round(2)
+            query.rename({'node':'Nodes', 'way':'Ways','relation': 'Relations', 'create':'Created', 'modify':'Modified'}, axis=1, inplace=True)
+            query.columns = query.columns.to_flat_index().str.join(' ')
+
+            # if self.as_percentage:
+            #     query.rename(lambda x: x + ' %', axis=1, inplace=True)
+
+            
+        else:
+            query = pd.DataFrame(index=pd.Series(['#NA'], name='Total'))
+        
+        self.country_table._update_data(query)
+
+        # previoysly selected items are preserved in selected_countries.  Reselect them again if exist.
+        self.reselect_itmes_in_table(self.selected_countries, self.country_table)
+
+
+        def country_chart(query):
+            query = query.iloc[:20]
+            keys = ['Ways Created', 'Ways Modified', 'Relations Created',
+                'Relations Modified', 'Nodes Created', 'Nodes Modified']
+
+            keys = list(filter(lambda k: k in query.columns, keys))
+
+            countries = query.index.values.tolist()
+            data = dict({'countries' : countries}, **{k: query[k].values.tolist() for k in keys})
+
+
+            p = figure(y_range=list(reversed(countries)),  title="Total updates by country",
+                    toolbar_location=None, tools='tap')
+            self.country_datasource.data = data
+            p.hbar_stack(keys, y='countries', height=0.6, color=GnBu6[:len(keys)], source=self.country_datasource,
+                        legend_label=keys)
+
+
+
+            p.y_range.range_padding = 0.1
+            p.ygrid.grid_line_color = None
+            p.legend.location = "center_right"
+            p.axis.minor_tick_line_color = None
+            p.xaxis.formatter = NumeralTickFormatter(format='0.0a')
+            p.outline_line_color = None
+            
+
+
+            return pn.pane.Bokeh(p, height=400)
+
+
+        self.country_tabs = pn.Tabs(
+            ('Table', self.country_table),
+            ('Chart', country_chart(query)), 
+            active=self.country_tabs.active,
+            dynamic = True
+        )
+        return self.country_tabs 
+    ##########################################################################################################################
+
+
+            
+
+    #######################################
+    #######################################
+    ########## Time Series View ###########
+    #######################################
+    #######################################
+    @param.depends('query2', 'selected_road_types', 'selected_countries', 'as_percentage')
+    def time_series_view(self):
+        if self.pause_updates:
+            return self.time_series_tabs
+
+        print('time_series_view', self.selected_road_types, self.selected_countries)
+
+
+        query = self.query2.copy()
+        p = figure (title="Updates over time", x_axis_type="datetime", toolbar_location=None, tools='')
+        p.yaxis.formatter = NumeralTickFormatter(format='0.0a')
+        p.outline_line_color = None
+
+        if len(query):
+            road_type_filter = self.selected_road_types or slice(None)
+            countries_filter = self.selected_countries or slice(None)
+            query = query.loc[(slice(None),road_type_filter),(countries_filter,)]
+            query = query.groupby(level=0).sum().groupby(level=0, axis=1).sum()
+            query = query.set_index(pd.to_datetime(query.index))
+            if not self.selected_countries:
+                query = pd.DataFrame({'Total':query.sum(axis=1)}, index=query.index)
+
+            
+
+            
+            if len(query.columns) <= 10 :
+                colors = Category10[10]
+            elif len(query.columns) <= 20 :
+                colors = Category20[20]
+            else:
+                colors = Turbo256[10]
+            
+            for country,color in zip (query,colors):
+                p.line(x=query.index ,y=query[country], line_width=2, legend_label=country, color=color)
+
+
+        self.time_series_tabs = pn.Tabs(
+            ('Chart', pn.pane.Bokeh(p, height=400)), 
+            active=self.time_series_tabs.active,
+            dynamic = True
+        )
+        return self.time_series_tabs 
+            
+    ##########################################################################################################################
+
+    
+    
+    
+    
+    #######################################
+    #######################################
+    ########## Sample View ###########
+    #######################################
+    #######################################
+
+
+    
+    def sample_view(self):
+        sample_load_button = pn.widgets.Button(name='Load a sample updates', button_type='primary')
 
         def query(event, button): 
             with pn.param.set_values(button, loading=True):
@@ -595,8 +740,8 @@ class Dashboard(param.Parameterized):
 
                 road_type_filter = ""
                 selected_types = self.categories.selected_types + ['']
-                if self.tabulator.selection:
-                    selected_types = self.tabulator.value.index[self.tabulator.selection].tolist() + ['']
+                if self.selected_road_types:
+                    selected_types = self.selected_road_types + ['']
                 
                 if selected_types:
                     road_type_filter = f"AND road_type IN {tuple(selected_types)}"
@@ -605,16 +750,15 @@ class Dashboard(param.Parameterized):
                 operation_filter = ' OR '.join([f'operation_{e}' for e in self.operations])
 
                 country_filter = ""
-                if self.country['dataframe_filter']:
-                    if self.location_group['name'] == 'US':
-                        country_filter = f"AND country = 'United States' AND state = '{self.country['name']}'" 
-                    else:
-                        country_filter = f"AND country = '{self.country['name']}'" 
-
+                if self.location_group['name'] == 'US':
+                    country_filter = f"AND country = 'United States'"
+                    if self.selected_countries:
+                        country_filter += f" AND state IN {tuple(self.selected_countries + [''])}"
+                elif self.selected_countries:
+                    country_filter += f"AND (" +  ' OR '.join([f"country='{c}'" for c in self.selected_countries]) + ")"
                 elif self.location_group['name'] != 'All':
-                    country_filter = f"AND country IN {tuple(self.location_group['countries']+('',))}" 
+                    country_filter = f"AND (" +  ' OR '.join([f"country='{c}'" for c in self.location_group['countries']]) + ")"
 
-                # country_filter = f"AND country IN {self.country['postgis_filter']}"
                 # AND ST_INTERSECTS(geometry, '{bb}') 
                 # AND ST_INTERSECTS(geometry, '{country_bb}') 
 
@@ -633,20 +777,40 @@ class Dashboard(param.Parameterized):
 
                 
                 changes = geopandas.read_postgis(sql, engine,geom_col='geometry').drop_duplicates(subset = ["changeset"])
-                self.markers_group.markers = tuple(
+                self.sample_markers.markers = tuple(
                     Marker(location=p, 
                             draggable=False, 
                             popup=HTML(
                                 value=f'<b>Changeset ID:</b> #<a href="https://overpass-api.de/achavi/?changeset={id}" target="_blank">{id}</a>')) for id, p in zip(changes.changeset, zip(changes.geometry.y,changes.geometry.x))
                 )
 
-        query_func = partial(query, button=button)
-        button.on_click(query_func)
-        return pn.Column(button, self.leaflet_map)
+        query_func = partial(query, button=sample_load_button)
+        sample_load_button.on_click(query_func)
+        return pn.Column(sample_load_button, self.sample_map)
 
+
+    @param.depends('selected_countries', watch=True)
+    def update_map_bounds(self):
+        if self.pause_updates:
+            return
         
+        if len(self.selected_countries) != 1:
+            return
+
+        if self.location_group['name'] == 'US':
+            bounds = self.us_states_bounds[self.selected_countries[0]]
+        else:
+            bounds = self.countries_bounds[self.selected_countries[0]]
+
+        leaflet_bounds = (
+            (bounds['south'], bounds['west']),
+            (bounds['north'], bounds['east'])
+        )
+        self.sample_map.fit_bounds(leaflet_bounds)  
+
+
     def view(self):
-        import numpy as np 
+         
 
         pn.config.sizing_mode = 'stretch_width'
 
@@ -655,38 +819,86 @@ class Dashboard(param.Parameterized):
 
         bootstrap.main.append(
             pn.Column(
-                pn.Card(
-                    pn.Column(
-                        # self.choropleth_map,
-                        pn.Row(
-                            pn.Column(pn.pane.Markdown("Select a country/state to draw its time series and compare it with others. The top-3 will be drawn by default if no entry is selected", style = {'color':'gray'}), self.choro_table, width = 300, sizing_mode='fixed'),
-                            self.timeseries_fig,
-                            self.choro_fig),
-                        self.map_control_view
-                    ),title='Country/State View'
+                # pn.Card(
+                #     pn.Column(
+                #         self.choropleth_map,
+                #         pn.Row(
+                #             # pn.Column(pn.pane.Markdown("Select a country/state to draw its time series and compare it with others. The top-3 will be drawn by default if no entry is selected", style = {'color':'gray'}), self.choro_table, width = 300, sizing_mode='fixed'),
+                #             self.timeseries_fig,
+                #             self.choropleth_chart),
+                #         self.map_control_view
+                #     ),title='Country/State View'
+                # ),
+                pn.Row(
+                    pn.Param(
+                        self.param.as_percentage,
+                        widgets={
+                            'as_percentage': {
+                                'widget_type': pn.widgets.RadioButtonGroup,
+                                'options': {'Absolute Numbers':False, 'Percentage': True} 
+                            }
+                        }, width=300, sizing_mode='fixed'
+                    ),
+                    pn.Param(
+                        self.param['location_group'], 
+                        widgets={'location_group':  pn.widgets.RadioButtonGroup},
+                        align = ('center', 'center')
+                    ),
                 ),
                 pn.Row(
                     pn.Card(
-                        pn.Column(
-                            pn.Row(
-                                self.country_state_filter_view,
-                                # pn.layout.HSpacer(),
-                                # pn.layout.HSpacer(),
-                                pn.Column(
-                                    pn.Param(self.param.as_percentage, widgets={
-                                        'as_percentage': {
-                                            'widget_type': pn.widgets.RadioButtonGroup,
-                                            'options': {'Absolute Numbers':False, 'Percentage': True} 
-                                        }
-                                    }, margin=[22, 0, 0, 0])
-                                )
-                            ),
-                            pn.pane.Markdown("Select a country/state from the dropdown list above to show its road types and count of updates in the table below. Select from the table below to filter only for a specific road type and update all views above", style = {'color':'gray'}),
+                        # pn.Column(
+                            # pn.Row(
+                            #     # self.country_state_filter_view,
+                            #     pn.Column(
+                            #         pn.Param(self.param.as_percentage, widgets={
+                            #             'as_percentage': {
+                            #                 'widget_type': pn.widgets.RadioButtonGroup,
+                            #                 'options': {'Absolute Numbers':False, 'Percentage': True} 
+                            #             }
+                            #         }, margin=[22, 0, 0, 0])
+                            #     )
+                            # ),
+                            # pn.pane.Markdown("Select a country/state from the dropdown list above to show its road types and count of updates in the table below. Select from the table below to filter only for a specific road type and update all views above", style = {'color':'gray'}),
                             
-                            self.tabulator
-                        ), title='Road Types View'
+
+                            
+                            
+                        # )
+                        self.road_type_view,
+                        title='Road Types View'
                     ),
-                    pn.Card(self.sample_map_view(), title='Sample View', height=750)
+                    pn.Card(
+                        # self.choropleth_view,
+                        pn.Column(
+                            self.choropleth_chart,
+                            pn.Row(
+                                pn.layout.HSpacer(),
+                                self.player,
+                                self.player_info_view, 
+                                align='center'
+                            )
+                        ),
+                        title = 'Choropleth View'
+                    )
+                    # pn.Card(self.sample_map_view(), title='Sample View', height=750, scroll=True,)
+                ),
+                pn.Row(
+                    pn.Card(
+                        self.country_view,
+                        title='Country View'
+                    ),
+                    pn.Card(
+                        self.time_series_view,
+                        title='Time Series View'
+                    )
+                ),
+                pn.Row(
+                    pn.Card(
+                        self.sample_view(),
+                        title='Sample View',
+                        height=750
+                    )
                 )
             )
         )
@@ -694,10 +906,6 @@ class Dashboard(param.Parameterized):
         
         return bootstrap
 
-
-
-
-# pn.extension()
 
 
 dashboard = Dashboard(name="OSM Changes On Road Network")

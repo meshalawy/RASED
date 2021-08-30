@@ -3,7 +3,7 @@
 from logging import disable
 from bokeh.models.formatters import NumeralTickFormatter
 from bokeh.models import ColumnDataSource, HoverTool, Label, LabelSet
-from bokeh.palettes import GnBu6,  Category10, Category20, Turbo256
+from bokeh.palettes import GnBu9,  BuPu9, BrBG9, Category10, Category20, Turbo256
 from bokeh.plotting import figure
 import plotly.graph_objects as go
 
@@ -165,7 +165,8 @@ class Dashboard(param.Parameterized):
         
         self.unreflected_changes.object = ''
 
-    # Misc
+    
+    ####################################### Misc
     def get_empty_dataframe(self):
         return pd.DataFrame(index=pd.Series(['#NA'], name='Total'))
 
@@ -185,14 +186,18 @@ class Dashboard(param.Parameterized):
             'render_mode' : 'css',
         }
         return [
-            Label(x_offset=200, y_offset=40, text='Only top 20 entries (absolute count) are shown here.', **options ),
-            Label(x_offset=200, y_offset=20, text='Switch to table view for the full list.', **options )
+            Label(x_offset=200, y_offset=30, text='Only top 20 entries (absolute count) are shown here.', **options ),
+            Label(x_offset=200, y_offset=15, text='Switch to table view for the full list.', **options )
         ]
-
     
+    def is_location_group_US(self):
+        return self.location_group['name'] == 'US'
+
+
+    ########################################################################
     @param.depends('data', 'location_group', watch=True)
     def update_query_results(self):
-        group_level = 1 if self.location_group['name'] == 'US' else 0
+        group_level = 1 if self.is_location_group_US() else 0
 
         
         query = self.data.loc[
@@ -204,7 +209,7 @@ class Dashboard(param.Parameterized):
         # when we couldn't identify which state it falls. However, when calculating percentages per state, 
         # this cause an issue now because there is no such state. Should be fixed from original source.
         # in data preperation.
-        if self.location_group['name'] == 'US':
+        if self.is_location_group_US():
             query.drop('United States', axis = 1, inplace=True)
 
 
@@ -264,6 +269,16 @@ class Dashboard(param.Parameterized):
                     self.selected_road_types = sorted(self.road_type_table.value.index[event.new].tolist())
 
         self.road_type_table.param.watch(callback, ['selection'], onlychanged=True)
+
+        # commong between road_type and country plots
+        self.plotting_keys = {
+            'Ways Created' : GnBu9[0] ,
+            'Ways Modified' : GnBu9[2] ,
+            'Relations Created' : BuPu9[0] ,
+            'Relations Modified' : BuPu9[2] ,
+            'Nodes Created' : BrBG9[0],
+            'Nodes Modified' : BrBG9[2]
+        }
         ############################################
 
         # 2- initializing items related to Country View:
@@ -384,7 +399,7 @@ class Dashboard(param.Parameterized):
 
         geo_scope = None
         locationmode = None
-        if self.location_group['name'] == 'US':
+        if self.is_location_group_US():
             query = pd.merge(left=query, right=self.us_states_gdf, left_index=True, right_on='name')
             query['location_id'] = query['id']
             locationmode = 'USA-states'
@@ -486,19 +501,19 @@ class Dashboard(param.Parameterized):
             country_filter = self.selected_countries or slice(None)
             query = self.query2.loc[:,(country_filter,)]
             query =query[query.any(axis=1)].groupby(level=1).sum().groupby(level=[1,2], axis=1).sum()
-            query['Total'] = query.sum(axis=1)
-            query.sort_values(by='Total', ascending=False, inplace=True)
+            query['All'] = query.sum(axis=1)
+            query.sort_values(by='All', ascending=False, inplace=True)
             
             if self.as_percentage:
                 tpc  = self.query_tpc.loc[(query.index),(country_filter,)].groupby(level=[1], axis=1).sum()
-                tpc['Total'] = tpc.sum(axis=1)
+                tpc['All'] = tpc.sum(axis=1)
 
                 for c in query.columns:
                     query[c] = query[c] / tpc[c[0]].values
 
 
             
-            query = query.loc[:,(['Total'] + self.param.elements.objects,)].replace([np.inf, -np.inf], np.nan).fillna(0).round(4)
+            query = query.loc[:,(['All'] + self.param.elements.objects,)].replace([np.inf, -np.inf], np.nan).fillna(0).round(4)
             query.rename({'node':'Nodes', 'way':'Ways','relation': 'Relations', 'create':'Created', 'modify':'Modified'}, axis=1, inplace=True)
             query.columns = query.columns.to_flat_index().str.join(' ')
 
@@ -507,10 +522,9 @@ class Dashboard(param.Parameterized):
         
         ## 2- create chart:
         chart_data = table_data.iloc[:20]
-        keys = ['Ways Created', 'Ways Modified', 'Relations Created',
-            'Relations Modified', 'Nodes Created', 'Nodes Modified']
-
-        keys = list(filter(lambda k: k in chart_data.columns, keys))
+        keys_colors = dict(filter(lambda entry: entry[0] in chart_data.columns, self.plotting_keys.items()))
+        keys = list(keys_colors.keys())
+        colors = list(keys_colors.values())
 
         road_types = chart_data.index.values.tolist()
         data = dict({'road_types' : road_types}, **{k: chart_data[k].values.tolist() for k in keys})
@@ -519,7 +533,7 @@ class Dashboard(param.Parameterized):
         p = figure(y_range=list(reversed(road_types)),  title="Total updates by road/feature type",
                 toolbar_location=None, tools='tap')
         self.road_type_datasource.data = data
-        p.hbar_stack(keys, y='road_types', height=0.6, color=GnBu6[:len(keys)], source=self.road_type_datasource,
+        p.hbar_stack(keys, y='road_types', height=0.6, color=colors, source=self.road_type_datasource,
                     legend_label=keys)
 
 
@@ -605,19 +619,19 @@ class Dashboard(param.Parameterized):
             selected_roads = self.selected_road_types
             road_type_filter = idx[selected_roads] if selected_roads else idx[:]
             query = self.query2.loc[idx[:,road_type_filter],:].sum().unstack(0).T
-            query['Total'] = query.sum(axis=1)
-            query.sort_values(by='Total', ascending=False, inplace=True)
+            query['All'] = query.sum(axis=1)
+            query.sort_values(by='All', ascending=False, inplace=True)
 
 
             if self.as_percentage:
                 tpc  = self.query_tpc.loc[road_type_filter].sum().unstack(0).T.loc[query.index]
-                tpc['Total'] = tpc.sum(axis=1)
+                tpc['All'] = tpc.sum(axis=1)
 
                 for c in query.columns:
                     query[c] = query[c] / tpc[c[0]].values
 
             
-            query = query[['Total'] + self.elements].replace([np.inf, -np.inf], np.nan).fillna(0).round(4)
+            query = query[['All'] + self.elements].replace([np.inf, -np.inf], np.nan).fillna(0).round(4)
             query.rename({'node':'Nodes', 'way':'Ways','relation': 'Relations', 'create':'Created', 'modify':'Modified'}, axis=1, inplace=True)
             query.columns = query.columns.to_flat_index().str.join(' ')
 
@@ -627,10 +641,9 @@ class Dashboard(param.Parameterized):
 
         ## 2- create chart:
         chart_data = table_data.iloc[:20]
-        keys = ['Ways Created', 'Ways Modified', 'Relations Created',
-            'Relations Modified', 'Nodes Created', 'Nodes Modified']
-
-        keys = list(filter(lambda k: k in chart_data.columns, keys))
+        keys_colors = dict(filter(lambda entry: entry[0] in chart_data.columns, self.plotting_keys.items()))
+        keys = list(keys_colors.keys())
+        colors = list(keys_colors.values())
 
         countries = chart_data.index.values.tolist()
         data = dict({'countries' : countries}, **{k: chart_data[k].values.tolist() for k in keys})
@@ -639,7 +652,7 @@ class Dashboard(param.Parameterized):
         p = figure(y_range=list(reversed(countries)),  title="Total updates by country",
                 toolbar_location=None, tools='tap')
         self.country_datasource.data = data
-        p.hbar_stack(keys, y='countries', height=0.6, color=GnBu6[:len(keys)], source=self.country_datasource,
+        p.hbar_stack(keys, y='countries', height=0.6, color=colors, source=self.country_datasource,
                     legend_label=keys)
 
 
@@ -821,7 +834,7 @@ class Dashboard(param.Parameterized):
                 operation_filter = ' OR '.join([f'operation_{e}' for e in self.operations])
 
                 country_filter = ""
-                if self.location_group['name'] == 'US':
+                if self.is_location_group_US():
                     country_filter = f"AND country = 'United States'"
                     if self.selected_countries:
                         country_filter += f" AND state IN {tuple(self.selected_countries + [''])}"
@@ -868,7 +881,7 @@ class Dashboard(param.Parameterized):
         if len(self.selected_countries) != 1:
             return
 
-        if self.location_group['name'] == 'US':
+        if self.is_location_group_US():
             bounds = self.us_states_bounds[self.selected_countries[0]]
         else:
             bounds = self.countries_bounds[self.selected_countries[0]]

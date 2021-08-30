@@ -2,6 +2,7 @@
 import pandas as pd 
 import geopandas 
 import pickle
+import json
 #%%
 
 countries = geopandas.read_file('/export/scratch/mmusleh/osm/osm_change_analysis/UIA_World_Countries_Boundaries_with_ISO3/World_Countries__Generalized_.shp')
@@ -63,4 +64,36 @@ for k,v in location_group_options.items():
     v['postgis_filter'] = f"SRID=4326;{countries.loc[list(v['countries'])].dissolve().geometry[0].to_wkt()}",
 
 pickle.dump((countries, us_states_gdf, country_objects, state_objects, location_group_options), open('warmup_options.pkl', 'wb'))
+# %%
+
+# v2 of RASED
+countries = geopandas.read_file('/export/scratch/mmusleh/osm/osm_change_analysis/UIA_World_Countries_Boundaries_with_ISO3/World_Countries__Generalized_.shp')
+countries = countries[['COUNTRYAFF', 'ISO3', 'geometry']].dissolve(by='COUNTRYAFF')
+countries_bounds = {}
+for name,geometry in countries.geometry.iteritems():
+    west,south,east,north = geometry.bounds
+    countries_bounds[name] = {
+        'west' : west,
+        'south' : south,
+        'east' : east,
+        'north' : north
+    } 
+
+json.dump(countries_bounds, open('countries_bounds.json', 'w'))
+
+
+
+us_states_gdf = geopandas.GeoDataFrame.from_file('us-states.json').dissolve(by='name')
+us_states_bounds = {}
+for name,geometry in us_states_gdf.geometry.iteritems():
+    west,south,east,north = geometry.bounds
+    us_states_bounds[name] = {
+        'west' : west,
+        'south' : south,
+        'east' : east,
+        'north' : north
+    } 
+
+json.dump(us_states_bounds, open('us_states_bounds.json', 'w'))
+
 # %%

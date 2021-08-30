@@ -927,8 +927,8 @@ class Dashboard(param.Parameterized):
                 ),
                 pn.Row(
                     pn.Card(
-                        self.road_type_view,
-                        title='Road/Feature Types View'
+                        self.country_view,
+                        title='Countries View'
                     ),
                     pn.Card(
                         pn.Column(
@@ -946,8 +946,8 @@ class Dashboard(param.Parameterized):
                 ),
                 pn.Row(
                     pn.Card(
-                        self.country_view,
-                        title='Country View'
+                        self.road_type_view,
+                        title='Road/Feature Types View'
                     ),
                     pn.Card(
                         self.time_series_view,
@@ -972,3 +972,14 @@ dashboard = Dashboard(name="OSM Changes On Road Network")
 panel = dashboard.view()
 
 panel.servable()
+
+
+
+# try:
+#     server.stop()
+# except :
+#     pass
+# finally :
+#     server = panel.show(port=4321,open=False)
+# self = dashboard
+# %%

@@ -1,5 +1,6 @@
 #%%
 
+from logging import disable
 from bokeh.models.formatters import NumeralTickFormatter
 from bokeh.models import ColumnDataSource, HoverTool, Label, LabelSet
 from bokeh.palettes import GnBu6,  Category10, Category20, Turbo256
@@ -244,7 +245,7 @@ class Dashboard(param.Parameterized):
         # initializing widgets and related elements:
 
         # 1- initializing items related to Road Type View:
-        self.road_type_table = pn.widgets.DataFrame(pd.DataFrame(), autosize_mode = 'fit_columns', height=400)
+        self.road_type_table = pn.widgets.DataFrame(pd.DataFrame(), autosize_mode = 'fit_columns', height=300, disabled=True)
         self.road_type_datasource = ColumnDataSource()
         self.road_type_tabs = pn.Tabs()
         self.road_type_panel = pn.Column()
@@ -266,7 +267,7 @@ class Dashboard(param.Parameterized):
         ############################################
 
         # 2- initializing items related to Country View:
-        self.country_table = pn.widgets.DataFrame(pd.DataFrame(), autosize_mode = 'fit_columns', height=400)
+        self.country_table = pn.widgets.DataFrame(pd.DataFrame(), autosize_mode = 'fit_columns', height=300, disabled=True)
         self.country_datasource = ColumnDataSource()
         self.country_tabs = pn.Tabs()
         self.country_panel = pn.Column()
@@ -289,7 +290,7 @@ class Dashboard(param.Parameterized):
         
         # 3- initializing items related to the Choropleth View:
         self.player = pn.widgets.Player(start=0, end=8, value= 0,loop_policy= 'once',show_loop_controls= False,interval= 500, width=400, sizing_mode='fixed')
-        self.choropleth_chart = pn.pane.Plotly(height=340)
+        self.choropleth_chart = pn.pane.Plotly(height=270, config={'displayModeBar': False})
         #######################################################
 
         # 4- initializing items related to the Time Series View:
@@ -309,8 +310,6 @@ class Dashboard(param.Parameterized):
 
         super().__init__(*args, **kwargs)
 
-
-    
     
     def params_view(self):
         self.params_column = pn.Column(
@@ -330,7 +329,6 @@ class Dashboard(param.Parameterized):
             }),
             pn.pane.Markdown("Data is currently available from 2019-01-01 to 2021-06-28", style={'color':'gray'}),
             self.categories.view,
-            pn.layout.VSpacer(),
             pn.widgets.StaticText(name='Elements', value=''),
             pn.Param(self.param['elements'], widgets={
                     'elements': pn.widgets.CheckBoxGroup
@@ -343,7 +341,6 @@ class Dashboard(param.Parameterized):
                     'query_button': {'widget_type': pn.widgets.Button, 'button_type': 'primary' }
             }),
             self.unreflected_changes
-            
         )
         return self.params_column
 
@@ -400,18 +397,19 @@ class Dashboard(param.Parameterized):
                 
         query['location_name'] = query.index + (' %' if self.as_percentage else '')
         fig = go.Figure(data=go.Choropleth(
-            locations = query['location_id'],
-            z = query['Total Updates'],
-            text = query['location_name'],
-            colorscale = 'Blues',
-            autocolorscale=False,
-            reversescale=False,
-            marker_line_color='darkgray',
-            marker_line_width=0.5,
-            colorbar_tickprefix = '',
-            colorbar_title = 'Number of<br>Updates',
-            locationmode = locationmode,
-        ))
+                locations = query['location_id'],
+                z = query['Total Updates'],
+                text = query['location_name'],
+                colorscale = 'Blues',
+                autocolorscale=False,
+                reversescale=False,
+                marker_line_color='darkgray',
+                marker_line_width=0.5,
+                colorbar_tickprefix = '',
+                colorbar_title = 'Number of<br>Updates',
+                locationmode = locationmode,
+            )
+        )
 
         fig.update_layout(
             geo=dict(
@@ -537,7 +535,7 @@ class Dashboard(param.Parameterized):
             for l in self.get_only_20_note():
                 p.add_layout(l)
         
-        chart = pn.pane.Bokeh(p, height=400)
+        chart = pn.pane.Bokeh(p, height=300)
 
         ## 3- update table view:
         if self.as_percentage:
@@ -579,10 +577,7 @@ class Dashboard(param.Parameterized):
             <span><b>Selected: </b></span>
             <span style='color:{selection_note_color}'>{selection_note}.</span>
             <br>
-            Click to select road/feature type(s) and see its details in the other views. 
-            Use shift on the chart to select multiple entries and click on empty area (or ESC) to clear selection. 
-            Use Ctrl (Mac: Cmd) on the table to select/deselect entries.
-        """, height=50)
+        """, height=20)
 
 
 
@@ -660,7 +655,7 @@ class Dashboard(param.Parameterized):
             for l in self.get_only_20_note():
                 p.add_layout(l)
         
-        chart = pn.pane.Bokeh(p, height=400)
+        chart = pn.pane.Bokeh(p, height=300)
         
 
 
@@ -706,8 +701,8 @@ class Dashboard(param.Parameterized):
             <span><b>Selected: </b></span>
             <span style='color:{selection_note_color}'>{selection_note}.</span>
             <br>
-            Click to select one or more country and see their details in the other views. 
-            Use shift on the chart to select multiple entries and click on empty area (or ESC) to clear selection. 
+            Click to select one or more entry and update other views. 
+            Use shift on the chart for multiple selection and click on empty area (or ESC) to clear. 
             Use Ctrl (Mac: Cmd) on the table to select/deselect entries.
         """, height=50)
     ##########################################################################################################################
@@ -765,7 +760,7 @@ class Dashboard(param.Parameterized):
 
 
         self.time_series_tabs = pn.Tabs(
-            ('Chart', pn.pane.Bokeh(p, height=400)), 
+            ('Chart', pn.pane.Bokeh(p, height=310)), 
             active=self.time_series_tabs.active,
             dynamic = True
         )
@@ -897,10 +892,13 @@ class Dashboard(param.Parameterized):
         body {
             overflow : hidden;
         }
+        #main {
+            overflow-x : hidden;
+        }
         '''
         pn.config.raw_css.append(css)
 
-        bootstrap = pn.template.BootstrapTemplate(title='Road Network Updates on OSM',  header_background='black')
+        bootstrap = pn.template.BootstrapTemplate(title='Road Network Updates on OSM',  header_background='black', sidebar_width=220)
         bootstrap.sidebar.append(self.params_view())
 
         bootstrap.main.append(
@@ -931,7 +929,7 @@ class Dashboard(param.Parameterized):
                             self.choropleth_notes,
                             self.choropleth_chart,
                             pn.Row(
-                                pn.layout.HSpacer(),
+                                # pn.layout.HSpacer(),
                                 self.player,
                                 self.player_info_view, 
                                 align='center'

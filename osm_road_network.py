@@ -14,6 +14,7 @@ import param
 import pandas as pd
 from pandas import IndexSlice as idx
 import numpy as np
+from itertools import cycle
 
 
 
@@ -114,12 +115,6 @@ class Dashboard(param.Parameterized):
     as_percentage   = param.Boolean(default=False)
     selected_road_types = param.List(default=[])
     selected_countries = param.List(default=[])
-
-    
-
-    
-
-
 
     # pre processed options to avoid doing it on every request. Check the file "warmup_options.py" 
     countries, us_states_gdf, country_objects, state_objects, location_group_options = pickle.load(open('ui_setup/warmup_options.pkl', 'rb'))
@@ -300,6 +295,8 @@ class Dashboard(param.Parameterized):
         self.countries_bounds = json.load(open('ui_setup/countries_bounds.json', 'r'))   
         self.us_states_bounds = json.load(open('ui_setup/us_states_bounds.json', 'r'))   
 
+
+        pn.state.onload(lambda: self.param.trigger('query_button'))
 
         super().__init__(*args, **kwargs)
 
@@ -677,9 +674,9 @@ class Dashboard(param.Parameterized):
             elif len(query.columns) <= 20 :
                 colors = Category20[20]
             else:
-                colors = Turbo256
+                colors = cycle(Turbo256)
             
-            for country,color in zip (query,colors)[:256]:
+            for country,color in zip (query,colors):
                 p.line(x=query.index ,y=query[country], line_width=2, legend_label=country, color=color)
 
 

@@ -801,16 +801,6 @@ class Dashboard(param.Parameterized):
 
         bootstrap.main.append(
             pn.Column(
-                # pn.Card(
-                #     pn.Column(
-                #         self.choropleth_map,
-                #         pn.Row(
-                #             # pn.Column(pn.pane.Markdown("Select a country/state to draw its time series and compare it with others. The top-3 will be drawn by default if no entry is selected", style = {'color':'gray'}), self.choro_table, width = 300, sizing_mode='fixed'),
-                #             self.timeseries_fig,
-                #             self.choropleth_chart),
-                #         self.map_control_view
-                #     ),title='Country/State View'
-                # ),
                 pn.Row(
                     pn.Param(
                         self.param.as_percentage,
@@ -829,29 +819,10 @@ class Dashboard(param.Parameterized):
                 ),
                 pn.Row(
                     pn.Card(
-                        # pn.Column(
-                            # pn.Row(
-                            #     # self.country_state_filter_view,
-                            #     pn.Column(
-                            #         pn.Param(self.param.as_percentage, widgets={
-                            #             'as_percentage': {
-                            #                 'widget_type': pn.widgets.RadioButtonGroup,
-                            #                 'options': {'Absolute Numbers':False, 'Percentage': True} 
-                            #             }
-                            #         }, margin=[22, 0, 0, 0])
-                            #     )
-                            # ),
-                            # pn.pane.Markdown("Select a country/state from the dropdown list above to show its road types and count of updates in the table below. Select from the table below to filter only for a specific road type and update all views above", style = {'color':'gray'}),
-                            
-
-                            
-                            
-                        # )
                         self.road_type_view,
                         title='Road Types View'
                     ),
                     pn.Card(
-                        # self.choropleth_view,
                         pn.Column(
                             self.choropleth_chart,
                             pn.Row(
@@ -863,7 +834,6 @@ class Dashboard(param.Parameterized):
                         ),
                         title = 'Choropleth View'
                     )
-                    # pn.Card(self.sample_map_view(), title='Sample View', height=750, scroll=True,)
                 ),
                 pn.Row(
                     pn.Card(
@@ -885,15 +855,11 @@ class Dashboard(param.Parameterized):
             )
         )
 
-        
         return bootstrap
-
 
 
 dashboard = Dashboard(name="OSM Changes On Road Network")
 # panel = pn.Pane(dashboard.view)
 panel = dashboard.view()
-
-
 
 panel.servable()

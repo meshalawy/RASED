@@ -29,6 +29,7 @@ from functools import partial
 
 from ipyleaflet import Map, Marker, MarkerCluster, basemaps, basemap_to_tiles, SplitMapControl
 from ipywidgets import HTML
+from param.parameterized import depends
 from shapely import geometry
 
 from shapely.geometry import box
@@ -183,11 +184,15 @@ class Dashboard(param.Parameterized):
         
         self.unreflected_changes.object = ''
 
+    # Misc
     def get_empty_dataframe(self):
         return pd.DataFrame(index=pd.Series(['#NA'], name='Total'))
 
     def reselect_itmes_in_table(self, items, table):
         table.selection = [table.value.index.get_loc(t) for t in items if t in table.value.index]
+
+    def get_location_group_string(self):
+        return 'All ' + ('countries' if self.location_group['name'] == 'All' else f' in {self.location_group["name"]}')
 
     
     @param.depends('data', 'location_group', watch=True)
@@ -199,6 +204,13 @@ class Dashboard(param.Parameterized):
             :,
             (list(self.location_group['countries']),)
         ].groupby(level=[group_level,2,3], axis = 1).sum()
+
+        # temporary fix to remove a state called "United States" which was a falling back procedure
+        # when we couldn't identify which state it falls. However, when calculating percentages per state, 
+        # this cause an issue now because there is no such state. Should be fixed from original source.
+        # in data preperation.
+        if self.location_group['name'] == 'US':
+            query.drop('United States', axis = 1, inplace=True)
 
 
         self.query_tpc = self.total_per_country.loc[
@@ -241,6 +253,7 @@ class Dashboard(param.Parameterized):
         self.road_type_table = pn.widgets.DataFrame(pd.DataFrame(), autosize_mode = 'fit_columns', height=400)
         self.road_type_datasource = ColumnDataSource()
         self.road_type_tabs = pn.Tabs()
+        self.road_type_panel = pn.Column()
         
         ## linking the selectons of both the chart and the table
         def road_type_datasource_selection_change(attr, old, new):
@@ -262,6 +275,7 @@ class Dashboard(param.Parameterized):
         self.country_table = pn.widgets.DataFrame(pd.DataFrame(), autosize_mode = 'fit_columns', height=400)
         self.country_datasource = ColumnDataSource()
         self.country_tabs = pn.Tabs()
+        self.country_panel = pn.Column()
         
         ## linking the selectons of both the chart and the table
         def country_datasource_selection_change(attr, old, new):
@@ -286,6 +300,7 @@ class Dashboard(param.Parameterized):
 
         # 4- initializing items related to the Time Series View:
         self.time_series_tabs = pn.Tabs()
+        self.time_series_panel = pn.Column()
         #######################################################
 
         # 5- initializing items related to the Sample View:
@@ -441,6 +456,23 @@ class Dashboard(param.Parameterized):
 
         return pn.pane.Markdown("**Showing:**\n\n" + text, width=120, sizing_mode='fixed', style = style)
 
+
+    @depends('selected_road_types')
+    def choropleth_notes(self):
+        showing_note = ""
+        if self.selected_road_types:
+            showing_note = ', '.join(self.selected_road_types)
+        else:
+            showing_note = 'All'
+
+        showing_note_color = 'red' if self.selected_road_types else 'black'
+
+        return pn.pane.HTML(f"""
+            <span><b>Showing For: </b></span>
+            <span style='color:{showing_note_color}'>{showing_note} road/feature type(s).</span>
+            &nbsp &nbsp
+        """, height=20)
+
     ##########################################################################################################################
 
     
@@ -455,7 +487,7 @@ class Dashboard(param.Parameterized):
     @param.depends('query2', 'selected_countries','as_percentage')
     def road_type_view(self):
         if self.pause_updates:
-            return self.road_type_tabs
+            return self.road_type_panel
 
         print('road_type_view', self.selected_countries)
         
@@ -495,7 +527,7 @@ class Dashboard(param.Parameterized):
         data = dict({'road_types' : road_types}, **{k: chart_data[k].values.tolist() for k in keys})
 
 
-        p = figure(y_range=list(reversed(road_types)),  title="Total updates by type",
+        p = figure(y_range=list(reversed(road_types)),  title="Total updates by road/feature type",
                 toolbar_location=None, tools='tap')
         self.road_type_datasource.data = data
         p.hbar_stack(keys, y='road_types', height=0.6, color=GnBu6[:len(keys)], source=self.road_type_datasource,
@@ -530,7 +562,35 @@ class Dashboard(param.Parameterized):
             active=self.road_type_tabs.active,
             dynamic = True
         )
-        return self.road_type_tabs 
+        self.road_type_panel = pn.Column(
+            self.road_types_notes,
+            self.road_type_tabs
+        )
+        return self.road_type_panel
+
+
+    @depends('selected_countries', 'selected_road_types')
+    def road_types_notes(self):
+        showing_note = ', '.join(self.selected_countries) or self.get_location_group_string()
+        showing_note_color = 'red' if self.selected_countries else 'black'
+
+        selection_note = ', '.join(self.selected_road_types) or 'None'
+        selection_note_color = 'red' if self.selected_road_types else 'black'
+
+        return pn.pane.HTML(f"""
+            <span><b>Showing For: </b></span>
+            <span style='color:{showing_note_color}'>{showing_note}.</span>
+            &nbsp &nbsp
+            <span><b>Selected: </b></span>
+            <span style='color:{selection_note_color}'>{selection_note}.</span>
+            <br>
+            Click to select road/feature type(s) and see its details in the other views. 
+            Use shift on the chart to select multiple entries and click on empty area (or ESC) to clear selection. 
+            Use Ctrl (Mac: Cmd) on the table to select/deselect entries.
+        """, height=50)
+
+
+
     ##########################################################################################################################
 
 
@@ -544,7 +604,7 @@ class Dashboard(param.Parameterized):
     @param.depends('query2', 'selected_road_types','as_percentage')
     def country_view(self):
         if self.pause_updates:
-            return self.country_tabs
+            return self.country_panel
 
 
         print('country_view', self.selected_road_types)
@@ -622,7 +682,34 @@ class Dashboard(param.Parameterized):
             active=self.country_tabs.active,
             dynamic = True
         )
-        return self.country_tabs 
+        
+
+        self.country_panel = pn.Column(
+            self.country_notes,
+            self.country_tabs
+        )
+        return self.country_panel
+
+
+    @depends('selected_countries', 'selected_road_types')
+    def country_notes(self):
+        showing_note = ', '.join(self.selected_road_types) or 'All'
+        showing_note_color = 'red' if self.selected_road_types else 'black'
+
+        selection_note = ', '.join(self.selected_countries) or 'None'
+        selection_note_color = 'red' if self.selected_countries else 'black'
+
+        return pn.pane.HTML(f"""
+            <span><b>Showing For: </b></span>
+            <span style='color:{showing_note_color}'>{showing_note} road/feature type(s).</span>
+            &nbsp &nbsp
+            <span><b>Selected: </b></span>
+            <span style='color:{selection_note_color}'>{selection_note}.</span>
+            <br>
+            Click to select one or more country and see their details in the other views. 
+            Use shift on the chart to select multiple entries and click on empty area (or ESC) to clear selection. 
+            Use Ctrl (Mac: Cmd) on the table to select/deselect entries.
+        """, height=50)
     ##########################################################################################################################
 
 
@@ -653,13 +740,14 @@ class Dashboard(param.Parameterized):
             query = query.loc[(slice(None),road_type_filter),(countries_filter,)]
             query = query.groupby(level=0).sum().groupby(level=0, axis=1).sum()
             query = query.set_index(pd.to_datetime(query.index))
+            name_for_total = self.get_location_group_string()
             if not self.selected_countries:
-                query = pd.DataFrame({'Total':query.sum(axis=1)}, index=query.index)
+                query = pd.DataFrame({name_for_total:query.sum(axis=1)}, index=query.index)
 
             if self.as_percentage:
                 tpc = self.query_tpc.loc[(road_type_filter),(countries_filter,)].sum().groupby(level=0).sum()
                 if not self.selected_countries:
-                    tpc = pd.Series({'Total':tpc.sum()})
+                    tpc = pd.Series({name_for_total:tpc.sum()})
                 
                 for c in query.columns:
                     query[c] = query[c] / tpc[c]
@@ -685,12 +773,27 @@ class Dashboard(param.Parameterized):
             active=self.time_series_tabs.active,
             dynamic = True
         )
-        return self.time_series_tabs 
+        
+        self.time_series_panel = pn.Column(
+            self.time_series_notes,
+            self.time_series_tabs
+        )
+        return self.time_series_panel
+
+
+    @depends('selected_road_types')
+    def time_series_notes(self):
+        showing_note = ', '.join(self.selected_road_types) or 'All'
+        showing_note_color = 'red' if self.selected_road_types else 'black'
+
+        return pn.pane.HTML(f"""
+            <span><b>Showing For: </b></span>
+            <span style='color:{showing_note_color}'>{showing_note} road/feature type(s).</span>
+            &nbsp &nbsp
+        """, height=20)
             
     ##########################################################################################################################
 
-    
-    
     
     
     #######################################
@@ -699,8 +802,6 @@ class Dashboard(param.Parameterized):
     #######################################
     #######################################
 
-
-    
     def sample_view(self):
         sample_load_button = pn.widgets.Button(name='Load a sample updates', button_type='primary')
 
@@ -792,6 +893,16 @@ class Dashboard(param.Parameterized):
          
 
         pn.config.sizing_mode = 'stretch_width'
+        css = '''
+        .slick-cell.selected {
+            background-color: #43a2ca !important;
+            color: white !important;
+        }
+        body {
+            overflow : hidden;
+        }
+        '''
+        pn.config.raw_css.append(css)
 
         bootstrap = pn.template.BootstrapTemplate(title='Road Network Updates on OSM',  header_background='black')
         bootstrap.sidebar.append(self.params_view())
@@ -817,10 +928,11 @@ class Dashboard(param.Parameterized):
                 pn.Row(
                     pn.Card(
                         self.road_type_view,
-                        title='Road Types View'
+                        title='Road/Feature Types View'
                     ),
                     pn.Card(
                         pn.Column(
+                            self.choropleth_notes,
                             self.choropleth_chart,
                             pn.Row(
                                 pn.layout.HSpacer(),

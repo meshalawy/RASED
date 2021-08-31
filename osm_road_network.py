@@ -101,10 +101,9 @@ class Dashboard(param.Parameterized):
     selected_countries = param.List(default=[])
 
     # pre processed options to avoid doing it on every request. Check the file "warmup_options.py" 
-    countries, us_states_gdf, country_objects, state_objects, location_group_options = pickle.load(open('ui_setup/warmup_options.pkl', 'rb'))
+    countries, us_states_gdf, location_group_options = pickle.load(open('ui_setup/warmup_options.pkl', 'rb'))
         
-    location_group = param.ObjectSelector(default=location_group_options['All'], objects=location_group_options)
-    country     = param.ObjectSelector( objects=country_objects)
+    location_group = param.ObjectSelector(default=location_group_options['World'], objects=location_group_options)
 
     elements= {
         'Way': 'way',
@@ -714,8 +713,8 @@ class Dashboard(param.Parameterized):
             <span><b>Selected: </b></span>
             <span style='color:{selection_note_color}'>{selection_note}.</span>
             <br>
-            Use Ctrl (Mac: Cmd) on the table to select/deselect entries.
-            Use shift on the chart for multiple selection; click on empty area (or ESC) to clear. 
+            <i>Table:</i> click+ctrl(cmd) to select/deselect entries.
+            <i>Chart:</i> click+shift for multiple selection; click on empty area (or ESC) to clear. 
         """, height=50)
     ##########################################################################################################################
 
@@ -978,14 +977,3 @@ dashboard = Dashboard(name="OSM Changes On Road Network")
 panel = dashboard.view()
 
 panel.servable()
-
-
-
-# try:
-#     server.stop()
-# except :
-#     pass
-# finally :
-#     server = panel.show(port=4321,open=False)
-# self = dashboard
-# %%

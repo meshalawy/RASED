@@ -96,4 +96,7 @@ for name,geometry in us_states_gdf.geometry.iteritems():
 
 json.dump(us_states_bounds, open('us_states_bounds.json', 'w'))
 
+
+pickle.dump((countries, us_states_gdf, location_group_options), open('warmup_options.pkl', 'wb'))
+
 # %%

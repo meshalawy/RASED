@@ -472,7 +472,7 @@ class Dashboard(param.Parameterized):
         showing_note_color = 'red' if self.selected_road_types else 'black'
 
         return pn.pane.HTML(f"""
-            <span><b>Showing For: </b></span>
+            <span><b>Data For: </b></span>
             <span style='color:{showing_note_color}'>{showing_note} road/feature type(s).</span>
             &nbsp &nbsp
         """, height=20)
@@ -585,7 +585,7 @@ class Dashboard(param.Parameterized):
         selection_note_color = 'red' if self.selected_road_types else 'black'
 
         return pn.pane.HTML(f"""
-            <span><b>Showing For: </b></span>
+            <span><b>Data For: </b></span>
             <span style='color:{showing_note_color}'>{showing_note}.</span>
             &nbsp &nbsp
             <span><b>Selected: </b></span>
@@ -708,15 +708,14 @@ class Dashboard(param.Parameterized):
         selection_note_color = 'red' if self.selected_countries else 'black'
 
         return pn.pane.HTML(f"""
-            <span><b>Showing For: </b></span>
+            <span><b>Data For: </b></span>
             <span style='color:{showing_note_color}'>{showing_note} road/feature type(s).</span>
             &nbsp &nbsp
             <span><b>Selected: </b></span>
             <span style='color:{selection_note_color}'>{selection_note}.</span>
             <br>
-            Click to select one or more entry and update other views. 
-            Use shift on the chart for multiple selection and click on empty area (or ESC) to clear. 
             Use Ctrl (Mac: Cmd) on the table to select/deselect entries.
+            Use shift on the chart for multiple selection; click on empty area (or ESC) to clear. 
         """, height=50)
     ##########################################################################################################################
 
@@ -791,7 +790,7 @@ class Dashboard(param.Parameterized):
         showing_note_color = 'red' if self.selected_road_types else 'black'
 
         return pn.pane.HTML(f"""
-            <span><b>Showing For: </b></span>
+            <span><b>Data For: </b></span>
             <span style='color:{showing_note_color}'>{showing_note} road/feature type(s).</span>
             &nbsp &nbsp
         """, height=20)

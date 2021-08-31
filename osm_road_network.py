@@ -2,7 +2,7 @@
 
 from logging import disable
 from bokeh.models.formatters import NumeralTickFormatter
-from bokeh.models import ColumnDataSource, HoverTool, Label, LabelSet
+from bokeh.models import ColumnDataSource, Label
 from bokeh.palettes import GnBu9,  BuPu9, BrBG9, Category10, Category20, Turbo256
 from bokeh.plotting import figure
 import plotly.graph_objects as go
@@ -734,10 +734,16 @@ class Dashboard(param.Parameterized):
         print('time_series_view', self.selected_road_types, self.selected_countries)
 
 
-        p = figure (title="Updates over time", x_axis_type="datetime", toolbar_location=None, tools='')
+        p = figure (title="Updates over time", x_axis_type="datetime", toolbar_location="right", tools= 'hover, wheel_zoom, pan, reset', active_scroll='wheel_zoom')
         format ='0.00%' if self.as_percentage else '0.0a'
         p.yaxis.formatter = NumeralTickFormatter(format=format)
         p.outline_line_color = None
+
+        p.hover.tooltips = [
+            ( 'date',     '@date{%F}'             ), 
+            ( 'volume',   f'@volume{{{format}}}'  ),
+        ]
+        p.hover.formatters = { "@date": "datetime"}
 
         query = self.query2.copy()
         if len(query):
@@ -767,7 +773,11 @@ class Dashboard(param.Parameterized):
                 colors = cycle(Turbo256)
             
             for country,color in zip (query,colors):
-                p.line(x=query.index ,y=query[country], line_width=2, legend_label=country, color=color)
+                ds = ColumnDataSource({
+                    'date' : query.index,
+                    'volume' : query[country]
+                })
+                p.line(x='date' ,y='volume', line_width=2, legend_label=country, color=color, name=country, source = ds)
 
 
         self.time_series_tabs = pn.Tabs(

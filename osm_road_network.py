@@ -252,7 +252,6 @@ class Dashboard(param.Parameterized):
         self.road_type_table = pn.widgets.DataFrame(pd.DataFrame(), autosize_mode = 'fit_columns', height=300, disabled=True)
         self.road_type_datasource = ColumnDataSource()
         self.road_type_tabs = pn.Tabs()
-        self.road_type_panel = pn.Column()
         
         ## linking the selectons of both the chart and the table
         def road_type_datasource_selection_change(attr, old, new):
@@ -284,7 +283,6 @@ class Dashboard(param.Parameterized):
         self.country_table = pn.widgets.DataFrame(pd.DataFrame(), autosize_mode = 'fit_columns', height=300, disabled=True)
         self.country_datasource = ColumnDataSource()
         self.country_tabs = pn.Tabs()
-        self.country_panel = pn.Column()
         
         ## linking the selectons of both the chart and the table
         def country_datasource_selection_change(attr, old, new):
@@ -309,7 +307,6 @@ class Dashboard(param.Parameterized):
 
         # 4- initializing items related to the Time Series View:
         self.time_series_tabs = pn.Tabs()
-        self.time_series_panel = pn.Column()
         #######################################################
 
         # 5- initializing items related to the Sample View:
@@ -490,7 +487,7 @@ class Dashboard(param.Parameterized):
     @param.depends('query2', 'selected_countries','as_percentage')
     def road_type_view(self):
         if self.pause_updates:
-            return self.road_type_panel
+            return self.road_type_tabs
 
         print('road_type_view', self.selected_countries)
         
@@ -568,11 +565,7 @@ class Dashboard(param.Parameterized):
             active=self.road_type_tabs.active,
             dynamic = True
         )
-        self.road_type_panel = pn.Column(
-            self.road_types_notes,
-            self.road_type_tabs
-        )
-        return self.road_type_panel
+        return self.road_type_tabs
 
 
     @depends('selected_countries', 'selected_road_types')
@@ -607,7 +600,7 @@ class Dashboard(param.Parameterized):
     @param.depends('query2', 'selected_road_types','as_percentage')
     def country_view(self):
         if self.pause_updates:
-            return self.country_panel
+            return self.country_tabs
 
 
         print('country_view', self.selected_road_types)
@@ -689,13 +682,7 @@ class Dashboard(param.Parameterized):
             active=self.country_tabs.active,
             dynamic = True
         )
-        
-
-        self.country_panel = pn.Column(
-            self.country_notes,
-            self.country_tabs
-        )
-        return self.country_panel
+        return self.country_tabs
 
 
     @depends('selected_countries', 'selected_road_types')
@@ -785,12 +772,7 @@ class Dashboard(param.Parameterized):
             active=self.time_series_tabs.active,
             dynamic = True
         )
-        
-        self.time_series_panel = pn.Column(
-            self.time_series_notes,
-            self.time_series_tabs
-        )
-        return self.time_series_panel
+        return self.time_series_tabs
 
 
     @depends('selected_road_types')
@@ -942,7 +924,10 @@ class Dashboard(param.Parameterized):
                 ),
                 pn.Row(
                     pn.Card(
-                        self.country_view,
+                        pn.Column(
+                            self.country_notes,
+                            self.country_view
+                        ),
                         title='Countries View'
                     ),
                     pn.Card(
@@ -950,7 +935,6 @@ class Dashboard(param.Parameterized):
                             self.choropleth_notes,
                             self.choropleth_chart,
                             pn.Row(
-                                # pn.layout.HSpacer(),
                                 self.player,
                                 self.player_info_view, 
                                 align='center'
@@ -961,11 +945,17 @@ class Dashboard(param.Parameterized):
                 ),
                 pn.Row(
                     pn.Card(
-                        self.road_type_view,
+                        pn.Column(
+                            self.road_types_notes,
+                            self.road_type_view
+                        ),
                         title='Road/Feature Types View'
                     ),
                     pn.Card(
-                        self.time_series_view,
+                        pn.Column(
+                            self.time_series_notes,
+                            self.time_series_view
+                        ),
                         title='Time Series View'
                     )
                 ),

@@ -120,6 +120,7 @@ class Dashboard(param.Parameterized):
     query_button = param.Action(lambda x: x.param.trigger('query_button'), label='Query Data')
 
     data = param.DataFrame(precedence=-1, default=pd.DataFrame(index=pd.MultiIndex(levels=[[],[]],codes=[[],[]],names=['day', 'type'])))
+    data2 = param.DataFrame(precedence=-1, default=pd.DataFrame(index=pd.MultiIndex(levels=[[],[]],codes=[[],[]],names=['day', 'type'])))
     query = param.DataFrame(precedence=-1, default=pd.DataFrame(columns=['Total']))
     query2 = param.DataFrame(precedence=-1, default=pd.DataFrame(columns=['Total']))
 
@@ -135,9 +136,13 @@ class Dashboard(param.Parameterized):
     def load_data(self):
         df = None
         with pn.param.set_values(self.params_column, loading=True):
-            df = pd.read_pickle('data/changes_aggregated/all.pkl.gzip', compression='gzip')
-            # TODO temporary fix make it type instead of road_type. Should be updated in the original data
-            df.index.names = ['day', 'Type']
+            if len(self.data2):
+                df = self.data2.copy()
+            else:
+                df = pd.read_pickle('data/changes_aggregated/all.pkl.gzip', compression='gzip')
+                # TODO temporary fix make it type instead of road_type. Should be updated in the original data
+                df.index.names = ['day', 'Type']
+                self.data2 = df.copy()
             
             s = self.start_date.strftime("%Y-%m-%d")
             e = self.end_date.strftime("%Y-%m-%d")
@@ -721,7 +726,7 @@ class Dashboard(param.Parameterized):
         print('time_series_view', self.selected_road_types, self.selected_countries)
 
 
-        p = figure (title="Updates over time", x_axis_type="datetime", toolbar_location="right", tools= 'hover, wheel_zoom, pan, reset', active_scroll='wheel_zoom')
+        p = figure (title="Updates over time (7-days moving average)", x_axis_type="datetime", toolbar_location="right", tools= 'hover, wheel_zoom, pan, reset', active_scroll='wheel_zoom')
         format ='0.00%' if self.as_percentage else '0.0a'
         p.yaxis.formatter = NumeralTickFormatter(format=format)
         p.outline_line_color = None
@@ -758,7 +763,7 @@ class Dashboard(param.Parameterized):
                 colors = Category20[20]
             else:
                 colors = cycle(Turbo256)
-            
+            query = query.rolling(7).mean().dropna()
             for country,color in zip (query,colors):
                 ds = ColumnDataSource({
                     'date' : query.index,

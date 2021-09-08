@@ -726,7 +726,7 @@ class Dashboard(param.Parameterized):
         print('time_series_view', self.selected_road_types, self.selected_countries)
 
 
-        p = figure (title="Updates over time (7-days moving average)", x_axis_type="datetime", toolbar_location="right", tools= 'hover, wheel_zoom, pan, reset', active_scroll='wheel_zoom')
+        p = figure (title="Updates over time", x_axis_type="datetime", toolbar_location="right", tools= 'hover, wheel_zoom, pan, reset', active_scroll='wheel_zoom')
         format ='0.00%' if self.as_percentage else '0.0a'
         p.yaxis.formatter = NumeralTickFormatter(format=format)
         p.outline_line_color = None
@@ -755,16 +755,18 @@ class Dashboard(param.Parameterized):
                 
                 for c in query.columns:
                     query[c] = query[c] / tpc[c]
-
             
+            if len(query) > 10: 
+                query = query.rolling(7).mean().dropna()
+                p.title.text += " (7-days moving average)"
+
             if len(query.columns) <= 10 :
                 colors = Category10[10]
             elif len(query.columns) <= 20 :
                 colors = Category20[20]
             else:
                 colors = cycle(Turbo256)
-            if len(query) > 10: 
-                query = query.rolling(7).mean().dropna()
+
             for country,color in zip (query,colors):
                 ds = ColumnDataSource({
                     'date' : query.index,

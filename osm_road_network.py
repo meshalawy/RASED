@@ -763,7 +763,8 @@ class Dashboard(param.Parameterized):
                 colors = Category20[20]
             else:
                 colors = cycle(Turbo256)
-            query = query.rolling(7).mean().dropna()
+            if len(query) > 10: 
+                query = query.rolling(7).mean().dropna()
             for country,color in zip (query,colors):
                 ds = ColumnDataSource({
                     'date' : query.index,

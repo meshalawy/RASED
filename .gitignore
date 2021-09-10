@@ -1,1 +1,5 @@
 data/**
+diff_*
+changesets_*
+osm_map_changes_data/**
+__pycache__/**

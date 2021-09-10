@@ -249,6 +249,13 @@ class Dashboard(param.Parameterized):
         # until the last parameter is updated.
         self.pause_updates = False
 
+        # check first and last days available to the system from the status file
+        self.status = json.load(open('status.json'))
+        self.last_day = datetime.strptime(self.status['last_day'], "%Y-%m-%d").date()
+        self.first_day = datetime.strptime(self.status['first_day'], "%Y-%m-%d").date()
+
+        self.start_date = self.last_day + timedelta(-30)
+        self.end_date = self.last_day
         
         # initializing widgets and related elements:
 
@@ -327,28 +334,22 @@ class Dashboard(param.Parameterized):
 
     
     def params_view(self):
-        last_day = json.load(open('status.json'))['last_day']
-        last_day_date = datetime.strptime(last_day, "%Y-%m-%d").date()
-
-        first_day = json.load(open('status.json'))['first_day']
-        first_day_date = datetime.strptime(first_day, "%Y-%m-%d").date()
-
         self.params_column = pn.Column(
             pn.Param(self.param['start_date'], widgets={
                     'start_date': {
                         'widget_type': pn.widgets.DatePicker,
-                        'start': first_day_date,
-                        'end': last_day_date,
+                        'start': self.first_day,
+                        'end': self.last_day,
                     }
                 }),
             pn.Param(self.param['end_date'], widgets={
                     'end_date': {
                         'widget_type': pn.widgets.DatePicker,
-                        'start': first_day_date,
-                        'end': last_day_date,
+                        'start': self.first_day,
+                        'end': self.last_day,
                     }
             }),
-            pn.pane.Markdown(f"Data is currently available from {first_day} to {last_day}", style={'color':'gray'}),
+            pn.pane.Markdown(f"Data is currently available from {self.status['first_day']} to {self.status['last_day']}. Last 30 days are selected by default", style={'color':'gray'}),
             self.categories.view,
             pn.widgets.StaticText(name='Elements', value=''),
             pn.Param(self.param['elements'], widgets={

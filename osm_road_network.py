@@ -1,6 +1,5 @@
 #%%
 
-from logging import disable
 from bokeh.models.formatters import NumeralTickFormatter
 from bokeh.models import ColumnDataSource, Label
 from bokeh.palettes import GnBu9,  BuPu9, BrBG9, Category10, Category20, Turbo256
@@ -24,7 +23,7 @@ from functools import partial
 import json
 import pickle
 
-from datetime import date, timedelta
+from datetime import date, datetime, timedelta
 
 
 from ipyleaflet import Map, Marker, MarkerCluster
@@ -328,22 +327,28 @@ class Dashboard(param.Parameterized):
 
     
     def params_view(self):
+        last_day = json.load(open('status.json'))['last_day']
+        last_day_date = datetime.strptime(last_day, "%Y-%m-%d").date()
+
+        first_day = json.load(open('status.json'))['first_day']
+        first_day_date = datetime.strptime(first_day, "%Y-%m-%d").date()
+
         self.params_column = pn.Column(
             pn.Param(self.param['start_date'], widgets={
                     'start_date': {
                         'widget_type': pn.widgets.DatePicker,
-                        'start': date(2019,1,1),
-                        'end': date(2021,6,28),
+                        'start': first_day_date,
+                        'end': last_day_date,
                     }
                 }),
             pn.Param(self.param['end_date'], widgets={
                     'end_date': {
                         'widget_type': pn.widgets.DatePicker,
-                        'start': date(2019,1,1),
-                        'end': date(2021,6,28),
+                        'start': first_day_date,
+                        'end': last_day_date,
                     }
             }),
-            pn.pane.Markdown("Data is currently available from 2019-01-01 to 2021-06-28", style={'color':'gray'}),
+            pn.pane.Markdown(f"Data is currently available from {first_day} to {last_day}", style={'color':'gray'}),
             self.categories.view,
             pn.widgets.StaticText(name='Elements', value=''),
             pn.Param(self.param['elements'], widgets={

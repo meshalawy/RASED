@@ -18,14 +18,6 @@ def daterange(start_date, end_date):
     for n in range(int((end_date - start_date).days)):
         yield start_date + timedelta(n)
 
-# start_date = date(2021, 6, 29)
-# end_date = date(2021,6,30)
-# days = [day.strftime("%Y-%m-%d") for day in daterange(start_date, end_date)]
-# # days=['2019-03-09', '2019-03-10', '2019-03-11']
-
-# # days = ['2019-11-22'] + days
-# # days = ['2020-11-17']
-
 # find missing days since last crawled day
 status = json.load(open('status.json'))
 last_day = status['last_day']
@@ -87,6 +79,7 @@ if __name__ == "__main__":
         analayzer.clear_downloaded_data(diff=True, changesets=True)
 
 
+    print(datetime.now())
     print('crawling: ', days)
 
     m = Manager()
@@ -94,8 +87,3 @@ if __name__ == "__main__":
     all_df_lock = m.Lock()
     func = partial(execute_crawling_cleaning_aggregation_workflow, download_lock, all_df_lock)
     process_map(func,days,max_workers=20)
-
-    # status['last_day'] = days[-1]
-    # json.dump(status, open('status.json', 'w'))
-
-# %%

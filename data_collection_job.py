@@ -27,7 +27,7 @@ days = [day.strftime("%Y-%m-%d") for day in days]
 
 
 # adding any days left from the previous run in case of any unhandled exception
-left_over =  [f[-10:] for f in glob.glob("diff_*")] + [f[-10:] for f in glob.glob("diff_*")]
+left_over =  [f[-10:] for f in glob.glob("diff_*")] + [f[-10:] for f in glob.glob("changesets_*")]
 days = sorted(list(set(days + left_over)))
 
 

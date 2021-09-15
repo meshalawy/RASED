@@ -915,8 +915,25 @@ class Dashboard(param.Parameterized):
         '''
         pn.config.raw_css.append(css)
 
-        bootstrap = pn.template.BootstrapTemplate(title='Road Network Updates on OSM',  header_background='black', sidebar_width=220)
-        bootstrap.sidebar.append(self.params_view())
+        bootstrap = pn.template.BootstrapTemplate(title='RASED: A Dashboard for Monitoring Road Network Updates in OSM',  header_background='black', sidebar_width=220)
+        bootstrap.sidebar.append(
+            pn.Column(
+                self.params_view(),
+
+                # google analytics
+                pn.pane.HTML("""
+                <!-- Global site tag (gtag.js) - Google Analytics -->
+                <script async src="https://www.googletagmanager.com/gtag/js?id=G-PYC0QLP3YL"></script>
+                <script>
+                    window.dataLayer = window.dataLayer || [];
+                    function gtag(){dataLayer.push(arguments);}
+                    gtag('js', new Date());
+
+                    gtag('config', 'G-PYC0QLP3YL');
+                </script>
+                """)
+            )
+        )
 
         bootstrap.main.append(
             pn.Column(
@@ -986,7 +1003,7 @@ class Dashboard(param.Parameterized):
         return bootstrap
 
 
-dashboard = Dashboard(name="OSM Changes On Road Network")
+dashboard = Dashboard(name="RASED: A Dashboard for Monitoring Road Network Updates in OSM")
 # panel = pn.Pane(dashboard.view)
 panel = dashboard.view()
 

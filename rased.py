@@ -32,7 +32,7 @@ from ipyleaflet import Map, Marker, MarkerCluster
 from ipywidgets import HTML
 from metadata_view.metadata_view import MetadataView
 
-
+#%%
 class TypeCategorySelector(param.Parameterized):
     selected_types = param.List(precedence=-1)
 
@@ -831,10 +831,10 @@ class Dashboard(param.Parameterized):
         
         # selected_countries param will hold states instead of countries in case location_group was the U.S.
         selected_states = [] if not self.is_location_group_US() else self.selected_countries
-        self.metadata_view.update_selection(selected_states=selected_states, 
-                                            selected_road_types=self.selected_road_types,
-                                            is_united_states_selected=is_united_states_selected
-        )
+
+        self.metadata_view.selected_states = selected_states
+        self.metadata_view.selected_road_types = self.selected_road_types
+        self.metadata_view.is_united_states_selected = is_united_states_selected        
 
 
 

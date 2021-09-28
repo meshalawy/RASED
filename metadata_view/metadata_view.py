@@ -10,10 +10,7 @@ from pandas import IndexSlice as idx
 #%%
 class MetadataView(param.Parameterized):
 
-
-    
     data = pd.read_pickle('data/metadata_counts.pkl')
-
     metadata_groups_df = pd.read_csv('ui_setup/osm_metadata_groups.csv').set_index(['category', 'metadata'])
 
     metadata_groups = dict()
@@ -31,16 +28,12 @@ class MetadataView(param.Parameterized):
     search                         =   param.String(default="")
     selected_states                =   param.List(default=[])
     selected_road_types            =   param.List(default=[])
-    is_united_states_selected      =   param.Boolean(default=True)
+    is_united_states_selected      =   param.Boolean(default=False)
     aggregated_data                =   param.DataFrame(default=pd.DataFrame())
 
     
     metadata_table                 =   pn.widgets.DataFrame(pd.DataFrame(), autosize_mode = 'fit_columns', height=300, disabled=True, sizing_mode = 'stretch_width')
-    search_input                   =   pn.widgets.TextInput(placeholder='Type to search for metedata...', name='Search')
-    
-    
     metadata_availability_note     =   "Metadata information are currently available for United States only, and represent a snapshot of the current status not the history."
-    metadata_notes                 =   pn.pane.HTML(metadata_availability_note, height=50)
     total_roads = 0
     
 
@@ -53,24 +46,6 @@ class MetadataView(param.Parameterized):
         return pd.DataFrame(index=pd.Series(['#NA'], name='Total'))
 
     ####################################### Misc
-
-
-    def update_selection(self, selected_states, selected_road_types, is_united_states_selected):
-        self.selected_states = list(selected_states)
-        self.selected_road_types = list(selected_road_types)
-        self.is_united_states_selected = bool(is_united_states_selected)
-        self.aggregate_table()
-        self.update_metadata_notes()
-
-    
-    @pn.depends('aggregated_data', 'metadata_group', 'search_input.value_input', watch = True)
-    def filter_table(self):
-        filtered = self.aggregated_data.copy()
-        filtered = self.aggregated_data.loc[self.aggregated_data.index.intersection(self.metadata_group)].copy()
-        if self.search_input.value_input:
-            filtered = filtered[filtered.index.str.contains(self.search_input.value_input)]
-        self.metadata_table._update_data(filtered)
-
 
     @pn.depends('selected_states', 'selected_road_types', 'is_united_states_selected', watch=True)
     def aggregate_table(self):
@@ -91,11 +66,9 @@ class MetadataView(param.Parameterized):
 
         table.index.rename('Metadata', inplace=True)
         self.aggregated_data = table
-        self.filter_table()
 
 
-    @pn.depends('selected_states', 'selected_road_types', 'is_united_states_selected', watch=True)
-    def update_metadata_notes(self):
+    def metadata_notes(self):
         showing_note_1 = (
             'None' if not self.is_united_states_selected 
             else 'All U.S. states' if not self.selected_states
@@ -120,24 +93,34 @@ class MetadataView(param.Parameterized):
             full_showing_note += "."
 
 
-        self.metadata_notes.object = f"""
-            {self.metadata_availability_note}
-            <br>
-            {full_showing_note}
-        """
+        return pn.pane.HTML( f"""
+                {self.metadata_availability_note}
+                <br>
+                {full_showing_note}
+            """, height=50)
+
+
+    def filtered_table(self):
+        filtered = self.aggregated_data.loc[self.aggregated_data.index.intersection(self.metadata_group)].copy()
+        if self.search:
+            filtered = filtered[filtered.index.str.contains(self.search)]
+
+        return pn.widgets.DataFrame(filtered, autosize_mode = 'fit_columns', height=300, disabled=True, sizing_mode = 'stretch_width')
+
 
     def view(self):
         
         return pn.Column(
             self.metadata_notes,
             pn.Row(
-                # self.search_input
                 pn.Param(self.param['metadata_group']),
                 pn.Param(self.param['search'], widgets={
-                    "search": self.search_input
+                    'search': {
+                        'widget_type' : pn.widgets.TextInput,
+                        'placeholder': 'Type and hit enter to search for metadata ...' 
+                    }
                 })
             ),
 
-            self.metadata_table
+            self.filtered_table
         )
-

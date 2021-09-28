@@ -4,12 +4,14 @@ from bokeh.models.formatters import NumeralTickFormatter
 from bokeh.models import ColumnDataSource, Label
 from bokeh.palettes import GnBu9,  BuPu9, BrBG9, Category10, Category20, Turbo256
 from bokeh.plotting import figure
+from panel.widgets import select
 import plotly.graph_objects as go
 
 
 import panel as pn
 import param
 from param.parameterized import depends
+from bootstrap_with_analytics import BootstrapTemplate
 
 import pandas as pd
 from pandas import IndexSlice as idx
@@ -28,6 +30,7 @@ from datetime import date, datetime, timedelta
 
 from ipyleaflet import Map, Marker, MarkerCluster
 from ipywidgets import HTML
+from metadata_view.metadata_view import MetadataView
 
 
 class TypeCategorySelector(param.Parameterized):
@@ -321,11 +324,16 @@ class Dashboard(param.Parameterized):
         #######################################################
 
         # 5- initializing items related to the Sample View:
-        self.sample_map = Map(center=(0, 0), zoom=2, scroll_wheel_zoom=True, layout={'height':'650px'} )
+        self.sample_map = Map(center=(0, 0), zoom=2, scroll_wheel_zoom=True, layout={'height':'400px'} )
         self.sample_markers = MarkerCluster()        
         self.sample_map.add_layer(self.sample_markers) 
         self.countries_bounds = json.load(open('ui_setup/countries_bounds.json', 'r'))   
         self.us_states_bounds = json.load(open('ui_setup/us_states_bounds.json', 'r'))   
+
+        # 6- initializing items related to the Metadat View:
+        self.metadata_view = MetadataView()
+
+
 
 
         pn.state.onload(lambda: self.param.trigger('query_button'))
@@ -802,6 +810,35 @@ class Dashboard(param.Parameterized):
             
     ##########################################################################################################################
 
+
+    #######################################
+    #######################################
+    ########## Metadata View ###########
+    #######################################
+    #######################################
+    @pn.depends('query2', 'location_group', 'selected_road_types', 'selected_countries', watch=True)
+    def update_metadata_view(self):
+        if self.pause_updates:
+            return 
+
+        print('metadata_view')
+
+        is_united_states_selected =  (
+            self.is_location_group_US() or
+            'United States' in self.selected_countries or
+             (self.location_group['name'] == 'All' and not self.selected_countries)
+        )
+        
+        # selected_countries param will hold states instead of countries in case location_group was the U.S.
+        selected_states = [] if not self.is_location_group_US() else self.selected_countries
+        self.metadata_view.update_selection(selected_states=selected_states, 
+                                            selected_road_types=self.selected_road_types,
+                                            is_united_states_selected=is_united_states_selected
+        )
+
+
+
+    ##########################################################################################################################
     
     
     #######################################
@@ -915,23 +952,10 @@ class Dashboard(param.Parameterized):
         '''
         pn.config.raw_css.append(css)
 
-        bootstrap = pn.template.BootstrapTemplate(title='RASED: A Dashboard for Monitoring Road Network Updates in OSM',  header_background='black', sidebar_width=220)
+        bootstrap = BootstrapTemplate(title='RASED: A Dashboard for Monitoring Road Network Updates in OSM',  header_background='black', sidebar_width=220)
         bootstrap.sidebar.append(
             pn.Column(
                 self.params_view(),
-
-                # google analytics
-                pn.pane.HTML("""
-                <!-- Global site tag (gtag.js) - Google Analytics -->
-                <script async src="https://www.googletagmanager.com/gtag/js?id=G-PYC0QLP3YL"></script>
-                <script>
-                    window.dataLayer = window.dataLayer || [];
-                    function gtag(){dataLayer.push(arguments);}
-                    gtag('js', new Date());
-
-                    gtag('config', 'G-PYC0QLP3YL');
-                </script>
-                """)
             )
         )
 
@@ -991,10 +1015,18 @@ class Dashboard(param.Parameterized):
                     )
                 ),
                 pn.Row(
-                    pn.Card(
-                        self.sample_view(),
-                        title='Sample View',
-                        height=750
+                    pn.Row(
+                        pn.Card(
+                            self.sample_view(),
+                            title='Sample View',
+                            height=500
+                        ),
+                        pn.Card(
+                            self.metadata_view.view(),
+                            title='Metadata View',
+                            height=500
+                        )
+
                     )
                 )
             )

@@ -1,0 +1,3565 @@
+﻿metadata,category
+4WD_only,other
+4wd,other
+4wd_only,other
+ADDR_TYPE,address
+AMOR,other
+ARTPATH,other
+AddressRan,address
+AdminClass,other
+Alias,other
+BRIDGE_NO,bridges
+Bergen_County_database_ref,Metadata for other datasets
+CASENUM2,other
+CCGIS:bicycle,other
+CDOT:ref,other
+CDOT:ref:source,other
+CDOT_ref,other
+CDOT_route,other
+CFCC,other
+CHA:bicycle,other
+CI_LOG_ID,other
+CL_Source,other
+CODT_route,other
+COL,other
+COR,other
+COUNTYFP,Metadata for other datasets
+CRAB_BMP,other
+CRAB_EMP,other
+CRAB_ID,other
+Camille,other
+Centerline,other
+Cleaned,other
+CommunityL,other
+CommunityR,other
+Cost,other
+County,address
+Development,other
+District,address
+EDIT_DATE,other
+EID,other
+East,other
+EdgeID,other
+FCC,other
+FCLASS,other
+FIPS,other
+FNODE_,other
+FR_ADDR_L,other
+FR_ADDR_R,other
+FR_ELEV,other
+FULLNAME,names
+FULL_NAME,names
+FayettevilleGIS:address_hi,other
+FayettevilleGIS:address_lo,other
+Flow,other
+FrAdd_L,other
+FrAdd_R,other
+From_Elev,other
+FuncClassI,other
+GADOT_HWY:reviewed,other
+GADOT_HWY:source,sources for metadata
+GADOT_HWY:source_1,other
+GlobalID,other
+GovLevel,other
+HFCS,other
+HFCS_ref,other
+HIERARCHY,other
+ID,other
+Juicy,other
+JurSplit,other
+LABEL,other
+LAYER,other
+LCITY,other
+LCity,other
+LEFT_FROM,other
+LEFT_TO,other
+LENGTH,other
+LHI,other
+LINEARID,other
+LLO,other
+LOS,other
+LOS2,other
+LOS2:add,other
+LOS2:note,other
+LPOLY_,other
+Label,other
+LandPro08:DE3,other
+LandPro08:DE5,other
+LandPro08:LC_NAME,names
+LandPro08:LU_NAME,names
+LandPro08:reviewed,other
+Lefthigh,other
+Leftlow,other
+Length_Mil,other
+MAP_LABEL,other
+MATERIAL,other
+MCL,other
+MCR,other
+MTFCC,other
+MUNI_L,other
+MUNI_R,other
+MuniCode,other
+Municipality,other
+NHD:ComID,other
+NHD:FCode,other
+NHD:FDate,other
+NHD:FTYPE,other
+NHD:FType,other
+NHD:RESOLUTION,other
+NHD:ReachCode,other
+NHD:way_id,other
+NHS,other
+NHX,other
+NJDOT_SRI,other
+NOTE,notes
+NR_STATUS,other
+NYSDOT_ref,other
+NavigateLA:highway,other
+Note,notes
+OBJECTID,other
+OBJECTID_1,other
+ONEWAYDIR,basic (detailed)
+ORDNUM,other
+Operation,other
+Owner,other
+PARK_NAME,names
+PASS_route,other
+POD,other
+PRD,other
+PREFIX,other
+Palomino,other
+PathType,other
+RCity,other
+RD_LOG_ID,other
+README,other
+README_2,other
+REF,other
+REM,other
+REM:Class,other
+RHI,other
+RIGHT_FROM,other
+RIGHT_TO,other
+RLIS:bicycle,bicycle
+RLIS:bicycle:left,bicycle
+RLIS:bicycle:right,bicycle
+RLIS:reviewed,bicycle
+RLIS:systemname,names
+RLIS:trailid,bicycle
+RLO,other
+ROAD_NO,other
+RPOLY_,other
+RTTYP,other
+RUCODE,other
+Ref,other
+RightHigh,other
+RightLow,other
+RightOfWay,other
+RoadType,other
+Route,other
+RouteName,names
+SEGMENT_ID,other
+SHAPE_Area,other
+SHAPE_LENG,other
+SHAPE_Leng,other
+SHAPE_len,other
+SIN,other
+SPR_AMD_OR,other
+SRC_DATE,other
+STATEFP,Metadata for other datasets
+STATUS,other
+STN,other
+STREETNAME,names
+STREETTYPE,other
+STREET_,other
+STREET_ID,other
+STREET_NAM,other
+STS,other
+SUBDIVIS_1,other
+SUBTYPEFIE,other
+SUFFIX,other
+Segment,other
+Segment #,other
+Shape_Leng,other
+Shape_STLe,other
+Shape_len,other
+Sign,other
+Source,other
+Speed,speed limits
+Spring,other
+State,address
+Status,other
+StreetID,other
+Structure No.,other
+TIGER:fips,Metadata for other datasets
+TIGER:st_fips,Metadata for other datasets
+TIGER:state,Metadata for other datasets
+TNODE_,other
+TODO,other
+TO_ADDR_L,other
+TO_ADDR_R,other
+TO_ELEV,other
+TRL_LENGTH,other
+TYPE,other
+Texas_Trunk_System,other
+Tiger:MTFCC,Metadata for other datasets
+ToAdd_L,other
+ToAdd_R,other
+To_Elev,other
+Trail,other
+Type,other
+US:MD:sha_ref,Metadata for other datasets
+US:MD:sha_rteno,Metadata for other datasets
+US:MD:sha_rtepre,Metadata for other datasets
+US:MD:sha_rtesfx,Metadata for other datasets
+USFS,Metadata for other datasets
+USFS:systemname,names
+USFS:way_id,Metadata for other datasets
+USGS-LULC:CLASS,Metadata for other datasets
+USGS-LULC:CNTYNAME,names
+USGS-LULC:LEVEL_I,Metadata for other datasets
+USGS-LULC:LEVEL_II,Metadata for other datasets
+USGS-LULC:STATECTY,Metadata for other datasets
+Unsigned_ref,other
+WIDTH,other
+West,other
+YearPaved,other
+ZIPLEFT,address
+ZIP_CODE_L,address
+ZIP_CODE_R,address
+ZIP_L,address
+ZIP_R,address
+ZIPright,address
+ZONINGCODE,other
+_ADMIN_ORG__,Metadata for other datasets
+_BMP__,Metadata for other datasets
+_CONGRESSIO_,Metadata for other datasets
+_COUNTY__,Metadata for other datasets
+_EMP__,Metadata for other datasets
+_FUNCTIONAL_,Metadata for other datasets
+_ID__,Metadata for other datasets
+_JURISDICTI_,Metadata for other datasets
+_LANES__,Metadata for other datasets
+_LINEARID_,Metadata for other datasets
+_MANAGING_O_,Metadata for other datasets
+_OBJECTIVE__,Metadata for other datasets
+_OPER_MAINT_,Metadata for other datasets
+_PFSR_CLASS_,Metadata for other datasets
+_PRIMARY_MA_,Metadata for other datasets
+_ROUTE_STAT_,Metadata for other datasets
+_RTE_CN__,Metadata for other datasets
+_Rd_Type_,Metadata for other datasets
+_Road_Class_,Metadata for other datasets
+_SEG_LENGTH_,Metadata for other datasets
+_SURFACE_TY_,Metadata for other datasets
+_SYSTEM__,Metadata for other datasets
+_Season_,Metadata for other datasets
+_Shape_Leng_,Metadata for other datasets
+_rdname_,Metadata for other datasets
+_ref,Metadata for other datasets
+abandoned,life_cycle
+abandoned:aeroway,life_cycle
+abandoned:construction,life_cycle
+abandoned:gauge,life_cycle
+abandoned:golf,life_cycle
+abandoned:highway,life_cycle
+abandoned:junction,life_cycle
+abandoned:name,life_cycle
+abandoned:name_1,life_cycle
+abandoned:operator,life_cycle
+abandoned:railway,life_cycle
+abandoned:ref,life_cycle
+abandoned:service,life_cycle
+abandoned:usage,life_cycle
+abandoned:waterway,life_cycle
+abbr_name,names
+abutters,basic
+access,access
+access:OHV,access
+access:backward,access
+access:both_ways,access
+access:bus,access
+access:conditional,access
+access:covid19,access
+access:delivery,access
+access:destination,access
+access:dogs,access
+access:emergency,access
+access:employee,access
+access:foot,pedestrian
+access:forward,access
+access:hgv,access
+access:lanes,lanes
+access:lanes:backward,lanes
+access:lanes:both_ways,lanes
+access:lanes:conditional,lanes
+access:lanes:forward,lanes
+access:motor_vehicle,access
+access:motor_vehicle:conditional,access
+access:motorcar,access
+access:motorcycle,access
+access:note,access
+access:parking:conditional,access
+access:parking:lane:right,lanes
+access:permissive,access
+access:permit,access
+access:psv,access
+access:pt_bus,access
+access:service,access
+access:skateboard:conditional,access
+access:snowmobile,winter
+access:source,sources for metadata
+access:trailer,access
+access:vehicle,access
+access:winter,winter
+access_1,other
+access_control,other
+accessible,other
+accuracy:meters,other
+acess,other
+acres,other
+addr:block_number,address
+addr:city,address
+addr:city:en,address
+addr:city:source,address
+addr:city_1,address
+addr:country,address
+addr:county,address
+addr:district,address
+addr:grid,address
+addr:hamlet,address
+addr:housename,address
+addr:housenumber,address
+addr:housenumber2,address
+addr:housenumber_1,address
+addr:housenumber_2,address
+addr:housenumber_3,address
+addr:inclusion,address
+addr:interpolation,address
+addr:municipality,address
+addr:name_type,address
+addr:neighbourhood,address
+addr:place,address
+addr:postcode,address
+addr:postcode:source,address
+addr:postcode_1,address
+addr:province,address
+addr:range,address
+addr:state,address
+addr:street,address
+addr:street:name,address
+addr:street:prefix,address
+addr:street:source,address
+addr:street:type,address
+addr:street_1,address
+addr:suburb,address
+addr:town,address
+addr:unit,address
+addr:zip,address
+addr_cnt,address
+addr_neigh,address
+address range,address
+admin_level,other
+admin_org,other
+admin_ref,other
+administration,other
+adopted,other
+adot_name,names
+aefccess,other
+aerialway,other
+aeroway,other
+agency,other
+agricultural,other
+agricultural:conditional,other
+airport,other
+aligned_with,other
+all_lanes,lanes
+alley,other
+alt,other
+alt_name,names
+alt_name1,names
+alt_name2,names
+alt_name:1,names
+alt_name:2,names
+alt_name:backward,names
+alt_name:de,names
+alt_name:el,names
+alt_name:en,names
+alt_name:etymology,names
+alt_name:etymology:wikidata,Metadata for other datasets
+alt_name:forward,names
+alt_name:fr,names
+alt_name:full,names
+alt_name:historic,names
+alt_name:left,names
+alt_name:prefix,names
+alt_name:pronunciation,names
+alt_name:right,names
+alt_name:source,sources for metadata
+alt_name:vi,names
+alt_name:vi:etymology:wikidata,Metadata for other datasets
+alt_name_1,names
+alt_name_2,names
+alt_name_3,names
+alt_name_4,names
+alt_ref,other
+alt_ref:1,other
+alt_source,other
+alt_tiger:name_base,names
+altccess,other
+amenity,other
+amenity_1,other
+animal,other
+animal_shelter:adoption,other
+annotation,other
+architect,other
+area,other
+area:highway,other
+ascent,other
+assembly_point:tornado,other
+assmntdist,other
+association,other
+atis_ref,other
+atm,other
+atspm:approach_compass,other
+atspm:approach_compass:backward,other
+atspm:approach_compass:forward,other
+attraction,other
+attribution,other
+atv,other
+atv:conditional,other
+authorized,other
+avgspeed,speed limits
+backrest,other
+bad_maxspeed,speed limits
+bad_name,names
+bank,other
+barrier,other
+barrier:obstacle_type,other
+base_material_values,other
+baseball,other
+bburg:altname,names
+bburg:dataset,other
+bburg:id,other
+bburg:maint,other
+bburg:maxspeed,speed limits
+bburg:name,names
+bburg:suffix,other
+bburg:type,other
+bdouble,other
+beds,other
+bench,other
+bic,other
+bicycle,bicycle
+bicycle:backward,bicycle
+bicycle:conditional,bicycle
+bicycle:designated,bicycle
+bicycle:forward,bicycle
+bicycle:lane,bicycle
+bicycle:lanes,bicycle
+bicycle:lanes:backward,bicycle
+bicycle:lanes:both_ways,bicycle
+bicycle:lanes:forward,bicycle
+bicycle:non_experienced,bicycle
+bicycle:source,bicycle
+bicycle:suitability,bicycle
+bicycle_parking,bicycle
+bicycle_road,bicycle
+bicycle_road:right,bicycle
+bicycles,bicycle
+bike,bicycle
+bike-ability,bicycle
+bike:safety,bicycle
+bike:scenic,bicycle
+bike_ride,bicycle
+bikelane,bicycle
+bin,other
+blaze,other
+blind,other
+blm:closurestat,other
+blm:maintlvl,other
+blm:roadclass,other
+blooper,other
+bna,other
+boat,other
+border_type,other
+both_ways,other
+boundary,other
+boundary_type,other
+brand,other
+brand:wikidata,Metadata for other datasets
+brand:wikipedia,Metadata for other datasets
+breezeway,other
+bridge,bridges
+bridge:alt_name,bridges
+bridge:colour,bridges
+bridge:descr,bridges
+bridge:description,bridges
+bridge:historic,bridges
+bridge:id,bridges
+bridge:loc_name,bridges
+bridge:material,bridges
+bridge:movable,bridges
+bridge:name,bridges
+bridge:name:en,bridges
+bridge:name:etymology,bridges
+bridge:name:etymology:wikidata,bridges
+bridge:official_name,bridges
+bridge:old_name,bridges
+bridge:ref,bridges
+bridge:source,sources for metadata
+bridge:start_date,bridges
+bridge:structure,bridges
+bridge:type,bridges
+bridge_1,bridges
+bridge_descr,bridges
+bridge_height,bridges
+bridge_milestone,bridges
+bridge_name,bridges
+bridge_number,bridges
+bridge_ref,bridges
+bridge_type,bridges
+builder,other
+building,other
+building:colour,other
+building:levels,other
+building:material,other
+building:part,other
+building:shape,other
+building:type,other
+building:units,other
+building:use:retail,other
+building:year_built,other
+built,other
+bus,bus
+bus:backward,bus
+bus:conditional,bus
+bus:forward,bus
+bus:lanes,bus
+bus:lanes:backward,bus
+bus:lanes:both_ways,bus
+bus:lanes:conditional,bus
+bus:lanes:forward,bus
+bus:lanes:forward:conditional,bus
+bus:toll,bus
+bus_bay,bus
+bus_bay:left:access,bus
+bus_bay:left:bus,bus
+bus_bay:right,bus
+bus_bay:right:access,bus
+bus_ref,bus
+bus_route,bus
+buses,bus
+busway,bus
+busway:both,bus
+busway:conditional,bus
+busway:forward,bus
+busway:left,bus
+busway:right,bus
+busway:right:conditional,bus
+cables,other
+caltrans:district,other
+caltrans:dynsegpm,other
+caltrans:type,other
+camel,other
+camera:mount,other
+camera:type,other
+cancelled_ref,other
+canoe,other
+capacity,other
+capacity:beast,other
+capacity:cow,other
+capacity:disabled,other
+capacity:horse,other
+capacity:mule,other
+car,other
+car_repair,other
+caravan,other
+caravan:forward,other
+caravan:lanes,lanes
+caravans,other
+carriage,other
+cartpath,other
+category,other
+causeway,other
+caution,other
+ccfc,other
+census:population,other
+center_stripe,other
+center_turn_lane,turns
+centre_turn_lane,turns
+centre_turning_lane,turns
+centreline,other
+cfcc,other
+change,other
+change:backward,other
+change:both_ways,other
+change:forward,other
+change:lanes,lanes
+change:lanes:backward,lanes
+change:lanes:both_ways,lanes
+change:lanes:bus,lanes
+change:lanes:forward,lanes
+changing_table,other
+charge,other
+check_date,other
+check_date:access,other
+check_date:cycleway,other
+check_date:lit,other
+check_date:surface,basic (detailed)
+checkname,names
+chicago:building_id,other
+circumference,other
+city,other
+class:bicycle,bicycle
+class:justification,other
+class:justify,other
+clearance,other
+clopin:id,other
+clopin:route,other
+close_street,other
+closed,other
+cnt_name,names
+coach,other
+colonnade:left,other
+colonnade:right,other
+colour,other
+comment,other
+comment:name,names
+comment_2,other
+common_name,names
+communication,other
+community_centre,other
+concrete,other
+condition,other
+constructed_by,other
+construction,life_cycle
+construction:bridge,life_cycle
+construction:centre_turn_lane,life_cycle
+construction:cycleway,life_cycle
+construction:date,life_cycle
+construction:destination,life_cycle
+construction:destination:forward,life_cycle
+construction:destination:lanes,life_cycle
+construction:destination:lanes:backward,life_cycle
+construction:destination:lanes:forward,life_cycle
+construction:destination:ref,life_cycle
+construction:destination:ref:lanes,life_cycle
+construction:destination:ref:lanes:backward,life_cycle
+construction:destination:ref:lanes:forward,life_cycle
+construction:destination:ref:to,life_cycle
+construction:destination:ref:to:forward,life_cycle
+construction:destination:ref:to:lanes,life_cycle
+construction:destination:street,life_cycle
+construction:destination:street:lanes,life_cycle
+construction:destination:street:to,life_cycle
+construction:destination:street:to:lanes,life_cycle
+construction:expressway,life_cycle
+construction:hgv:lanes,life_cycle
+construction:highway,life_cycle
+construction:lanes,life_cycle
+construction:lanes:backward,life_cycle
+construction:lanes:both_ways,life_cycle
+construction:lanes:forward,life_cycle
+construction:maxspeed,speed limits
+construction:maxspeed:type,speed limits
+construction:name,life_cycle
+construction:oneway,life_cycle
+construction:ref,life_cycle
+construction:sidewalk,pedestrian
+construction:source,sources for metadata
+construction:start_date,life_cycle
+construction:surface,life_cycle
+construction:trailer:lanes,life_cycle
+construction:turn:lanes,turns
+construction:turn:lanes:backward,turns
+construction:turn:lanes:both_ways,turns
+construction:turn:lanes:forward,turns
+construction:website,life_cycle
+construction:website_2,life_cycle
+construction_date,other
+construction_end_expected,other
+construction_start,other
+construction_time,other
+construction_year,other
+contact,other
+contact:facebook,other
+contact:phone,other
+contact:website,other
+content,other
+conveying,other
+cooperative,other
+cosmha,other
+county,address
+cover,other
+covered,other
+covered:lanes,lanes
+crane:type,other
+created_by,other
+crop,other
+cross_country_ski,winter
+crossing,basic
+crossing:island,basic (detailed)
+crossing:light,basic (detailed)
+crossing_ref,other
+ctran:reviewed,other
+cuisine,other
+curve,other
+curve:name,names
+curve_geometry,other
+cutline,other
+cutting,other
+cutting:name,names
+cycle,bicycle
+cycle_network,bicycle
+cyclerating,other
+cyclestreet,other
+cycleway,bicycle
+cycleway:backward,bicycle
+cycleway:bicycle,bicycle
+cycleway:both,bicycle
+cycleway:both:buffer,bicycle
+cycleway:both:lane,bicycle
+cycleway:both:oneway,bicycle
+cycleway:both:segregated,bicycle
+cycleway:both:width,bicycle
+cycleway:buffer,bicycle
+cycleway:buffer:left,bicycle
+cycleway:buffer:right,bicycle
+cycleway:center,bicycle
+cycleway:colour,bicycle
+cycleway:direction,bicycle
+cycleway:est_width,bicycle
+cycleway:foot,bicycle
+cycleway:forward,bicycle
+cycleway:golf_cart,bicycle
+cycleway:lane,bicycle
+cycleway:lane:backward,bicycle
+cycleway:lane:buffer,bicycle
+cycleway:lane:forward,bicycle
+cycleway:lane:width,bicycle
+cycleway:lanes,bicycle
+cycleway:lanes:backward,bicycle
+cycleway:lanes:forward,bicycle
+cycleway:left,bicycle
+cycleway:left:bicycle,bicycle
+cycleway:left:buffer,bicycle
+cycleway:left:colour,bicycle
+cycleway:left:foot,bicycle
+cycleway:left:lane,bicycle
+cycleway:left:lanes,bicycle
+cycleway:left:name,bicycle
+cycleway:left:oneway,bicycle
+cycleway:left:segregated,bicycle
+cycleway:left:separation:right,bicycle
+cycleway:left:surface,bicycle
+cycleway:left:track,bicycle
+cycleway:left:width,bicycle
+cycleway:left_1,bicycle
+cycleway:official,bicycle
+cycleway:proposed,bicycle
+cycleway:right,bicycle
+cycleway:right:bicycle,bicycle
+cycleway:right:buffer,bicycle
+cycleway:right:buffer:right,bicycle
+cycleway:right:colour,bicycle
+cycleway:right:foot,bicycle
+cycleway:right:lane,bicycle
+cycleway:right:oneway,bicycle
+cycleway:right:segregated,bicycle
+cycleway:right:surface,bicycle
+cycleway:right:track,bicycle
+cycleway:right:width,bicycle
+cycleway:right_1,bicycle
+cycleway:separation,bicycle
+cycleway:smoothness,bicycle
+cycleway:source,bicycle
+cycleway:surface,bicycle
+cycleway:track,bicycle
+cycleway:width,bicycle
+cycleway_1,bicycle
+damage:event,other
+danger,other
+danger_1,other
+date,other
+date_off,other
+date_on,other
+day_off,other
+day_on,other
+day_on:bicycle,bicycle
+day_on:motor_vehicle,other
+daytime_headlinghts,other
+ddd,other
+delivery,other
+demolished,life_cycle
+demolished:highway,life_cycle
+denomination,other
+denomination:ref,other
+denotation,other
+departures_board,other
+depth,other
+descent,other
+description,other
+description:en,other
+description:ref,other
+description:restriction,other
+description:street,other
+description_1,other
+description_2,other
+description_3,other
+design,other
+designation,other
+destination,destination
+destination:arrow:lanes,lanes
+destination:backward,destination
+destination:both_ways,destination
+destination:colour,destination
+destination:colour:backward,destination
+destination:colour:forward,destination
+destination:colour:lanes,lanes
+destination:colour:ref,destination
+destination:distance,destination
+destination:distance:forward,destination
+destination:distance:lanes,lanes
+destination:distance:lanes:forward,lanes
+destination:forward,destination
+destination:lanes,lanes
+destination:lanes:backward,lanes
+destination:lanes:conditional,lanes
+destination:lanes:forward,lanes
+destination:lang:fr,destination
+destination:left,destination
+destination:loc_ref,destination
+destination:name,names
+destination:pronunciation,destination
+destination:pronunciation:backward,destination
+destination:pronunciation:lanes,lanes
+destination:ref,destination
+destination:ref:backward,destination
+destination:ref:forward,destination
+destination:ref:forward:wikidata,Metadata for other datasets
+destination:ref:lanes,lanes
+destination:ref:lanes:backward,lanes
+destination:ref:lanes:forward,lanes
+destination:ref:left,destination
+destination:ref:to,destination
+destination:ref:to:backward,destination
+destination:ref:to:forward,destination
+destination:ref:to:lanes,lanes
+destination:ref:to:lanes:backward,lanes
+destination:ref:to:lanes:forward,lanes
+destination:ref:to:wikidata,Metadata for other datasets
+destination:ref:to:wikidata:backward,Metadata for other datasets
+destination:ref:to:wikidata:forward,Metadata for other datasets
+destination:ref:to:wikidata:lanes,Metadata for other datasets
+destination:ref:to:wikidata:lanes:backward,Metadata for other datasets
+destination:ref:wikidata,Metadata for other datasets
+destination:ref:wikidata:backward,Metadata for other datasets
+destination:ref:wikidata:forward,Metadata for other datasets
+destination:ref:wikidata:lanes,Metadata for other datasets
+destination:ref:wikidata:lanes:backward,Metadata for other datasets
+destination:ref:wikidata:lanes:forward,Metadata for other datasets
+destination:right,destination
+destination:sign,destination
+destination:street,destination
+destination:street:backward,destination
+destination:street:forward,destination
+destination:street:lanes,lanes
+destination:street:lanes:backward,lanes
+destination:street:lanes:forward,lanes
+destination:street:ref,destination
+destination:street:to,destination
+destination:street:to:backward,destination
+destination:street:to:forward,destination
+destination:street:to:lanes,lanes
+destination:symbol,destination
+destination:symbol:backward,destination
+destination:symbol:forward,destination
+destination:symbol:lanes,lanes
+destination:symbol:lanes:backward,lanes
+destination:symbol:lanes:forward,lanes
+destination:symbol:to,destination
+destination:symbol:to:lanes,lanes
+destination:to,destination
+destination:to:backward,destination
+destination:to:forward,destination
+destination:to:lanes,lanes
+destination:toll:lanes,lanes
+destination:unsigned,destination
+destination:unsigned_ref,destination
+destination:via,destination
+destination:wikidata,Metadata for other datasets
+destination_1,destination
+destination_backward,destination
+destroyed,life_cycle
+destroyed:bridge,life_cycle
+destroyed:bridge:name,life_cycle
+destroyed:highway,life_cycle
+diet:halal,other
+direction,other
+direction:backward,other
+direction:forward,other
+direction_part_of_name,names
+directions,other
+dirt,other
+dirtbike,bicycle
+dirtbike:scale,bicycle
+disabled,other
+dismount,other
+dispensing,other
+distance,other
+distinatinon_forward,other
+disused,life_cycle
+disused:aeroway,life_cycle
+disused:aeroway:ref,life_cycle
+disused:amenity,life_cycle
+disused:bicycle,life_cycle
+disused:change,life_cycle
+disused:cycleway,life_cycle
+disused:destination,life_cycle
+disused:destination:ref,life_cycle
+disused:destination:ref:wikidata,life_cycle
+disused:foot,life_cycle
+disused:hgv,life_cycle
+disused:hgv:national_network,life_cycle
+disused:highway,life_cycle
+disused:lanes,life_cycle
+disused:name,life_cycle
+disused:name2,life_cycle
+disused:oneway,life_cycle
+disused:railway,life_cycle
+disused:ref,life_cycle
+disused:turn:lanes,life_cycle
+disused:wikidata,life_cycle
+divided,other
+divider,other
+dog,other
+dog_sled,other
+dogs,other
+drain,other
+drainagetype,other
+drinking_water,other
+drive,other
+drive_in,other
+drive_through,other
+driveway,other
+driving_side,basic
+dual_carriage,other
+dual_carriageway,other
+eef,other
+ele,other
+ele:ft,other
+electrified,other
+elementary_school_district,other
+email,other
+embankment,other
+embedded_rails,lanes
+embedded_rails:lanes:backward,lanes
+embedded_rails:lanes:forward,lanes
+emergency,basic
+emergency:both_ways,other
+emergency:lanes:both_ways,lanes
+emergency:lanes:forward,lanes
+emergency_access,other
+emergency_vehicles,other
+employee,other
+end_date,other
+end_date:name,names
+end_date:railway,other
+engine_brake,other
+entrance,other
+erroneous_name,names
+escape:type,other
+esperanto,other
+est_maxheight,other limits
+est_width,other
+etymology,names
+evacuation_route,other
+evacuation_route:type,other
+except,other
+exclusive,other
+exit,other
+exit:road_ref,other
+exit_to,other
+expressway,other
+f_name,names
+facebook,other
+facility,other
+facility_type,other
+FALSE,other
+fast_food,other
+fax,other
+fcdot:cfcc,Metadata for other datasets
+fcdot:data_source,Metadata for other datasets
+fcdot:effective_date,Metadata for other datasets
+fcdot:fairfax_class,Metadata for other datasets
+fcdot:last_update,Metadata for other datasets
+fdot:county,Metadata for other datasets
+fdot:fihs,Metadata for other datasets
+fdot:rci_section,Metadata for other datasets
+fdot:ref,Metadata for other datasets
+fdot:sis,Metadata for other datasets
+fee,tolls
+fee:motor_vehicle,tolls
+female,other
+fence,other
+fence_type,other
+fetype,other
+fine:capacity:beast,other
+fine:capacity:cow,other
+fine:capacity:horse,other
+fine:capacity:mule,other
+fine:maxspeed:beast,speed limits
+fine:maxspeed:cow,speed limits
+fine:maxspeed:horse,speed limits
+fine:maxspeed:mule,speed limits
+finish,other
+fire_hydrant:position,other
+fire_hydrant:type,other
+fire_path,other
+fishing,other
+flashing_lights,other
+fldot:roadwayid,other
+floating,other
+flood_prone,other
+foobar,other
+foot,pedestrian
+foot:conditional,pedestrian
+foot:forward,pedestrian
+foot:left,pedestrian
+foot:right,pedestrian
+footway,pedestrian
+footway:right,pedestrian
+ford,basic
+ford:intermittent,basic
+forestry,other
+former:name,names
+former:ref,other
+fraddl,other
+fraddr,other
+frequency,other
+fromFeatur,other
+from_address_left,address
+from_address_left_1,address
+from_address_left_2,address
+from_address_left_3,address
+from_address_right,address
+from_address_right_1,address
+from_address_right_2,address
+frontage,other
+frontage_road,other
+fuel:diesel,other
+full_name,names
+fut_destination,other
+fut_destination:ref,other
+fut_highway,other
+fut_lanes,lanes
+fut_maxspeed,speed limits
+fut_name,names
+fut_name:etymology,names
+fut_name:etymology:wikidata,Metadata for other datasets
+fut_ref,other
+fut_ref:penndot,other
+future:destination,other
+future:destination:ref,other
+future:wikidata,Metadata for other datasets
+future_name,names
+future_ref,other
+garmin:road_class,other
+garmin_road_class,other
+gas,other
+gate,other
+gatech:PRKG_NUM,other
+gated_community,other
+gauge,other
+gdot:grip,other
+general,other
+generator:method,other
+generator:output:electricity,other
+generator:source,sources for metadata
+generator:type,other
+geobase:acquisitionTechnique,other
+geobase:datasetName,names
+geobase:routeName1:en,names
+geobase:uuid,other
+gid,other
+gnis:County,Metadata for other datasets
+gnis:county_id,Metadata for other datasets
+gnis:county_name,names
+gnis:created,Metadata for other datasets
+gnis:fcode,Metadata for other datasets
+gnis:feature_id,Metadata for other datasets
+gnis:ftype,Metadata for other datasets
+gnis:id,Metadata for other datasets
+gnis:import_uuid,Metadata for other datasets
+gnis:reviewed,Metadata for other datasets
+gnis:state_id,Metadata for other datasets
+golf,other
+golf:adjacent,other
+golf_cart,other
+golf_cart:both,other
+golf_cart:lanes,lanes
+golf_cart:right,other
+goods,other
+goods:backward,other
+goods:conditional,other
+goods:forward,other
+goods:maxweight,other limits
+gosm:sig:8CBDE645,other
+gracias,other
+grades,other
+gradient,other
+gravel,other
+greenway,other
+gritting,other
+gritting_operator,other
+gtfs:dataset_id,other
+gtfs:stop_id,other
+gtfs_id,other
+guage,other
+gwv,other
+gym,other
+handicap,pedestrian
+handicapped,pedestrian
+handicapped_accessible,pedestrian
+handrail,other
+hazard,hazards and goods transportation
+hazard:backward,hazards and goods transportation
+hazard:bicycle,hazards and goods transportation
+hazard:forward,hazards and goods transportation
+hazard_prone,hazards and goods transportation
+hazard_type,hazards and goods transportation
+hazmat,hazards and goods transportation
+hazmat:0,hazards and goods transportation
+hazmat:1,hazards and goods transportation
+hazmat:1.1,hazards and goods transportation
+hazmat:1.2,hazards and goods transportation
+hazmat:1.3,hazards and goods transportation
+hazmat:1:conditional,hazards and goods transportation
+hazmat:2,hazards and goods transportation
+hazmat:2.1,hazards and goods transportation
+hazmat:2.1:conditional,hazards and goods transportation
+hazmat:3,hazards and goods transportation
+hazmat:4,hazards and goods transportation
+hazmat:5.2,hazards and goods transportation
+hazmat:6.1,hazards and goods transportation
+hazmat:6.1:conditional,hazards and goods transportation
+hazmat:lanes,lanes
+hazmat:ox,hazards and goods transportation
+headlight,other
+healthcare,other
+heated,other
+height,other
+height_restriction,other
+heritage,other
+heritage:name,names
+heritage:operator,other
+heritage:since,other
+heritage:website,other
+hgih,other
+hgv,hazards and goods transportation
+hgv:backward,hazards and goods transportation
+hgv:conditional,hazards and goods transportation
+hgv:forward,hazards and goods transportation
+hgv:hour_off,hazards and goods transportation
+hgv:hour_on,hazards and goods transportation
+hgv:lanes,lanes
+hgv:lanes:backward,lanes
+hgv:lanes:forward,lanes
+hgv:minaxles,hazards and goods transportation
+hgv:minlength,other limits
+hgv:minweight,hazards and goods transportation
+hgv:nation,hazards and goods transportation
+hgv:national_network,hazards and goods transportation
+hgv:night,hazards and goods transportation
+hgv:note,hazards and goods transportation
+hgv:state_network,hazards and goods transportation
+hgv:tandem,hazards and goods transportation
+hgv_1,hazards and goods transportation
+hgv_articulated,hazards and goods transportation
+hgv_articulated:conditional,hazards and goods transportation
+hide,other
+highspeed,speed limits
+highway:category:pl,other
+highway:demolished,life_cycle
+highway:historical,other
+highway:lanes,lanes
+highway:note,other
+highway:parking,parking
+highway:proposed,life_cycle
+highway:source,sources for metadata
+highway_1,other
+highway_2,other
+highway_3,other
+highway_authority_ref,other
+highways_england:area,other
+hiking,pedestrian
+hint,other
+hire,other
+hiser,other
+hist_ref,other
+historic,other
+historic:aeroway,other
+historic:end_date,other
+historic:gauge,other
+historic:highway,other
+historic:maxspeed,speed limits
+historic:name,names
+historic:operator,other
+historic:railway,other
+historic:ref,other
+historic:service,other
+historic:start_date,other
+historic_name,names
+historical,other
+historical_name,names
+hiu,other
+hmv,other
+honorary_name,names
+horse,other
+horse:advisory,other
+horse:conditional,other
+horse:forward,other
+horse_scale,other
+horse_trailer,other
+hospital,other
+hot,other
+hotel,other
+hour_off,other
+hour_on,other
+hours:hgv,other
+house,other
+hov,other
+hov:backward:conditional,other
+hov:conditional,other
+hov:forward,other
+hov:forward:conditional,other
+hov:lanes,lanes
+hov:lanes:backward,lanes
+hov:lanes:conditional,lanes
+hov:lanes:forward,lanes
+hov:minimum,other limits
+hov:minimum:lanes,lanes
+hov:minpeople,other limits
+hov:toll,tolls
+hundred:block,other
+hundred:direction,other
+ice_road,winter
+id,other
+iis,other
+image,other
+image_direction,other
+imagery_used,other
+impassable,other
+implicit,other
+import,other
+import_source,other
+importuuid,other
+in_a_junction,other
+in_service,other
+incline,basic
+incomplete,other
+indoor,other
+industrial,other
+informal,other
+information,other
+injunction,other
+inline_skates,other
+inline_skates:conditional,other
+inscription,other
+inside,other
+int_name,names
+int_ref,other
+intermittent,other
+internet_access,other
+internet_access:fee,other
+internet_access:operator,other
+internet_access:ssid,other
+intersection,other
+is,other
+is_in,address
+is_in:borough,address
+is_in:city,address
+is_in:country,address
+is_in:country_code,address
+is_in:county,address
+is_in:hamlet,address
+is_in:iso_3166_2,address
+is_in:locality,address
+is_in:micronation,address
+is_in:municipality,address
+is_in:neighbourhood,address
+is_in:postal_code,address
+is_in:province,address
+is_in:state,address
+is_in:state_code,address
+is_in:subdivision,address
+is_in:suburb,address
+is_in:town,address
+is_in:township,address
+is_in:village,address
+islet,other
+jams,other
+jumping,other
+junction,basic
+junction:fut_ref,basic (detailed)
+junction:name,names
+junction:name:lanes,names
+junction:noname,names
+junction:noref,basic (detailed)
+junction:old_ref,basic (detailed)
+junction:ref,basic (detailed)
+junction:ref:backward,basic (detailed)
+junction:ref:forward,basic (detailed)
+junction:ref:lanes,lanes
+junction:unsigned_ref,basic (detailed)
+junction_ref,basic (detailed)
+keep_clear,other
+kerb,other
+kerb:both,other
+kern:Comb_Zn,other
+kern:Zn_Cd1,other
+key,other
+kudish,other
+lacounty:ain,other
+lacounty:bld_id,other
+landmark,other
+landuse,other
+lane,lanes
+lane:parking:both,lanes
+lane:parking:left,lanes
+lane:parking:right,lanes
+lane_markings,lanes
+lane_markings:forward,lanes
+lanes,lanes
+lanes:backward,lanes
+lanes:backward:conditional,lanes
+lanes:bicycle,lanes
+lanes:bicycle:backward,lanes
+lanes:bicycle:forward,lanes
+lanes:both,lanes
+lanes:both_ways,lanes
+lanes:bus,lanes
+lanes:bus:backward,lanes
+lanes:bus:conditional,lanes
+lanes:bus:forward,lanes
+lanes:check_date,lanes
+lanes:conditional,lanes
+lanes:counterflow,lanes
+lanes:direction,lanes
+lanes:directions,lanes
+lanes:extra,lanes
+lanes:for,lanes
+lanes:forward,lanes
+lanes:forward:conditional,lanes
+lanes:future,lanes
+lanes:hgv,lanes
+lanes:hov,lanes
+lanes:hov:conditional,lanes
+lanes:left,lanes
+lanes:marked,lanes
+lanes:marked:backward,lanes
+lanes:merge,lanes
+lanes:note,lanes
+lanes:parking,lanes
+lanes:permanant,lanes
+lanes:psv,lanes
+lanes:psv:backward,lanes
+lanes:psv:conditional,lanes
+lanes:psv:forward,lanes
+lanes:reversible,lanes
+lanes:right,lanes
+lanes:source,lanes
+lanes:taxi,lanes
+lanes:turn,lanes
+lanes:turning,lanes
+lanes:turnleft,lanes
+lanes:turnright,lanes
+lanes:unmarked,lanes
+lanes:width,lanes
+last_edi_1,other
+last_edite,other
+last_updat,other
+lastcheck,other
+latitude,other
+lay,other
+layer,other
+layer_1,other
+lbcs:activity:code,other
+lbcs:activity:name,names
+lbcs:function:code,other
+lbcs:function:name,names
+lcn,other
+lcn_ref,other
+lcn_type,other
+leaf_cycle,other
+leaf_type,other
+left:county,address
+left:street_number:interpolation,address
+legislation,other
+legislation:hgv,hazards and goods transportation
+leisure,other
+length,other
+length_mi,other
+level,other
+lgv,other
+lhv,other
+lighted,other
+line,other
+linearid,other
+lines,other
+link,other
+lit,basic
+lit_1,basic (detailed)
+lit_by_gaslight,basic (detailed)
+living_street,other
+loc,other
+loc_name,names
+loc_name:vi,names
+loc_name_1,names
+loc_name_2,names
+loc_name_3,names
+loc_ref,other
+local:wfpd,other
+local_name,names
+local_ref,other
+locale,other
+localwiki,Metadata for other datasets
+location,other
+lockable,other
+long_name,names
+longitude,other
+lqnes:hov,other
+lwn,other
+maintained,other
+maintenance,other
+male,other
+man_made,other
+map,other
+mapillary,other
+mapwithai:source,sources for metadata
+marine,other
+maritime,other
+marked,other
+marked_trail,other
+marking,other
+marking:cycleway,other
+masa,other
+massgis:ARTICLE97,Metadata for other datasets
+massgis:ASSESS_ACR,Metadata for other datasets
+massgis:ATT_DATE,Metadata for other datasets
+massgis:DCAM_ID,Metadata for other datasets
+massgis:DEED_ACRES,Metadata for other datasets
+massgis:EOEAINVOLV,Metadata for other datasets
+massgis:FEESYM,Metadata for other datasets
+massgis:FEE_OWNER,Metadata for other datasets
+massgis:FY_FUNDING,Metadata for other datasets
+massgis:LEV_PROT,Metadata for other datasets
+massgis:OS_DEED_BO,Metadata for other datasets
+massgis:OS_DEED_PA,Metadata for other datasets
+massgis:OS_ID,Metadata for other datasets
+massgis:OWNER_ABRV,Metadata for other datasets
+massgis:OWNER_TYPE,Metadata for other datasets
+massgis:POLY_ID,Metadata for other datasets
+massgis:PRIM_PURP,Metadata for other datasets
+massgis:PUB_ACCESS,Metadata for other datasets
+massgis:SITE_NAME,Metadata for other datasets
+massgis:TOWN_ID,Metadata for other datasets
+massgis:ref,Metadata for other datasets
+massgis:way_id,Metadata for other datasets
+material,other
+max,other limits
+maxaxleload,other limits
+maxaxles,other limits
+maxbogieweight,other limits
+maxcyclewidth,other limits
+maxgcweight,other limits
+maxgcweightrating,other limits
+maxheight,other limits
+maxheight:CDOT,other limits
+maxheight:backward,other limits
+maxheight:check_date,other limits
+maxheight:conditional,other limits
+maxheight:forward,other limits
+maxheight:lane,lanes
+maxheight:lanes,lanes
+maxheight:lanes:backward,lanes
+maxheight:lanes:forward,lanes
+maxheight:left,other limits
+maxheight:note,other limits
+maxheight:physical,other limits
+maxheight:physical:backward,other limits
+maxheight:physical:forward,other limits
+maxheight:right,other limits
+maxheight:shoulder:right,other limits
+maxheight:source,sources for metadata
+maxlength,other limits
+maxlength:hgv,other limits
+maxlength:hgv_articulated,other limits
+maxlength:trailer,other limits
+maxspeed,speed limits
+maxspeed:advised,speed limits
+maxspeed:advisory,speed limits
+maxspeed:advisory:backward,speed limits
+maxspeed:advisory:conditional,speed limits
+maxspeed:advisory:forward,speed limits
+maxspeed:advisory:type,speed limits
+maxspeed:atv,speed limits
+maxspeed:backward,speed limits
+maxspeed:backward:conditional,speed limits
+maxspeed:beast,speed limits
+maxspeed:bicycle,speed limits
+maxspeed:bus,speed limits
+maxspeed:children_present,speed limits
+maxspeed:children_present:forward,speed limits
+maxspeed:conditional,speed limits
+maxspeed:cow,speed limits
+maxspeed:design,speed limits
+maxspeed:forward,speed limits
+maxspeed:forward:conditional,speed limits
+maxspeed:goods,speed limits
+maxspeed:hgv,speed limits
+maxspeed:hgv:advisory,speed limits
+maxspeed:hgv:backward,speed limits
+maxspeed:hgv:conditional,speed limits
+maxspeed:hgv:forward,speed limits
+maxspeed:horse,speed limits
+maxspeed:lanes,speed limits
+maxspeed:lanes:backward,speed limits
+maxspeed:lanes:forward,speed limits
+maxspeed:motor_vehicle:conditional,speed limits
+maxspeed:mule,speed limits
+maxspeed:night,speed limits
+maxspeed:note,speed limits
+maxspeed:permanent,speed limits
+maxspeed:practical,speed limits
+maxspeed:psv,speed limits
+maxspeed:recommended,speed limits
+maxspeed:restriction,speed limits
+maxspeed:school,speed limits
+maxspeed:school_days,speed limits
+maxspeed:school_zone,speed limits
+maxspeed:snowmobile,speed limits
+maxspeed:source,sources for metadata
+maxspeed:suggested,speed limits
+maxspeed:tank,speed limits
+maxspeed:towing,speed limits
+maxspeed:trailer,speed limits
+maxspeed:truck,speed limits
+maxspeed:truck:night,speed limits
+maxspeed:type,speed limits
+maxspeed:type:advisory,speed limits
+maxspeed:typical,speed limits
+maxspeed:variable,speed limits
+maxspeed:variable:backward,speed limits
+maxspeed:variable:forward,speed limits
+maxspeed:variable:max,speed limits
+maxspeed:wet,speed limits
+maxspeed:winter,speed limits
+maxspeed_1,speed limits
+maxstay,other limits
+maxstay:conditional,other limits
+maxunladenweight,other limits
+maxunladenweight:conditional,other limits
+maxweight,other limits
+maxweight:backward,other limits
+maxweight:backward:conditional,other limits
+maxweight:combination,other limits
+maxweight:combinations,other limits
+maxweight:conditional,other limits
+maxweight:description,other limits
+maxweight:emergency,other limits
+maxweight:emergency:conditional,other limits
+maxweight:goods,other limits
+maxweight:hazmat,other limits
+maxweight:hgv,other limits
+maxweight:hgv:conditional,other limits
+maxweight:hgv_articulated,other limits
+maxweight:hgv_articulated:conditional,other limits
+maxweight:lanes,lanes
+maxweight:note,other limits
+maxweight:other,other limits
+maxweight:relative,other limits
+maxweight:relative:conditional,other limits
+maxweight:signed,other limits
+maxweight:single,other limits
+maxweight:source,sources for metadata
+maxweight:start_date,other limits
+maxweight:tandem,other limits
+maxweightrating,other limits
+maxweightrating:hgv,other limits
+maxweightrating:lanes,lanes
+maxwidth,other limits
+maxwidth:physical,other limits
+mdt_base_route,other
+median,other
+mediantype,other
+memorial_name,names
+meta:id,other
+meta:lastEdit,other
+metal_tread,other
+metcouncil:fun_class,other
+midnr:bas_id,other
+mileage:state,address
+milepost:county,address
+milepost:state,address
+military,other
+min_height,other limits
+mincyclewidth,other limits
+mindistance:hgv,other limits
+minibus,bus
+minpassengers,other limits
+minsk_PT,other
+minspeed,speed limits
+minspeed:advisory,speed limits
+minspeed:backward,speed limits
+minspeed:lanes,speed limits
+minspeed:type,speed limits
+minspeed:variable,speed limits
+minspeed:winter,speed limits
+minweight:hgv,other limits
+minwidthcycle,other limits
+mndnr:collector,other
+mndnr:sht_type,other
+modifier,other
+mofa,other
+mooring,other
+moped,other
+morpc:tp,other
+mortalk,other
+moto,other
+motor_vehicle,other
+motor_vehicle:backward,other
+motor_vehicle:conditional,other
+motor_vehicle:covid19,other
+motor_vehicle:forward,other
+motor_vehicle:forward:conditional,other
+motor_vehicle:lanes,lanes
+motor_vehicle:lanes:backward,lanes
+motor_vehicle:lanes:both_ways,lanes
+motor_vehicle:lanes:conditional,lanes
+motor_vehicle:lanes:forward,lanes
+motor_vehicle:note,other
+motor_vehicle:winter,winter
+motorcar,other
+motorcar:backward,other
+motorcar:lanes,lanes
+motorcar:lanes:forward,lanes
+motorcar:toll,tolls
+motorcycle,other
+motorcycle:conditional,other
+motorcycle:lanes,lanes
+motorcycle:lanes:backward,lanes
+motorcycle:lanes:conditional,lanes
+motorhome,other
+motorhome:lanes,lanes
+motorhome:lanes:backward,lanes
+motorhome:lanes:forward,lanes
+motorroad,basic
+motorroad:backward,basic (detailed)
+motorway,other
+motorway:ref,other
+motorway_link,other
+mountain_pass,other
+movable,other
+mph,other
+mrosd:point_of_interest,other
+mrosd:preserve,other
+mrosd:version,other
+mtb,bicycle
+mtb:description,bicycle
+mtb:name,names
+mtb:scale,bicycle
+mtb:scale:imba,bicycle
+mtb:scale:uphill,bicycle
+mtb:type,bicycle
+mtfcc,other
+nam,other
+name,names
+name1,names
+name2,names
+name:1,names
+name:2,names
+name:ODOT,names
+name:ab,names
+name:adot,names
+name:af,names
+name:alg,names
+name:alt,names
+name:alt2,names
+name:am,names
+name:ar,names
+name:az,names
+name:backward,names
+name:be,names
+name:bg,names
+name:bn,names
+name:botanical,names
+name:bridge,names
+name:ca,names
+name:chr,names
+name:co,names
+name:cs,names
+name:cy,names
+name:cycleway,names
+name:da,names
+name:de,names
+name:el,names
+name:en,names
+name:en:pronunciation,names
+name:eo,names
+name:es,names
+name:etymology,names
+name:etymology:es,names
+name:etymology:website,names
+name:etymology:wikidata,Metadata for other datasets
+name:etymology:wikipedia,Metadata for other datasets
+name:eu,names
+name:fa,names
+name:fi,names
+name:fil,names
+name:fixme,names
+name:forward,names
+name:fr,names
+name:full,names
+name:ga,names
+name:gd,names
+name:gl,names
+name:gu,names
+name:ha,names
+name:haw,names
+name:he,names
+name:hi,names
+name:historic,names
+name:historical,names
+name:hmn,names
+name:honorary,names
+name:hr,names
+name:hu,names
+name:hy,names
+name:id,names
+name:is,names
+name:it,names
+name:ja,names
+name:ja-Hira,names
+name:ja-Latn,names
+name:jv,names
+name:ka,names
+name:kk,names
+name:km,names
+name:kn,names
+name:ko,names
+name:ko-Latn,names
+name:lb,names
+name:left,names
+name:lo,names
+name:lt,names
+name:mez,names
+name:mk,names
+name:ml,names
+name:mn,names
+name:mr,names
+name:ms,names
+name:mt,names
+name:mus,names
+name:my,names
+name:ne,names
+name:nl,names
+name:no,names
+name:note,names
+name:nso,names
+name:oc,names
+name:old,names
+name:or,names
+name:pa,names
+name:pl,names
+name:prefix,names
+name:pronunciation,names
+name:pronunciation:backward,names
+name:pronunciation:forward,names
+name:pronunciation:left,names
+name:pronunciation:right,names
+name:ps,names
+name:pt,names
+name:railway,names
+name:right,names
+name:ro,names
+name:ru,names
+name:scenic,names
+name:sd,names
+name:si,names
+name:signed,names
+name:sk,names
+name:so,names
+name:source,sources for metadata
+name:source:date,sources for metadata
+name:sq,names
+name:sr,names
+name:sr-Latn,names
+name:statcan_rbuid,names
+name:street,names
+name:structure,names
+name:su,names
+name:suffix,names
+name:sv,names
+name:sw,names
+name:ta,names
+name:te,names
+name:th,names
+name:tr,names
+name:tt,names
+name:type,names
+name:ug,names
+name:uk,names
+name:unverified,names
+name:ur,names
+name:uz,names
+name:uz-Latn,names
+name:vi,names
+name:xh,names
+name:yi,names
+name:zh,names
+name:zh-Hans,names
+name:zh-Hant,names
+name:zh_pinyin,names
+name:zu,names
+name_,names
+name_1,names
+name_11,names
+name_1:forward,names
+name_1:full,names
+name_1:prefix,names
+name_1:source,sources for metadata
+name_1a,names
+name_2,names
+name_2:full,names
+name_2:prefix,names
+name_3,names
+name_3:full,names
+name_3:prefix,names
+name_4,names
+name_4:full,names
+name_4:prefix,names
+name_5,names
+name_6,names
+name_7,names
+name_alt,names
+name_base,names
+name_base_1,names
+name_direction,names
+name_direction_prefix,names
+name_direction_prefix_1,names
+name_direction_suffix,names
+name_direction_suffix_1,names
+name_en,names
+name_full,names
+name_left,names
+name_mem,names
+name_official,names
+name_old,names
+name_orig,names
+name_right,names
+name_type,names
+name_type_1,names
+nameop,names
+name๘ๅ,names
+naq,other
+narrow,other
+nat_name,names
+nat_name:en,names
+nat_name:fr,names
+nat_name_1,names
+nat_name_2,names
+nat_ref,other
+natural,other
+nbi:structure_number,Metadata for other datasets
+ncn,Metadata for other datasets
+ncn_ref,Metadata for other datasets
+nct_ref,Metadata for other datasets
+neighbh,other
+neighborhood,other
+network,other
+network:source,sources for metadata
+network:wikidata,Metadata for other datasets
+nev,other
+nfs:teton:OBJECTID,Metadata for other datasets
+nhd-shp:com_id,Metadata for other datasets
+nhd-shp:fdate,Metadata for other datasets
+nhd:com_id,Metadata for other datasets
+nhd:fdate,Metadata for other datasets
+nhd:reach_code,Metadata for other datasets
+nhs,Metadata for other datasets
+nht_ref,Metadata for other datasets
+nist:fips_code,Metadata for other datasets
+nist:state_fips,Metadata for other datasets
+no:highway,other
+no_parking,parking
+no_straight_on,other
+noe,other
+noexit,other
+noname,names
+noname_1,names
+noref,other
+not:destination,other
+not:destination:ref,other
+not:highway,other
+not:junction,basic (detailed)
+not:name,names
+not:name:etymology,names
+not:name:etymology:wikidata,Metadata for other datasets
+not:ref,other
+not:ref:source,other
+not:service,other
+not:turn:lanes,turns
+note,notes
+note1,notes
+note2,notes
+note:,notes
+note:1,notes
+note:2,notes
+note:TIGER,notes
+note:access,notes
+note:alt_name,names
+note:bicycle,notes
+note:bus,notes
+note:capacity,notes
+note:construction,life_cycle
+note:cycleway,notes
+note:cycleway:lane,lanes
+note:destination,notes
+note:destination:forward,notes
+note:destination:ref:to,notes
+note:en,notes
+note:foot,pedestrian
+note:hgv,notes
+note:highway,notes
+note:junction,notes
+note:lanes,notes
+note:lanes:backward,notes
+note:lanes:forward,notes
+note:lcn,notes
+note:lit,notes
+note:maxheight,notes
+note:maxspeed,notes
+note:maxspeed:variable,notes
+note:maxweight,notes
+note:maxwidth,notes
+note:name,names
+note:old_name,names
+note:old_railway_operator,life_cycle
+note:old_ref,notes
+note:old_ref:1945,notes
+note:old_ref:legislative,notes
+note:oneway,notes
+note:oneway:bicycle,notes
+note:operator,notes
+note:placement,notes
+note:proposed:lanes,life_cycle
+note:railway,notes
+note:rcn,notes
+note:ref,notes
+note:restriction,notes
+note:shared_lane,lanes
+note:shoulder,notes
+note:sidewalk,pedestrian
+note:smoothness,notes
+note:source,sources for metadata
+note:surface,notes
+note:toll,notes
+note:toll:hov,notes
+note:trolley_wire,notes
+note:tunnel,notes
+note:turn:lanes,turns
+note:turn:lanes:backward,turns
+note:unsigned_ref,notes
+note:wheelchair,notes
+note:width,notes
+note_1,notes
+note_2,notes
+note_ref,notes
+notes,notes
+nps:condition,Metadata for other datasets
+nps:length,Metadata for other datasets
+nps:pets,Metadata for other datasets
+nps:route_desc,Metadata for other datasets
+nps:trail,Metadata for other datasets
+nps:type,Metadata for other datasets
+nps:verified,Metadata for other datasets
+nrhp:criteria,Metadata for other datasets
+nrhp:inscription_date,Metadata for other datasets
+nrhp:nhl,Metadata for other datasets
+ntd_id,other
+number,other
+nursing,other
+nysdot_ref,Metadata for other datasets
+nysdot_sh_ref,Metadata for other datasets
+nysgissam:nysaddresspointid,Metadata for other datasets
+nysgissam:review,Metadata for other datasets
+oc_1926_road_bond_issue,other
+odbl,other
+odbl:note,other
+odot_ref,Metadata for other datasets
+office,other
+official_name,names
+official_name:etymology,names
+official_name:etymology:wikidata,Metadata for other datasets
+official_name:etymology:wikipedia,Metadata for other datasets
+official_name_1,names
+official_ref,other
+ohv,other
+oin,other
+ois,other
+old,life_cycle
+old:ref,life_cycle
+old:tiger:tlid,life_cycle
+old_adot_name,life_cycle
+old_atis_ref,life_cycle
+old_bridge_number,life_cycle
+old_highway,life_cycle
+old_leg_ref,life_cycle
+old_name,life_cycle
+old_name1,life_cycle
+old_name2,life_cycle
+old_name:-1969,life_cycle
+old_name:-1969-01-08,life_cycle
+old_name:-2012,life_cycle
+old_name:-2017,life_cycle
+old_name:-2020,life_cycle
+old_name:1,life_cycle
+old_name:1748,life_cycle
+old_name:1762,life_cycle
+old_name:1764,life_cycle
+old_name:1811-1879,life_cycle
+old_name:1811-1883,life_cycle
+old_name:1811-1928,life_cycle
+old_name:1830,life_cycle
+old_name:1838-196?,life_cycle
+old_name:1875-1895,life_cycle
+old_name:1879-1954,life_cycle
+old_name:1883-1928,life_cycle
+old_name:1915-1990,life_cycle
+old_name:1954-1957,life_cycle
+old_name:1992-1993,life_cycle
+old_name:2,life_cycle
+old_name:2011-2015,life_cycle
+old_name:2017-2019,life_cycle
+old_name:de,life_cycle
+old_name:en,life_cycle
+old_name:en:1807-1836,life_cycle
+old_name:en:1836-1850,life_cycle
+old_name:etymology,life_cycle
+old_name:etymology:wikidata,life_cycle
+old_name:prefix,life_cycle
+old_name:pronunciation,life_cycle
+old_name:railway,life_cycle
+old_name:ru,life_cycle
+old_name:source,life_cycle
+old_name:source:url,life_cycle
+old_name:source_ref,life_cycle
+old_name_1,life_cycle
+old_name_1:prefix,life_cycle
+old_name_2,life_cycle
+old_name_3,life_cycle
+old_nat_name,life_cycle
+old_ncn_ref,life_cycle
+old_nysdot_ref,life_cycle
+old_old_name,life_cycle
+old_operator,life_cycle
+old_postal_code,life_cycle
+old_railroad_operator,life_cycle
+old_railway,life_cycle
+old_railway_operator,life_cycle
+old_railway_operator_1,life_cycle
+old_rcn_ref,life_cycle
+old_ref,life_cycle
+old_ref1,life_cycle
+old_ref2,life_cycle
+old_ref:1923,life_cycle
+old_ref:1936,life_cycle
+old_ref:1945,life_cycle
+old_ref:fap,life_cycle
+old_ref:legislative,life_cycle
+old_ref:penndot,life_cycle
+old_ref:pre_1939,life_cycle
+old_ref:pre_1945,life_cycle
+old_ref_1,life_cycle
+old_ref_2,life_cycle
+old_ref_3,life_cycle
+old_ref_legislative,life_cycle
+old_reg_name,life_cycle
+old_source,life_cycle
+old_unsigned_ref,life_cycle
+oldref,life_cycle
+olf_ref:pre_2021,other
+one,other
+oneway,basic
+oneway:backward:conditional,basic (detailed)
+oneway:bicycle,basic (detailed)
+oneway:bus,basic (detailed)
+oneway:conditional,basic (detailed)
+oneway:covid19,basic (detailed)
+oneway:delivery,basic (detailed)
+oneway:destination,basic (detailed)
+oneway:emergency,basic (detailed)
+oneway:foot,pedestrian
+oneway:forward:conditional,basic (detailed)
+oneway:hgv,basic (detailed)
+oneway:horse,basic (detailed)
+oneway:lanes,lanes
+oneway:motor_vehicle,basic (detailed)
+oneway:psv,basic (detailed)
+oneway:source,sources for metadata
+oneway:source_ref,basic (detailed)
+oneway:taxi,basic (detailed)
+oneway:vehicle,basic (detailed)
+oneway_1,basic (detailed)
+oneway_type,basic (detailed)
+onr,other
+onw,other
+open,other
+open_date,other
+opened,other
+opening_date,other
+opening_hours,other
+opening_hours:covid19,other
+opening_hours:url,other
+oper,other
+operating,other
+operational_status,other
+operator,other
+operator:amenity,other
+operator:type,other
+operator:wikidata,Metadata for other datasets
+operator:wikidata_1,Metadata for other datasets
+orig_name,names
+orv,other
+osmarender:nameDirection,names
+other_name,names
+outdoor_living_room,other
+outdoor_seating,other
+overtaking,basic
+overtaking:backward,basic
+overtaking:both,basic
+overtaking:forward,basic
+owner,other
+owner:wikidata,Metadata for other datasets
+ownership,other
+p,other
+par,other
+park,other
+park:type,other
+park_ride,other
+park_type,other
+parking,parking
+parking lot,parking
+parking:both,parking
+parking:both:marked,parking
+parking:bothsides,parking
+parking:condition,parking
+parking:condition:2,parking
+parking:condition:both,parking
+parking:condition:both:2,parking
+parking:condition:both:2:maxstay,parking
+parking:condition:both:2:reason,parking
+parking:condition:both:2:time_interval,parking
+parking:condition:both:capacity,parking
+parking:condition:both:capacity:disabled,parking
+parking:condition:both:customers,parking
+parking:condition:both:default,parking
+parking:condition:both:default:maxstay,parking
+parking:condition:both:fee_per_hour,parking
+parking:condition:both:maxstay,parking
+parking:condition:both:reason,parking
+parking:condition:both:residents,parking
+parking:condition:both:time_interval,parking
+parking:condition:both:vehicles,parking
+parking:condition:capacity,parking
+parking:condition:left,parking
+parking:condition:left:2,parking
+parking:condition:left:2:maxstay,parking
+parking:condition:left:2:reason,parking
+parking:condition:left:2:residents,parking
+parking:condition:left:2:time_interval,parking
+parking:condition:left:3,parking
+parking:condition:left:3:maxstay,parking
+parking:condition:left:3:time_interval,parking
+parking:condition:left:capacity,parking
+parking:condition:left:capacity:disabled,parking
+parking:condition:left:customers,parking
+parking:condition:left:default,parking
+parking:condition:left:default:maxstay,parking
+parking:condition:left:fee_per_hour,parking
+parking:condition:left:maxsnow,parking
+parking:condition:left:maxstay,parking
+parking:condition:left:maxstay:conditional,parking
+parking:condition:left:reason,parking
+parking:condition:left:residents,parking
+parking:condition:left:time_interval,parking
+parking:condition:left:vehicles,parking
+parking:condition:maxstay,parking
+parking:condition:maxstay:both,parking
+parking:condition:right,parking
+parking:condition:right:10,parking
+parking:condition:right:10:related_law,parking
+parking:condition:right:10:residents,parking
+parking:condition:right:2,parking
+parking:condition:right:2:maxstay,parking
+parking:condition:right:2:reason,parking
+parking:condition:right:2:related_law,parking
+parking:condition:right:2:residents,parking
+parking:condition:right:2:time_interval,parking
+parking:condition:right:3,parking
+parking:condition:right:3:permit,parking
+parking:condition:right:3:related_law,parking
+parking:condition:right:3:time_interval,parking
+parking:condition:right:4,parking
+parking:condition:right:4:related_law,parking
+parking:condition:right:4:time_interval,parking
+parking:condition:right:5,parking
+parking:condition:right:5:maxstay,parking
+parking:condition:right:5:no_return,parking
+parking:condition:right:5:no_return:zone,parking
+parking:condition:right:5:related_law,parking
+parking:condition:right:5:time_interval,parking
+parking:condition:right:6,parking
+parking:condition:right:6:related_law,parking
+parking:condition:right:6:residents,parking
+parking:condition:right:7,parking
+parking:condition:right:7:related_law,parking
+parking:condition:right:8,parking
+parking:condition:right:8:maxstay,parking
+parking:condition:right:8:no_return,parking
+parking:condition:right:8:no_return:zone,parking
+parking:condition:right:8:related_law,parking
+parking:condition:right:8:time_interval,parking
+parking:condition:right:9,parking
+parking:condition:right:9:time_interval,parking
+parking:condition:right:capacity,parking
+parking:condition:right:capacity:disabled,parking
+parking:condition:right:customers,parking
+parking:condition:right:default,parking
+parking:condition:right:default:maxstay,parking
+parking:condition:right:fee_per_hour,parking
+parking:condition:right:maxstay,parking
+parking:condition:right:maxstay:conditional,parking
+parking:condition:right:reason,parking
+parking:condition:right:residents,parking
+parking:condition:right:time_interval,parking
+parking:condition:right:vehicles,parking
+parking:condition:side,parking
+parking:condition:time_interval,parking
+parking:fee,parking
+parking:lane,parking
+parking:lane:access,parking
+parking:lane:backward,parking
+parking:lane:both,parking
+parking:lane:both:2,parking
+parking:lane:both:capacity,parking
+parking:lane:both:diagonal,parking
+parking:lane:both:parallel,parking
+parking:lane:both:perpendicular,parking
+parking:lane:both:width,parking
+parking:lane:both_1,parking
+parking:lane:both_2,parking
+parking:lane:capacity,parking
+parking:lane:capacity:disabled,parking
+parking:lane:center,parking
+parking:lane:centre,parking
+parking:lane:forward,parking
+parking:lane:left,parking
+parking:lane:left:capacity,parking
+parking:lane:left:capacity:disabled,parking
+parking:lane:left:condition,parking
+parking:lane:left:conditional,parking
+parking:lane:left:diagonal,parking
+parking:lane:left:marked,parking
+parking:lane:left:parallel,parking
+parking:lane:left:perpendicular,parking
+parking:lane:left:surface,parking
+parking:lane:left:width,parking
+parking:lane:left_1,parking
+parking:lane:name,parking
+parking:lane:parallel,parking
+parking:lane:right,parking
+parking:lane:right:capacity,parking
+parking:lane:right:capacity:disabled,parking
+parking:lane:right:default,parking
+parking:lane:right:diagonal,parking
+parking:lane:right:parallel,parking
+parking:lane:right:perpendicular,parking
+parking:lane:right:time_interval,parking
+parking:lane:right:width,parking
+parking:lane:right_2,parking
+parking:lane:side,parking
+parking:lane:width,parking
+parking:lanes:backward,parking
+parking:lanes:both,parking
+parking:lanes:forward,parking
+parking:lanes:left,parking
+parking:lanes:right,parking
+parking:lanes:right:parallel,parking
+parking:left,parking
+parking:left:condition,parking
+parking:left:marked,parking
+parking:orientation,parking
+parking:placement,parking
+parking:right,parking
+parking:right:both,parking
+parking:side:both,parking
+parking:time:bothside,parking
+parking_1,parking
+parking_aisle,parking
+parking_lane,parking
+parking_meters,parking
+parking_pass,parking
+parking_restriction,parking
+parking_tram,parking
+passenger,other
+passenger_information_display,other
+passing,other
+passing_places,basic
+passing_places:description,basic (detailed)
+path,other
+path_type,other
+pathway,other
+paved,other
+paved:date,other
+pavement,other
+pavetype,other
+paving_stones:colour,other
+paving_stones:pattern,other
+paving_stones:shape,other
+paving_stones:type,other
+payment:bitcoin,other
+payment:cash,other
+payment:coins,other
+payment:credit_cards,other
+payment:e_zpass,other
+payment:e_zpass:name,names
+payment:fastrak,other
+payment:good_to_go,other
+payment:license_plate,other
+payment:notes,other
+payment:peachpass,other
+payment:pikepass,other
+payment:platepay,other
+payment:prepaid_ticket,other
+payment:quickpass,other
+payment:sunpass,other
+payment:transponder,other
+pedestrian,pedestrian
+pedestrians,pedestrian
+penndot:ref,other
+permission,other
+permit,other
+pet_area,other
+pets_allowed,other
+phone,other
+phone:enhancement_coordinator,other
+phone:maintenance_engineer,other
+phone:mnemonic,other
+picnic_table,other
+pier,other
+piste:difficulty,other
+piste:dog,other
+piste:dogs_allowed,other
+piste:grooming,other
+piste:grooming:priority,other
+piste:lit,other
+piste:name,names
+piste:oneway,basic (detailed)
+piste:operator,other
+piste:priority,other
+piste:ref,other
+piste:status,other
+piste:type,other
+place,other
+place_name,names
+place_numbers,other
+placement,other
+placement:backward,other
+placement:backward:end,other
+placement:backward:start,other
+placement:both_ways,other
+placement:both_ways:end,other
+placement:both_ways:start,other
+placement:end,other
+placement:forward,other
+placement:forward:end,other
+placement:forward:start,other
+placement:start,other
+placement:transition,other
+planned,life_cycle
+planned:building,life_cycle
+planned:highway,life_cycle
+planned:lanes,life_cycle
+planned:sidewalk,pedestrian
+plat,other
+platforms,other
+playground,other
+playground:theme,other
+pool,other
+population,other
+position,other
+post_code,address
+postal,address
+postal_code,address
+postal_code:country,address
+postal_code:left,address
+postal_code:right,address
+postal_code_2,address
+postmile,address
+power,other
+power_supply,other
+pr:noname,names
+previous_name,names
+priPSI,other
+priSurf,other
+priSurfWd,other
+primary,other
+priority,other
+priority_road,basic
+private,other
+private road,other
+probable_bct,other
+projID,other
+project,other
+proposed,life_cycle
+proposed:bicycle,life_cycle
+proposed:bridge,life_cycle
+proposed:cycleway,life_cycle
+proposed:cycleway:left,life_cycle
+proposed:cycleway:left:oneway,life_cycle
+proposed:cycleway:right,life_cycle
+proposed:destination,life_cycle
+proposed:destination:forward,life_cycle
+proposed:destination:lanes,life_cycle
+proposed:destination:lanes:forward,life_cycle
+proposed:destination:ref,life_cycle
+proposed:destination:ref:backward,life_cycle
+proposed:destination:ref:forward,life_cycle
+proposed:destination:ref:lanes,life_cycle
+proposed:destination:ref:lanes:forward,life_cycle
+proposed:destination:ref:to,life_cycle
+proposed:destination:ref:to:backward,life_cycle
+proposed:destination:ref:to:lanes,life_cycle
+proposed:destination:street:lanes,life_cycle
+proposed:foot,life_cycle
+proposed:highway,life_cycle
+proposed:lanes,life_cycle
+proposed:lanes:backward,life_cycle
+proposed:lanes:forward,life_cycle
+proposed:layer,life_cycle
+proposed:name,life_cycle
+proposed:oneway,life_cycle
+proposed:oneway:bicycle,life_cycle
+proposed:razed:highway,life_cycle
+proposed:ref,life_cycle
+proposed:sidewalk,pedestrian
+proposed:surface,life_cycle
+proposed:turn:lanes,life_cycle
+proposed:turn:lanes:backward,life_cycle
+proposed:turn:lanes:forward,life_cycle
+proposed_ref,life_cycle
+protect_class,other
+protected,other
+protection_title,other
+psdc:ref,other
+psv,other
+psv:backward,other
+psv:conditional,other
+psv:forward,other
+psv:lanes,lanes
+psv:lanes:backward,lanes
+psv:lanes:conditional,lanes
+psv:lanes:forward,lanes
+public,other
+public_transport,other
+public_transport:type,other
+r,other
+rail,other
+railway,other
+railway:end_date,other
+railway:historic,other
+railway:lanes,lanes
+railway:name,names
+railway:operator,other
+railway:railpicid,other
+railway:service,other
+railway:traffic_mode,other
+railway_1,other
+railway_milepost,other
+ramp,other
+ramp_speed,speed limits
+rank,other
+rating,other
+razed,other
+razed:gauge,other
+razed:highway,other
+razed:operator,other
+razed:railway,other
+razed:service,other
+razed:surface,basic (detailed)
+rcn,other
+rcn_proposed,other
+rcn_ref,other
+re,other
+rec,other
+recommended_speed,speed limits
+recreation,other
+red_turn:right,turns
+reef,other
+ref,other
+ref:,other
+ref:BLM,other
+ref:USFS,other
+ref:backward,other
+ref:bag,other
+ref:bicycle,other
+ref:blm,other
+ref:cdot,other
+ref:cli,other
+ref:colour,other
+ref:county,address
+ref:deldot,other
+ref:directional,other
+ref:forward,other
+ref:fra_crossing,other
+ref:gdot,other
+ref:lanes,sources for metadata
+ref:lanes:backward,other
+ref:lanes:forward,other
+ref:left,other
+ref:legislative,other
+ref:maxspeed,speed limits
+ref:mdsha,other
+ref:nhrp,other
+ref:njrhp,other
+ref:nmsrcp,other
+ref:note,other
+ref:nrhp,other
+ref:odot,other
+ref:old,other
+ref:p,other
+ref:penndot,other
+ref:penndot:backward,other
+ref:penndot:forward,other
+ref:pinellas,other
+ref:project_id,other
+ref:record_book,other
+ref:record_date,other
+ref:right,other
+ref:sddot,other
+ref:source,sources for metadata
+ref:state,address
+ref:to,other
+ref:tsal,other
+ref:unsigned,other
+ref:usfs,other
+ref:vlr,other
+ref_1,other
+ref_2,other
+ref_admin:state,address
+ref_deldot,other
+ref_mdsha,other
+ref_name,names
+ref_old,other
+ref_old_1,other
+ref_unsigned,other
+ref_wvdoh,other
+reference,other
+refq,other
+reg,other
+reg_name,names
+reg_name:etymology,names
+reg_name:etymology:wikidata,Metadata for other datasets
+reg_name_1,names
+reg_name_2,names
+reg_ref,other
+region,other
+rel,other
+religion,other
+removed:name,names
+render,other
+repair,other
+repeat_on,other
+reporting_marks,other
+rer,other
+res,other
+reservable,other
+residential,other
+resource,other
+restaurant,other
+restriction,other
+restriction:backward,other
+restriction:conditional,other
+restriction:goods,other
+restriction:hgv,other
+restriction:hours,other
+restriction:maxweight,other limits
+restriction:motorcar,other
+restriction_hours,other
+restrictions,other
+resurvey,other
+retail,other
+reverse,other
+reversible,other
+reversible:both_ways,other
+reversible:lanes,lanes
+reversible_lane,lanes
+review,other
+review_date,other
+reviewed,other
+rfe,other
+rideshare,other
+right:county,address
+right:state,address
+roa,other
+road,other
+road_marking,other
+road_type,other
+rollerblade,other
+roof:colour,other
+roof:levels,other
+roof:material,other
+roof:shape,other
+rotary,other
+roundabout,basic
+roundtrip,other
+route,other
+route_note:entering,other
+route_ref,other
+rt_number,other
+rttyp,other
+ruins,other
+rv,other
+sac_scale,pedestrian
+safe_to_stop,other
+safety:mask:covid19,other
+salting:ref,other
+sanitary_dump_station,other
+sanitation,other
+scenic,other
+scenic:authority,other
+scenic:name,names
+school,other
+school:entrance,other
+school_bus,bus
+school_zone,other
+school_zone:maxspeed,speed limits
+school_zone:on,other
+scooter,other
+scvwd:FACILITY,other
+scvwd:ROUTEID,other
+se,other
+seamark:bridge:category,other
+seamark:bridge:clearance_height,other
+seamark:bridge:clearance_height_closed,other
+seamark:bridge:clearance_width,other
+seamark:bridge:units,other
+seamark:harbour:category,other
+seamark:name,names
+seamark:shoreline_construction:category,life_cycle
+seamark:small_craft_facility:category,other
+seamark:type,other
+season,other
+seasonal,other
+seasonal:fall,other
+seasonal:snowfall,winter
+seasonal:spring,other
+seasonal:summer,other
+seasonal:wet_season,other
+seasonal:winter,winter
+sector,other
+security:classification,other
+segmDir,other
+segmID,other
+segregated,other
+self_service,other
+sentri,other
+separated,other
+seperate,other
+service,basic
+service road,other
+service:bicycle:chain_tool,other
+service:bicycle:cleaning,other
+service:lanes,lanes
+service:vehicle,other
+service_1,other
+service_2,other
+service_times,other
+service_type,other
+services,other
+servise,other
+servu,other
+shade,other
+shape_le_1,other
+shape_len,other
+shape_leng,other
+shared,other
+shelter,other
+shelter_type,other
+shop,other
+short,other
+short_name,names
+short_name:en,names
+short_name:vi,names
+short_name_1,names
+shortest_name,names
+shoulder,basic
+shoulder:access:bicycle,other
+shoulder:bicycle,other
+shoulder:left,other
+shoulder:left:line,other
+shoulder:left:surface,basic (detailed)
+shoulder:left:width,other
+shoulder:line,other
+shoulder:maxheight,other limits
+shoulder:right,other
+shoulder:right:access:psv,other
+shoulder:right:line,other
+shoulder:right:smoothness,basic (detailed)
+shoulder:right:surface,basic (detailed)
+shoulder:right:width,other
+shoulder:smoothness,basic (detailed)
+shoulder:surface,basic (detailed)
+shoulder:width,other
+sid,other
+side,other
+side_road,other
+sidewalk,pedestrian
+sidewalk:bicycle,pedestrian
+sidewalk:both,pedestrian
+sidewalk:both:bicycle,pedestrian
+sidewalk:both:kerb,pedestrian
+sidewalk:both:smoothness,pedestrian
+sidewalk:both:surface,pedestrian
+sidewalk:buffer,pedestrian
+sidewalk:left,pedestrian
+sidewalk:left:bicycle,pedestrian
+sidewalk:left:kerb,pedestrian
+sidewalk:left:smoothness,pedestrian
+sidewalk:left:surface,pedestrian
+sidewalk:left:wheelchair,pedestrian
+sidewalk:left:width,pedestrian
+sidewalk:right,pedestrian
+sidewalk:right:bicycle,pedestrian
+sidewalk:right:kerb,pedestrian
+sidewalk:right:sloped_curb:end,pedestrian
+sidewalk:right:smoothness,pedestrian
+sidewalk:right:surface,pedestrian
+sidewalk:right:wheelchair,pedestrian
+sidewalk:right:width,pedestrian
+sidewalk:surface,pedestrian
+sidewalk:width,pedestrian
+sidewalk_1,pedestrian
+sidwalk:surface,basic (detailed)
+sign,other
+sign_condition,other
+signcondition,other
+signed,other
+signed_ref,other
+skateboard,other
+ski,other
+slight_right,other
+slope,other
+sloped_curb,pedestrian
+slow_vehicle:lanes:backward,lanes
+slow_vehicle:lanes:forward,lanes
+smoking,other
+smoothness,basic
+smoothness:,other
+smoothness:date,basic (detailed)
+smoothness:lanes,lanes
+snow route,winter
+snow_chains,winter
+snowmobile,winter
+snowmobile:grade,winter
+snowplowing,winter
+snowshoe,winter
+soccer,other
+social_facility,other
+sou,other
+sound_horn,other
+source,other
+source2,other
+source:FIXME,sources for metadata
+source:HFCS,sources for metadata
+source:NHS,sources for metadata
+source:Texas_Trunk_System,sources for metadata
+source:access,sources for metadata
+source:access_control,sources for metadata
+source:addr,sources for metadata
+source:alignment,sources for metadata
+source:alt_name,sources for metadata
+source:alt_name1,sources for metadata
+source:alt_name2,sources for metadata
+source:alt_name:date,sources for metadata
+source:alt_name:url,sources for metadata
+source:amenity,sources for metadata
+source:amenity:date,sources for metadata
+source:atv,sources for metadata
+source:bicycle,sources for metadata
+source:boundary,sources for metadata
+source:bridge,sources for metadata
+source:bridge:movable,sources for metadata
+source:capacity,sources for metadata
+source:construction,sources for metadata
+source:construction:sidewalk,sources for metadata
+source:covered,sources for metadata
+source:cutting,sources for metadata
+source:cycleway,sources for metadata
+source:cycleway:left,sources for metadata
+source:cycleway:right,sources for metadata
+source:date,sources for metadata
+source:daytime_headlight,sources for metadata
+source:description,sources for metadata
+source:destination,sources for metadata
+source:destination:ref,other
+source:destination:street,sources for metadata
+source:ele,sources for metadata
+source:en,sources for metadata
+source:file,sources for metadata
+source:flood_prone,sources for metadata
+source:foot,sources for metadata
+source:footway,sources for metadata
+source:ford,sources for metadata
+source:fut_ref,sources for metadata
+source:ge,sources for metadata
+source:geometry,sources for metadata
+source:geometry:date,sources for metadata
+source:hgv,sources for metadata
+source:hgv:forward,sources for metadata
+source:hgv:lanes,sources for metadata
+source:hgv:nation,sources for metadata
+source:hgv:national_network,sources for metadata
+source:hgv:state_network,sources for metadata
+source:highway,sources for metadata
+source:highway:date,sources for metadata
+source:image,sources for metadata
+source:imagery,sources for metadata
+source:impassable,sources for metadata
+source:impassable:date,sources for metadata
+source:incline,sources for metadata
+source:junction,sources for metadata
+source:lanes,sources for metadata
+source:lanes:forward,sources for metadata
+source:layer,sources for metadata
+source:lcn,sources for metadata
+source:lit,sources for metadata
+source:loc,sources for metadata
+source:loc_name,sources for metadata
+source:local_knowledge,sources for metadata
+source:massgis:way_id,sources for metadata
+source:maxheight,sources for metadata
+source:maxheight:physical,sources for metadata
+source:maxspeed,sources for metadata
+source:maxspeed:advised,sources for metadata
+source:maxspeed:advisory,sources for metadata
+source:maxspeed:advisory:forward,sources for metadata
+source:maxspeed:backward,sources for metadata
+source:maxspeed:children_present,sources for metadata
+source:maxspeed:children_present:forward,sources for metadata
+source:maxspeed:date,sources for metadata
+source:maxspeed:forward,sources for metadata
+source:maxspeed:hgv,sources for metadata
+source:maxspeed:practical,sources for metadata
+source:maxspeed:recommended,sources for metadata
+source:maxspeed:reverse,sources for metadata
+source:maxspeed:suggested,sources for metadata
+source:maxspeed:towing,sources for metadata
+source:maxspeed_1,sources for metadata
+source:maxweight,sources for metadata
+source:maxweightrating,sources for metadata
+source:maxwidth,sources for metadata
+source:minspeed,sources for metadata
+source:motor_vehicle,sources for metadata
+source:motorroad,sources for metadata
+source:name,sources for metadata
+source:name1,sources for metadata
+source:name:backward,sources for metadata
+source:name:date,sources for metadata
+source:name:es,sources for metadata
+source:name:etymology,sources for metadata
+source:name:forward,sources for metadata
+source:name_1,sources for metadata
+source:name_2,sources for metadata
+source:names,sources for metadata
+source:nat_name,sources for metadata
+source:nat_name:date,sources for metadata
+source:network,sources for metadata
+source:noname,sources for metadata
+source:note,sources for metadata
+source:official_name,sources for metadata
+source:old_name,sources for metadata
+source:old_name:1748,sources for metadata
+source:old_name:1762,sources for metadata
+source:old_name:1764,sources for metadata
+source:old_name:1830,sources for metadata
+source:old_name:url,sources for metadata
+source:old_name_2,sources for metadata
+source:old_name_3,sources for metadata
+source:old_rcn_ref,sources for metadata
+source:old_ref,sources for metadata
+source:old_ref:fap,sources for metadata
+source:oneway,sources for metadata
+source:opening_date,sources for metadata
+source:opening_hours,sources for metadata
+source:operator,sources for metadata
+source:original,sources for metadata
+source:outline,sources for metadata
+source:overtaking,sources for metadata
+source:parking,sources for metadata
+source:parking:lane,sources for metadata
+source:payment,sources for metadata
+source:peed,sources for metadata
+source:position,sources for metadata
+source:private,sources for metadata
+source:proposed:cycleway,sources for metadata
+source:proposed:destination,sources for metadata
+source:proposed:lanes,sources for metadata
+source:proposed:sidewalk,sources for metadata
+source:railway,sources for metadata
+source:rcn,sources for metadata
+source:record_book,sources for metadata
+source:ref,other
+source:ref:date,other
+source:ref:note,other
+source:ref:penndot,other
+source:ref:pinellas,other
+source:reg_name,sources for metadata
+source:removed:bridge,sources for metadata
+source:restriction,sources for metadata
+source:shape,sources for metadata
+source:shared_lane,sources for metadata
+source:sidewalk,sources for metadata
+source:sign,sources for metadata
+source:smoothness,sources for metadata
+source:source,sources for metadata
+source:start_date,sources for metadata
+source:surface,sources for metadata
+source:surface:date,sources for metadata
+source:surveillance,sources for metadata
+source:toll,sources for metadata
+source:towing,sources for metadata
+source:trace,sources for metadata
+source:track,sources for metadata
+source:tracktype,sources for metadata
+source:tunnel,sources for metadata
+source:turn:lanes,sources for metadata
+source:turn:lanes:backward,sources for metadata
+source:turn:lanes:forward,sources for metadata
+source:turn:lanes:forward:date,sources for metadata
+source:type,sources for metadata
+source:unposted,sources for metadata
+source:unsigned_ref,sources for metadata
+source:uri,sources for metadata
+source:url,sources for metadata
+source:website,sources for metadata
+source:width,sources for metadata
+source:wikidata,sources for metadata
+source:year,sources for metadata
+source_1,other
+source_2,other
+source_2:old_name,names
+source_date,other
+source_nobridge,other
+source_note,other
+source_opened,other
+source_ref,sources for metadata
+source_ref:access,sources for metadata
+source_ref:access_control,sources for metadata
+source_ref:amenity,sources for metadata
+source_ref:atv,sources for metadata
+source_ref:bicycle,sources for metadata
+source_ref:bridge,sources for metadata
+source_ref:cycleway,sources for metadata
+source_ref:daytime_headlight,sources for metadata
+source_ref:hgv,sources for metadata
+source_ref:lanes,sources for metadata
+source_ref:layer,sources for metadata
+source_ref:maxheight,sources for metadata
+source_ref:maxspeed,sources for metadata
+source_ref:maxspeed:advisory,sources for metadata
+source_ref:maxspeed:backward,sources for metadata
+source_ref:maxspeed:children_present,sources for metadata
+source_ref:maxspeed:children_present:forward,sources for metadata
+source_ref:maxspeed:forward,sources for metadata
+source_ref:maxspeed:hgv,sources for metadata
+source_ref:maxspeed:recommended,sources for metadata
+source_ref:maxspeed:reverse,sources for metadata
+source_ref:maxspeed:suggested,sources for metadata
+source_ref:maxspeed:towing,sources for metadata
+source_ref:maxspeed_1,sources for metadata
+source_ref:maxspeed_children_present,sources for metadata
+source_ref:maxweight,sources for metadata
+source_ref:name,sources for metadata
+source_ref:official_name,sources for metadata
+source_ref:old_name,sources for metadata
+source_ref:oneway,sources for metadata
+source_ref:opening_hours,sources for metadata
+source_ref:private,sources for metadata
+source_ref:ref,other
+source_ref:smoothness,sources for metadata
+source_ref:start_date,sources for metadata
+source_ref:towing,sources for metadata
+source_ref:tunnel,sources for metadata
+source_ref:url,sources for metadata
+source_type_imagery,other
+source_url,other
+sourcerce,other
+sources,other
+sourcew,other
+speed,speed limits
+speed:source,sources for metadata
+spirce,other
+sport,other
+src,other
+srd_section_1941_statutes,other
+start,other
+start_date,other
+state,address
+state:highway,address
+state:milepost,address
+state:route,address
+state_name,address
+state_road_history,other
+state_route,address
+statscan:rbuid,other
+status,other
+step_count,pedestrian
+stop,basic
+stop:direction,basic (detailed)
+stop_sign:direction,other
+stopping,other
+store,other
+strapline,other
+street,other
+street_cit,other
+street_nam,other
+street_running,other
+street_sign_color,other
+street_st,other
+striping_condition,other
+stripingcondition,other
+stroller,other
+structure,other
+structure:desc,other
+structure:descr,other
+structure:id,other
+structure:maxheight,other limits
+structure:milepost,other
+structure:source,sources for metadata
+structure_name,names
+stub,other
+students,other
+style,other
+subdivision,other
+substance,other
+summer,other
+supermarket,other
+supervised,other
+sur,other
+sura,other
+surf,other
+surface,basic
+surface:backward,basic (detailed)
+surface:bicycle,basic (detailed)
+surface:colour,basic (detailed)
+surface:condition,basic (detailed)
+surface:forward,basic (detailed)
+surface:grade,basic (detailed)
+surface:lanes,lanes
+surface:lanes:backward,lanes
+surface:lanes:forward,lanes
+surface:left,basic (detailed)
+surface:material,basic (detailed)
+surface:motor_vehicle,basic (detailed)
+surface:note,basic (detailed)
+surface:paved,basic (detailed)
+surface:right,basic (detailed)
+surface:unpaved,basic (detailed)
+surface_1,basic (detailed)
+surface_2,basic (detailed)
+surface_survey,basic (detailed)
+surrey:geodb_oid,other
+surveillance,other
+surveillance:type,other
+surveillance:zone,other
+survey,other
+survey:date,other
+survey:maxspeed,speed limits
+survey_date,other
+survey_date:oneway,basic (detailed)
+survey_point,other
+symbol,other
+symbol_1,other
+tab,other
+tactile_paving,basic
+takeaway,other
+takeover,other
+taxi,other
+taxi:lanes,lanes
+taxiway,other
+taxon,other
+taxon:en,other
+telecom:medium,other
+temporary,other
+temporary:access,other
+temporary:date_off,other
+temporary:date_off_1,other
+temporary:date_on,other
+temporary:foot,pedestrian
+temporary:highway,other
+temporary:maxspeed,speed limits
+ter,other
+terrain,other
+tertiary,other
+test,other
+test_track,other
+thruLnQty,other
+thruLnWd,other
+tidal,other
+tiger 2010:way_id,Metadata for other datasets
+tiger.source:tlid,Metadata for other datasets
+tiger:ALAND,Metadata for other datasets
+tiger:AREAID,Metadata for other datasets
+tiger:AWATER,Metadata for other datasets
+tiger:CLASSFP,Metadata for other datasets
+tiger:COUNTYFP,Metadata for other datasets
+tiger:CPI,Metadata for other datasets
+tiger:FUNCSTAT,Metadata for other datasets
+tiger:GlobalID,Metadata for other datasets
+tiger:LINEARID,Metadata for other datasets
+tiger:LSAD,Metadata for other datasets
+tiger:MTFCC,Metadata for other datasets
+tiger:NAME,Metadata for other datasets
+tiger:NAMELSAD,Metadata for other datasets
+tiger:PCICBSA,Metadata for other datasets
+tiger:PCINECTA,Metadata for other datasets
+tiger:PLACEFP,Metadata for other datasets
+tiger:PLACENS,Metadata for other datasets
+tiger:PLCIDFP,Metadata for other datasets
+tiger:RTTYP,Metadata for other datasets
+tiger:STATEFP,Metadata for other datasets
+tiger:access,Metadata for other datasets
+tiger:alt_name_base,Metadata for other datasets
+tiger:alt_name_direction_suffix,Metadata for other datasets
+tiger:alt_name_type,Metadata for other datasets
+tiger:base,Metadata for other datasets
+tiger:base_name,Metadata for other datasets
+tiger:cfcc,Metadata for other datasets
+tiger:cfcc_1,Metadata for other datasets
+tiger:city,Metadata for other datasets
+tiger:city_left,Metadata for other datasets
+tiger:city_right,Metadata for other datasets
+tiger:contyfp,Metadata for other datasets
+tiger:county,Metadata for other datasets
+tiger:county_left,Metadata for other datasets
+tiger:county_right,Metadata for other datasets
+tiger:countyfp,Metadata for other datasets
+tiger:countyis,Metadata for other datasets
+tiger:direction,Metadata for other datasets
+tiger:flags,Metadata for other datasets
+tiger:fraddr,Metadata for other datasets
+tiger:geometry:reviewed,Metadata for other datasets
+tiger:is,Metadata for other datasets
+tiger:lfromadd,Metadata for other datasets
+tiger:linearid,Metadata for other datasets
+tiger:ltoadd,Metadata for other datasets
+tiger:maxspeed,Metadata for other datasets
+tiger:mtfcc,Metadata for other datasets
+tiger:nah,Metadata for other datasets
+tiger:name,Metadata for other datasets
+tiger:name_,Metadata for other datasets
+tiger:name_1,Metadata for other datasets
+tiger:name_2,Metadata for other datasets
+tiger:name_baref,Metadata for other datasets
+tiger:name_base,Metadata for other datasets
+tiger:name_base1,Metadata for other datasets
+tiger:name_base:alt_name,Metadata for other datasets
+tiger:name_base_1,Metadata for other datasets
+tiger:name_base_2,Metadata for other datasets
+tiger:name_base_3,Metadata for other datasets
+tiger:name_base_4,Metadata for other datasets
+tiger:name_base_5,Metadata for other datasets
+tiger:name_base_6,Metadata for other datasets
+tiger:name_base_7,Metadata for other datasets
+tiger:name_base_alt,Metadata for other datasets
+tiger:name_direction,Metadata for other datasets
+tiger:name_direction_base,Metadata for other datasets
+tiger:name_direction_prefix,Metadata for other datasets
+tiger:name_direction_prefix_1,Metadata for other datasets
+tiger:name_direction_prefix_2,Metadata for other datasets
+tiger:name_direction_prefix_3,Metadata for other datasets
+tiger:name_direction_prefix_4,Metadata for other datasets
+tiger:name_direction_prefix_5,Metadata for other datasets
+tiger:name_direction_suffix,Metadata for other datasets
+tiger:name_direction_suffix1,Metadata for other datasets
+tiger:name_direction_suffix_1,Metadata for other datasets
+tiger:name_direction_suffix_2,Metadata for other datasets
+tiger:name_direction_suffix_3,Metadata for other datasets
+tiger:name_direction_suffix_4,Metadata for other datasets
+tiger:name_direction_suffix_5,Metadata for other datasets
+tiger:name_direction_suffix_6,Metadata for other datasets
+tiger:name_directions,Metadata for other datasets
+tiger:name_full,Metadata for other datasets
+tiger:name_pre,Metadata for other datasets
+tiger:name_prefix,Metadata for other datasets
+tiger:name_prefix1,Metadata for other datasets
+tiger:name_ref,Metadata for other datasets
+tiger:name_suffix,Metadata for other datasets
+tiger:name_type,Metadata for other datasets
+tiger:name_type:alt_name,Metadata for other datasets
+tiger:name_type_1,Metadata for other datasets
+tiger:name_type_2,Metadata for other datasets
+tiger:name_type_3,Metadata for other datasets
+tiger:name_type_4,Metadata for other datasets
+tiger:name_type_5,Metadata for other datasets
+tiger:name_type_6,Metadata for other datasets
+tiger:name_type_alt,Metadata for other datasets
+tiger:name_type_prefix,Metadata for other datasets
+tiger:name_type_suffix,Metadata for other datasets
+tiger:namgole_direction_prefix,Metadata for other datasets
+tiger:review,Metadata for other datasets
+tiger:reviewed,Metadata for other datasets
+tiger:reviewed_by_WernerP:at,Metadata for other datasets
+tiger:rfromadd,Metadata for other datasets
+tiger:rtoadd,Metadata for other datasets
+tiger:rttyp,Metadata for other datasets
+tiger:separated,Metadata for other datasets
+tiger:source,Metadata for other datasets
+tiger:speed_limit,Metadata for other datasets
+tiger:state_id,Metadata for other datasets
+tiger:statefp,Metadata for other datasets
+tiger:tlid,Metadata for other datasets
+tiger:tlid2,Metadata for other datasets
+tiger:tlid3,Metadata for other datasets
+tiger:toaddr,Metadata for other datasets
+tiger:tow,Metadata for other datasets
+tiger:type,Metadata for other datasets
+tiger:ugotlid,Metadata for other datasets
+tiger:upload,Metadata for other datasets
+tiger:upload_uid,Metadata for other datasets
+tiger:upload_uuid,Metadata for other datasets
+tiger:ups,Metadata for other datasets
+tiger:way_id,Metadata for other datasets
+tiger:zip,Metadata for other datasets
+tiger:zip_1,Metadata for other datasets
+tiger:zip_2,Metadata for other datasets
+tiger:zip_3,Metadata for other datasets
+tiger:zip_lef,Metadata for other datasets
+tiger:zip_left,Metadata for other datasets
+tiger:zip_left_1,Metadata for other datasets
+tiger:zip_left_11,Metadata for other datasets
+tiger:zip_left_12,Metadata for other datasets
+tiger:zip_left_2,Metadata for other datasets
+tiger:zip_left_3,Metadata for other datasets
+tiger:zip_left_4,Metadata for other datasets
+tiger:zip_left_5,Metadata for other datasets
+tiger:zip_right,Metadata for other datasets
+tiger:zip_right_1,Metadata for other datasets
+tiger:zip_right_10,Metadata for other datasets
+tiger:zip_right_101,Metadata for other datasets
+tiger:zip_right_102,Metadata for other datasets
+tiger:zip_right_104,Metadata for other datasets
+tiger:zip_right_105,Metadata for other datasets
+tiger:zip_right_108,Metadata for other datasets
+tiger:zip_right_11,Metadata for other datasets
+tiger:zip_right_12,Metadata for other datasets
+tiger:zip_right_14,Metadata for other datasets
+tiger:zip_right_146,Metadata for other datasets
+tiger:zip_right_147,Metadata for other datasets
+tiger:zip_right_170,Metadata for other datasets
+tiger:zip_right_179,Metadata for other datasets
+tiger:zip_right_2,Metadata for other datasets
+tiger:zip_right_3,Metadata for other datasets
+tiger:zip_right_4,Metadata for other datasets
+tiger:zip_right_5,Metadata for other datasets
+tiger:zip_right_6,Metadata for other datasets
+tiger:zip_right_7,Metadata for other datasets
+tiger:zip_right_8,Metadata for other datasets
+tiger:zip_rightjun,Metadata for other datasets
+tiger:zip_rightno,Metadata for other datasets
+tiger_base,Metadata for other datasets
+tiger_base_1,Metadata for other datasets
+tiger_reviewed,Metadata for other datasets
+tigerour:name_type,Metadata for other datasets
+tigeyesr:separated,other
+tigis,other
+time,other
+tis,other
+tlid,other
+toFeature,other
+to_address_left,address
+to_address_left_1,address
+to_address_left_2,address
+to_address_left_3,address
+to_address_right,address
+to_address_right_1,address
+to_address_right_2,address
+toaddl,other
+toaddr,other
+todo,other
+toilet,other
+toilets,other
+toilets:disposal,other
+toilets:handwashing,other
+toilets:position,other
+toilets:wheelchair,other
+toll,tolls
+toll:backward,tolls
+toll:bicycle,tolls
+toll:bus,tolls
+toll:bus:conditional,tolls
+toll:bus:lanes,lanes
+toll:conditional,tolls
+toll:foot,pedestrian
+toll:forward,tolls
+toll:hgv,tolls
+toll:horse,tolls
+toll:hov,tolls
+toll:hov:conditional,tolls
+toll:hov:lanes,lanes
+toll:lanes,lanes
+toll:motor_vehicle,tolls
+toll:motorcycle,tolls
+toll:motorcycle:conditional,tolls
+toll:motorcycle:lanes,lanes
+toll:psv,tolls
+toll:start_date,tolls
+toll_1,tolls
+toll_method,tolls
+tourism,other
+tourism_1,other
+tourist_bus,bus
+tourmobile,other
+towards,other
+tower:construction,life_cycle
+tower:type,other
+track,other
+tracks,other
+tracktype,basic
+tract,other
+traffic,other
+traffic_calming,basic
+traffic_calming:backward,basic (detailed)
+traffic_sign,other
+traffic_sign:backward,other
+traffic_signals,other
+traffic_signals:direction,other
+trail,other
+trail_marking,other
+trail_visibility,basic
+trailblazed,other
+trailer,other
+trailer:forward,other
+trailer:lanes,lanes
+trailer:lanes:backward,lanes
+trailer:lanes:forward,lanes
+trailhead,other
+train:lanes,lanes
+training,other
+tram,other
+transit,other
+transit:backward,other
+transit:forward,other
+transit:lanes,lanes
+transit:lanes:backward,lanes
+transit:lanes:forward,lanes
+tree_lined,other
+trg,other
+trigger:name_base,names
+trigger:zip_left,address
+trolley_wire,other
+trolleybus,bus
+truck,other
+truck_wash,other
+trucks,other
+truss,other
+tunnel,other
+tunnel:name,names
+tunnel:ref,other
+tunnel_1,other
+tunnel_name,names
+tunnel_ref,other
+tur,other
+turn,turns
+turn:backward,turns
+turn:bicycle:lanes,bicycle
+turn:bicycle:lanes:backward,bicycle
+turn:bicycle:lanes:forward,bicycle
+turn:both_ways,turns
+turn:bus:lanes,turns
+turn:bus:lanes:backward,turns
+turn:bus:lanes:forward,turns
+turn:destination,turns
+turn:forward,turns
+turn:lanes,turns
+turn:lanes:backward,turns
+turn:lanes:backward:conditional,turns
+turn:lanes:both_ways,turns
+turn:lanes:both_ways:backward,turns
+turn:lanes:conditional,turns
+turn:lanes:forward,turns
+turn:lanes:forward:conditional,turns
+turn:motor_vehicle:lanes,turns
+turn:motor_vehicle:lanes:conditional,turns
+turn:psv:lanes,turns
+turn:variable:lanes,turns
+turn:variable:lanes:forward,turns
+turn:vehicle:lanes,turns
+turn:vehicle:lanes:backward,turns
+turnaround,turns
+turning_circle,turns
+turnlane,turns
+twoway,other
+type,other
+u_turn,turns
+uic_name,names
+uic_shuttle_route,other
+uis,other
+undefined,other
+under,other
+underpass,other
+underpass:name,names
+underpass:ref,other
+unisex,other
+unit,other
+unknown,other
+unnamed,names
+unpaved,other
+unsigned,other
+unsigned:ref,other
+unsigned_destination,other
+unsigned_name,names
+unsigned_ref,other
+unsigned_ref:left,other
+unverified_name,names
+uploaded_by,other
+urgent_care,other
+url,other
+url:access,other
+url:bicycle,other
+url:construction,other
+usability,other
+usage,other
+use,other
+usfs:_BEGIN_TERM_,Metadata for other datasets
+usfs:_BMP__,Metadata for other datasets
+usfs:_DESIGNED_U_,Metadata for other datasets
+usfs:_EMP__,Metadata for other datasets
+usfs:_END_TERMIN_,Metadata for other datasets
+usfs:_ID__,Metadata for other datasets
+usfs:_JURISDICTI_,Metadata for other datasets
+usfs:_NAME__,names
+usfs:_RTE_CN__,Metadata for other datasets
+usfs:_TRAIL_CLAS_,Metadata for other datasets
+usfs:_TRAIL_STAT_,Metadata for other datasets
+usfs:_TRAIL_SYST_,Metadata for other datasets
+usfs:_TRAIL_TYPE_,Metadata for other datasets
+utility_wires,other
+utility_wires:start_date,other
+uuid,other
+uva:layer,other
+valet,other
+validate:no_name,names
+vehicle,other
+vehicle:backward,other
+vehicle:conditional,other
+vehicle:forward,other
+vehicle:lanes,lanes
+vehicle:lanes:backward,lanes
+vehicle:lanes:both_ways,lanes
+vehicle:lanes:forward,lanes
+vehicle:lanes:forward:conditional,lanes
+vehicle_scale,other
+vehicles,other
+vending,other
+vending_machine,other
+verge,other
+verge:surface,basic (detailed)
+verge:width,other
+verified:name,names
+viaduct,other
+virginia_byway,other
+visibility,other
+voltage,other
+wall,other
+was:bridge:movable,life_cycle
+was:highway,life_cycle
+was:name,life_cycle
+was:railway,life_cycle
+waste_basket,other
+waste_bin,other
+water,other
+waterway,other
+waterway:historic,other
+way,other
+website,other
+website:unofficial,other
+weighbridge:lanes,lanes
+weight_limit,other
+weight_rating:aashto,other
+werbung,other
+wheelchair,pedestrian
+whitewater,other
+widened,other
+width,basic
+width:backward,basic (detailed)
+width:carriageway,basic (detailed)
+width:center_divider,basic (detailed)
+width:centre_divider,basic (detailed)
+width:centre_divider:end,basic (detailed)
+width:centre_divider:start,basic (detailed)
+width:dividers,basic (detailed)
+width:dividers:backward,basic (detailed)
+width:dividers:backward:start,basic (detailed)
+width:dividers:end,basic (detailed)
+width:dividers:forward,basic (detailed)
+width:dividers:forward:end,basic (detailed)
+width:end,basic (detailed)
+width:feet,basic (detailed)
+width:forward,basic (detailed)
+width:lanes,lanes
+width:lanes:backward,lanes
+width:lanes:backward:end,lanes
+width:lanes:backward:start,lanes
+width:lanes:both_ways,lanes
+width:lanes:both_ways:end,lanes
+width:lanes:both_ways:start,lanes
+width:lanes:end,lanes
+width:lanes:forward,lanes
+width:lanes:forward:end,lanes
+width:lanes:forward:start,lanes
+width:lanes:start,lanes
+width:source,sources for metadata
+width:start,basic (detailed)
+wikidata,Metadata for other datasets
+wikidata_1,Metadata for other datasets
+wikidata_2,Metadata for other datasets
+wikimedia_commons,Metadata for other datasets
+wikipedia,Metadata for other datasets
+wikipedia:en,Metadata for other datasets
+winter,winter
+winter_road,winter
+winter_service,winter
+wood,other
+wp:reviewed,other
+wrong_name,names
+wydot_ml_number,other
+year,other
+year_built,other
+year_of_construction,other
+zh:zone,other
+zip,address
+zip_left,address
+zip_left_1,address
+zip_left_2,address
+zip_left_3,address
+zip_right,address
+zip_right_1,address
+zip_right_2,address
+zipl,address
+zipr,address
+zone:maxspeed,speed limits
+zone:speed,speed limits
